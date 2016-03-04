@@ -149,6 +149,7 @@
                             <ul class="tree" id="tree">
                                 <li>
                                     <div class="treetitle"> <i class="treeicon"></i>
+                                        <span class="icon icon-persons"></span>
                                         <a>业务产品部</a>
                                         <input type="checkbox">
                                     </div>
@@ -156,26 +157,30 @@
                                         <li>
                                             <div class="treetitle">
                                                 <i class="treeicon"></i>
+                                                <span class="icon icon-persons"></span>
                                                 <a>研发体系</a>
-                                                <small>100</small>
+                                                <input type="checkbox">
                                             </div>
                                             <ul>
                                                 <li>
                                                     <div class="treetitle">
+                                                        <span class="icon icon-persons"></span>
                                                         <a>开发一部</a>
-                                                        <small>100</small>
+                                                        <input type="checkbox">
                                                     </div>
                                                 </li>
                                                 <li>
                                                     <div class="treetitle">
+                                                        <span class="icon icon-persons"></span>
                                                         <a>开发二部</a>
-                                                        <small>100</small>
+                                                        <input type="checkbox">
                                                     </div>
                                                 </li>
                                                 <li>
                                                     <div class="treetitle">
+                                                        <span class="icon icon-persons"></span>
                                                         <a>开发三部</a>
-                                                        <small>100</small>
+                                                        <input type="checkbox">
                                                     </div>
                                                 </li>
                                             </ul>
@@ -183,14 +188,16 @@
                                         <li>
                                             <div class="treetitle">
                                                 <i class="treeicon"></i>
+                                                <span class="icon icon-persons"></span>
                                                 <a>市场体系</a>
-                                                <small>100</small>
+                                                <input type="checkbox">
                                             </div>
                                             <ul>
                                                 <li>
                                                     <div class="treetitle">
+                                                        <span class="icon icon-persons"></span>
                                                         <a>上海办</a>
-                                                        <small>100</small>
+                                                        <input type="checkbox">
                                                     </div>
                                                 </li>
                                             </ul>
@@ -375,32 +382,71 @@
     //tree function 
     function onTapTree(){
         EventUtil.addHandler(tree,"tap",function(e){
-            var elLI,elUL,elIcon;
-            
+            //console.log(e.target);
+            var elLI,elUL,elIcon,selection
+            selectCurrent =  function (){
+                var selectionCheckbox = $(selection).find('input');
+                selectionCheckbox.trigger('click');
+                $(selection).toggleClass('active');
+                if (selectionCheckbox.prop('checked')==true){
+                     selectChildren();
+                }else{
+                     deselectChildren();
+                }
+                changeParent();
+            },
+            selectChildren = function(){
+                $(selection).next().find('input').prop('checked',true);
+                $(selection).next().find('.treetitle').addClass('active');
+                console.log("selectchildren");
+            },
+            deselectChildren = function(){
+                $(selection).next().find('input').prop('checked',true);
+                $(selection).next().find('.treetitle').removeClass('active');
+                console.log("deselectchildren");
+            },
+            changeParent = function(){
+                $('.tree-box').find('input').onChange(function(){
+                    console.log('theres a change');
+                })
+            };
             if(e.target.tagName.toLowerCase()=="ul"){
                 return;
             }
-            if(e.target.className=="treetitle"){
+            if(e.target.className.indexOf("treetitle")>=0){
                 //当点击标题标签时
-                console.log(e.target);
+                selection = e.target;
+                selectCurrent();
+                return;
+            }else if(e.target.tagName.toLowerCase()=="a"){
+                //当点击有a标签时
+                //elLI=e.target.parentNode.parentNode;
+                selection = e.target.parentNode;
+                selectCurrent();
+                return;
+            }else if(e.target.tagName.toLowerCase()=="span"){
+                //当点击有a标签时
+                //elLI=e.target.parentNode.parentNode;
+                selection = e.target.parentNode;
+                selectCurrent();
                 return;
             }
-            if(e.target.tagName.toLowerCase()=="a"){
-                //当点击有a标签时
-                //elLI=e.target.parentNode.parentNode;
-                console.log(e.target);
-                return;
-            } 
-            if(e.target.tagName.toLowerCase()=="li"){
-                //当点击有a标签时
-                //elLI=e.target.parentNode.parentNode;
-                console.log(e.target);
-                return;
-            } 
+            // else if(e.target.tagName.toLowerCase()=="input"){
+            //     //当点击有a标签时
+            //     //elLI=e.target.parentNode.parentNode;
+            //     selection = e.target.parentNode;
+            //     selectCurrent();
+            //     return;
+            // }
             if(e.target.tagName.toLowerCase()=="i"){
                 //当点击i标签时
+
                 elLI=e.target.parentNode.parentNode;
                 //console.log("opennow!");
+            } 
+            else if(e.target.tagName.toLowerCase()=="li"){
+                //当点击有a标签时
+                elLI=e.target.parentNode.parentNode;
             } 
             elUL=elLI.querySelector("ul");
             elIcon=elLI.querySelector(".treeicon");

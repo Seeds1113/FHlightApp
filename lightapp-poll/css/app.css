@@ -377,3 +377,48 @@
 .tab-container .rectbar .active .tab-label {
   color: #fff;
 }
+.tree .treetitle {
+  position: relative;
+}
+.tree .treetitle:active {
+  background: #ffffff;
+}
+.tree .treetitle .icon-persons {
+  background-color: #FFC02C;
+  display: inline-block;
+  vertical-align: middle;
+  width: 32px;
+  height: 32px;
+  font-size: 24px;
+  color: #fff;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 32px;
+  margin-left: 4px;
+  margin-right: -4px;
+}
+.tree .treetitle.active {
+  color: #4587F7;
+}
+.tree .treetitle.active .icon-persons {
+  background-color: #4587F7;
+}
+.tree .treetitle.active:after {
+  font-family: 'iconfont' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\e974";
+  position: absolute;
+  right: 12px;
+  top: 20px;
+}
+.tree .treetitle input[type=checkbox] {
+  display: none;
+}
