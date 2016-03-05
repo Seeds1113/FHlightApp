@@ -129,12 +129,12 @@
             <div class="selected-display"></div>
         </header>
         <article style="top:44px;bottom:0px;">
-            <div class="selectionbox"></div>
+            <div class="selection-box"></div>
             <!-- tree -->
             <div class="tree-box">
                 <ul class="tree" id="tree">
                     <li>
-                        <div class="treetitle" data-level="1" data-groupid="1" data-groupname="业务产品部"> <i class="treeicon"></i>
+                        <div class="treetitle" data-level="1" data-groupid="1" data-groupname="业务产品部" id="group-1"> <i class="treeicon"></i>
                             <span class="icon icon-persons"></span>
                             <a>业务产品部</a>
                             <a class="icon-rdoadd"></a>
@@ -142,7 +142,7 @@
                         </div>
                         <ul>
                             <li>
-                                <div class="treetitle">
+                                <div class="treetitle" data-level="" data-groupid="2" data-groupname="研发体系" id="group-2">
                                     <i class="treeicon"></i>
                                     <span class="icon icon-persons"></span>
                                     <a>研发体系</a>
@@ -151,7 +151,7 @@
                                 </div>
                                 <ul>
                                     <li>
-                                        <div class="treetitle">
+                                        <div class="treetitle" data-level="" data-groupid="3" data-groupname="开发一部" id="group-3">
                                             <i class="treeicon"></i>
                                             <span class="icon icon-persons"></span>
                                             <a>开发一部</a>
@@ -160,7 +160,7 @@
                                         </div>
                                     </li>
                                     <li>
-                                        <div class="treetitle">
+                                        <div class="treetitle" data-level="" data-groupid="4" data-groupname ="开发二部" id="group-4">
                                             <i class="treeicon"></i>
                                             <span class="icon icon-persons"></span>
                                             <a>开发二部</a>
@@ -169,7 +169,7 @@
                                         </div>
                                     </li>
                                     <li>
-                                        <div class="treetitle">
+                                        <div class="treetitle" data-level="" data-groupid="5" data-groupname ="开发三部" id="group-5">
                                             <i class="treeicon"></i>
                                             <span class="icon icon-persons"></span>
                                             <a>开发三部</a>
@@ -178,7 +178,7 @@
                                         </div>
                                         <ul>
                                             <li>
-                                                <div class="treetitle">
+                                                <div class="treetitle" data-level="" data-groupid="6" data-groupname="开发一部" id="group-6">
                                                     <i class="treeicon"></i>
                                                     <span class="icon icon-persons"></span>
                                                     <a>开发一组</a>
@@ -191,7 +191,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <div class="treetitle">
+                                <div class="treetitle" data-level="" data-groupid="7" data-groupname="开发一部" id="group-7">
                                     <i class="treeicon"></i>
                                     <span class="icon icon-persons"></span>
                                     <a>市场体系</a>
@@ -200,7 +200,17 @@
                                 </div>
                                 <ul>
                                     <li>
-                                        <div class="treetitle">
+                                        <div class="treetitle" data-level="" data-groupid="8" data-groupname="开发一部" id="group-8">
+                                            <i class="treeicon"></i>
+                                            <span class="icon icon-persons"></span>
+                                            <a>上海办</a>
+                                            <a class="icon-rdoadd"></a>
+                                            <!-- <input type="checkbox" class="group-checkbox" data-level="" data-groupid="7" data-groupname ="上海办"> -->
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="treetitle" data-level="" data-groupid="9" data-groupname="开发二部超级牛" id="group-9">
+                                            <i class="treeicon"></i>
                                             <span class="icon icon-persons"></span>
                                             <a>上海办</a>
                                             <a class="icon-rdoadd"></a>
@@ -329,6 +339,7 @@
         today = new Date();
         dateInput.valueAsDate = today;
         $(dateInput).change(function(){
+            console.log('its empty');
             var inputDate = dateInput.valueAsDate;
             if (inputDate < today){
                 dateToast.show();
@@ -381,35 +392,72 @@
     //     }
     // }
     //tree function 
+    var elLI,elUL,elIcon,selection,
+    deleteSelection = function(){
+        $(".delete-selection").click(function(){
+            var selectionTop = $(this).parent(),
+            selectionID = $(this).parent().data("treeid");
+            selection = $("#"+selectionID)[0];
+            console.log(selection);
+            selectionTop.fadeOut(500,function(){
+                selectionTop.remove();
+                if($(".selection-box").is(':empty')){
+                    $(".selection-box").slideUp();
+                }
+            });
+            removeCurrent(selection);
+            toggleChildren();
+        });
+    },
+    selectCurrent =  function (){
+        $(selection).addClass('active');
+        $(selection).find(".icon-rdoadd").fadeOut();
+        toggleChildren();
+        // changeParent();
+        // elIcon = selection.querySelector('.treeicon');
+        // elUL = selection.parentNode.querySelector('ul');
+    },
+    removeCurrent = function(){
+        $(selection).removeClass('active');
+        $(selection).find(".icon-rdoadd").fadeIn();
+        toggleChildren();
+    },
+    toggleChildren = function(){
+        var selectedChildren = $(selection).next().find('.treetitle.active'),
+        allChildren = $(selection).next().find('.treetitle'),
+        allChildrenAddIcon = $(selection).next().find(".icon-rdoadd");
+        if ($(selection).hasClass('active')==true){
+            allChildren.addClass('active');
+            allChildrenAddIcon.fadeOut();
+        }else{
+            allChildren.removeClass('active');
+            allChildrenAddIcon.fadeIn();
+        }
+        if (selectedChildren.length > 0) {
+            selectedChildren.each(function(index, value){
+                var childrenID = value.id;
+                $("#select"+childrenID).fadeOut(500,function(){
+                    $("#select"+childrenID).remove();
+                });
+            });
+        }
+    };
+
     function onTapTree(){
         EventUtil.addHandler(tree,"tap",function(e){
-            //console.log(e.target);
-            var elLI,elUL,elIcon,selection,
-            selectCurrent =  function (){
-                selectionCheckbox  = $(selection).find('input');
-                selectionCheckbox.trigger('click');
-                $(selection).toggleClass('active');
-                $(selection).find("icon-rdoadd");
-                toggleChildren();
-                // changeParent();
-                elIcon = selection.querySelector('.treeicon');
-                elUL = selection.parentNode.querySelector('ul');
-            },
-            toggleChildren = function(){
-                if ($(selection).hasClass('active')==true){
-                    $(selection).next().find('.treetitle').addClass('active');
-                    console.log("selectchildren");
-                }else{
-                    $(selection).next().find('input').prop('checked',false);
-                    $(selection).next().find('.treetitle').removeClass('active');
+            var addToDisplayDiv = function(){
+                var groupID = $(selection).attr("id"),
+                groupName = $(selection).data("groupname");
+                console.log(groupID + "  " + groupName);
+                //看selection-box是否为空
+                if($(".selection-box").is(':empty')){
+                    $(".selection-box").slideDown();
                 }
-                
+                $(".selection-box").append('<span class="selected-group" data-groupname="'+groupName+'" data-treeid="'+groupID+'" id="select'+groupID+'">'+groupName+'<a class="icon-clear-fill delete-selection"></a></span>');
+                deleteSelection();
             };
-            // closeChild = function(){
-            //     //有子节点，则展开或收缩子节点
-            //     elIcon.className="treeicon";
-            //     elUL.style.display="none";
-            // },
+            //console.log(e.target);
+            
             // addToDisplayDiv = function(){
             //     var groupName = $(selectionCheckbox).data('groupname');
             //     var groupId = $(selectionCheckbox).data('id');
@@ -418,7 +466,7 @@
             // changeParent = function(){
             //     console.log('theres a change');
             // };
-            console.log(e.target);
+            //console.log(e.target);
             if(e.target.tagName.toLowerCase()=="ul"){
                 return;
             }
@@ -427,6 +475,7 @@
                 //elLI=e.target.parentNode.parentNode;
                 selection = e.target.parentNode;
                 selectCurrent();
+                addToDisplayDiv();
                 return;
             }
             // else if(e.target.tagName.toLowerCase()=="input"){
@@ -504,6 +553,7 @@
         operateSelection();
         choosePerson();
         onTapTree();
+        deleteSelection();
     },false);
 	//定义exmobi返回
 	function back(){history.go(-1);}

@@ -425,11 +425,31 @@
 		.icon-rdoadd {
 			position: absolute;
 			right:12px;
+			top:0px;
 			font-size:24px;
 			color:#aaa;
 		}
 		input[type=checkbox] {
 			display: none;
 		}	
+	}
+}
+.selection-box {
+	display: none;
+	background-color:#DDDCE1;
+	height:48px;
+	overflow-x:scroll;
+	white-space: nowrap;
+	.selected-group {
+		border-radius:50px;
+		padding:8px 8px;
+		margin:0 0 0 8px;
+		background:#fff;
+		color:#2F5489;
+		margin-top: 5px;
+		display: inline-block;
+		.icon-clear-fill {
+			color:#aaa;
+		}
 	}
 }
