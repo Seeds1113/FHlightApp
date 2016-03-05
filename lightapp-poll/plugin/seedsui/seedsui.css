@@ -5534,18 +5534,6 @@ table th {
 .treetitle .treeicon.active:before {
   content: "\e90e";
 }
-/*无子节点左侧图标*/
-.treetitle:only-child .treeicon {
-  left: -28px;
-  border-radius: 100%;
-  font-size: 16px;
-  color: white;
-  background-image: none;
-  background-color: #efcb03;
-}
-.treetitle:only-child .treeicon:before {
-  content: '';
-}
 /*----------------tree.less(end)--------------*/
 /*----------------validate.less(start)--------------*/
 /*安全级别*/

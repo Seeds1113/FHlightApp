@@ -17,12 +17,6 @@
                     <span>返回</span>
                 </a>
                 <h1 class="text-center">新建投票</h1>
-                <a class="right">
-                    <i class="icon-rdoadd"></i>
-                </a>
-                <a href="add-poll.html" class="right" id="search-toggle">
-                    <i class="icon-search"></i>
-                </a>
             </div>
         </header>
         <article style="top:44px;bottom:0px;">
@@ -121,14 +115,8 @@
                     <span>返回</span>
                 </a>
                 <h1 class="text-center">选择人员</h1>
-                <a class="right">
-                    <i class="icon-rdoadd"></i>
-                </a>
-                <a href="add-poll.html" class="right" id="search-toggle">
-                    <i class="icon-search"></i>
-                </a>
             </div>
-            <div class="tab-container">
+            <!-- <div class="tab-container">
                 <ul class="rectbar" id="tabbar">
                     <li class="tab active">
                         <label class="tab-label">组织架构</label>
@@ -137,82 +125,95 @@
                         <label class="tab-label">群组</label>
                     </li>
                 </ul>
-            </div>
+            </div> -->
             <div class="selected-display"></div>
         </header>
-        <article style="top:101px;bottom:0px;">
-             <div class="slider-container" id="carouselPage" style="height:100%;">
-                <div class="slider-wrapper">
-                    <div class="slider-slide" id="page1">
-                        <!-- tree -->
-                        <div class="tree-box">
-                            <ul class="tree" id="tree">
-                                <li>
-                                    <div class="treetitle"> <i class="treeicon"></i>
-                                        <span class="icon icon-persons"></span>
-                                        <a>业务产品部</a>
-                                        <input type="checkbox">
-                                    </div>
-                                    <ul>
-                                        <li>
-                                            <div class="treetitle">
-                                                <i class="treeicon"></i>
-                                                <span class="icon icon-persons"></span>
-                                                <a>研发体系</a>
-                                                <input type="checkbox">
-                                            </div>
-                                            <ul>
-                                                <li>
-                                                    <div class="treetitle">
-                                                        <span class="icon icon-persons"></span>
-                                                        <a>开发一部</a>
-                                                        <input type="checkbox">
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="treetitle">
-                                                        <span class="icon icon-persons"></span>
-                                                        <a>开发二部</a>
-                                                        <input type="checkbox">
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="treetitle">
-                                                        <span class="icon icon-persons"></span>
-                                                        <a>开发三部</a>
-                                                        <input type="checkbox">
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <div class="treetitle">
-                                                <i class="treeicon"></i>
-                                                <span class="icon icon-persons"></span>
-                                                <a>市场体系</a>
-                                                <input type="checkbox">
-                                            </div>
-                                            <ul>
-                                                <li>
-                                                    <div class="treetitle">
-                                                        <span class="icon icon-persons"></span>
-                                                        <a>上海办</a>
-                                                        <input type="checkbox">
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
+        <article style="top:44px;bottom:0px;">
+            <div class="selectionbox"></div>
+            <!-- tree -->
+            <div class="tree-box">
+                <ul class="tree" id="tree">
+                    <li>
+                        <div class="treetitle" data-level="1" data-groupid="1" data-groupname="业务产品部"> <i class="treeicon"></i>
+                            <span class="icon icon-persons"></span>
+                            <a>业务产品部</a>
+                            <a class="icon-rdoadd"></a>
+                            <!-- <input type="checkbox" class="group-checkbox" data-level="1" data-groupid="1" data-groupname="业务产品部"> -->
                         </div>
-                        <!-- /tree -->
-                    </div>
-                    <div class="slider-slide" id="page2">
-                        page2
-                    </div>
-                </div>
+                        <ul>
+                            <li>
+                                <div class="treetitle">
+                                    <i class="treeicon"></i>
+                                    <span class="icon icon-persons"></span>
+                                    <a>研发体系</a>
+                                    <a class="icon-rdoadd"></a>
+                                    <!-- <input type="checkbox" class="group-checkbox" data-level="" data-groupid="2" data-groupname="研发体系"> -->
+                                </div>
+                                <ul>
+                                    <li>
+                                        <div class="treetitle">
+                                            <i class="treeicon"></i>
+                                            <span class="icon icon-persons"></span>
+                                            <a>开发一部</a>
+                                            <a class="icon-rdoadd"></a>
+                                            <!-- <input type="checkbox" class="group-checkbox" data-level="" data-groupid="3" data-groupname="开发一部"> -->
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="treetitle">
+                                            <i class="treeicon"></i>
+                                            <span class="icon icon-persons"></span>
+                                            <a>开发二部</a>
+                                            <a class="icon-rdoadd"></a>
+                                            <!-- <input type="checkbox" class="group-checkbox" data-level="" data-groupid="4" data-groupname ="开发二部"> -->
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="treetitle">
+                                            <i class="treeicon"></i>
+                                            <span class="icon icon-persons"></span>
+                                            <a>开发三部</a>
+                                            <a class="icon-rdoadd"></a>
+                                            <!-- <input type="checkbox" class="group-checkbox" data-level="" data-groupid="5" data-groupname ="开发三部"> -->
+                                        </div>
+                                        <ul>
+                                            <li>
+                                                <div class="treetitle">
+                                                    <i class="treeicon"></i>
+                                                    <span class="icon icon-persons"></span>
+                                                    <a>开发一组</a>
+                                                    <a class="icon-rdoadd"></a>
+                                                    <!-- <input type="checkbox" class="group-checkbox" data-level="" data-groupid="3" data-groupname="开发一部"> -->
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="treetitle">
+                                    <i class="treeicon"></i>
+                                    <span class="icon icon-persons"></span>
+                                    <a>市场体系</a>
+                                    <a class="icon-rdoadd"></a>
+                                    <!-- <input type="checkbox" class="group-checkbox" data-level="" data-groupid="6" data-groupname ="市场体系"> -->
+                                </div>
+                                <ul>
+                                    <li>
+                                        <div class="treetitle">
+                                            <span class="icon icon-persons"></span>
+                                            <a>上海办</a>
+                                            <a class="icon-rdoadd"></a>
+                                            <!-- <input type="checkbox" class="group-checkbox" data-level="" data-groupid="7" data-groupname ="上海办"> -->
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
+            <!-- /tree -->
         </article>
     </section>
     <script src="plugin/jquery/jquery.min.js"></script>
@@ -344,87 +345,84 @@
         var toggleSelectPage = function(){
             $("#pageAddPoll").toggleClass("active animated fadeInUp");
             $("#choosePeoplePage").toggleClass("active animated fadeInUp");
-            initSlider();
-            tabBindClick();
+            //initSlider();
+            //tabBindClick();
         };
         $("#selectPeople").click(toggleSelectPage);
         $("#closeSelectPage").click(toggleSelectPage);
     }
     //选人页tab
-    var tabbar=document.getElementById("tabbar");
-    var tab=tabbar.querySelectorAll(".tab");
-    var carouselPage;
-    function initSlider(){
-        carouselPage=new Slider("#carouselPage",{
-            "onSlideChangeEnd":function(e){
-                tabActive(e.index);
-            }
-        });
-    }
-    //选中tab
-    function tabActive(index){
-        for(var i=0,s;s=tab[i++];){
-            s.classList.remove("active");
-        }
-        tab[index].classList.add("active");
-    }
-    //绑定tab点击事件
-    function tabBindClick(){
-        for(var i=0,t;t=tab[i++];){
-            (function(i){
-                t.addEventListener("click",function(){
-                    carouselPage.slideTo(i-1);
-                    tabActive(i-1);
-                },false);
-            })(i);
-        }
-    }
+    // var tabbar=document.getElementById("tabbar");
+    // var tab=tabbar.querySelectorAll(".tab");
+    // var carouselPage;
+    // function initSlider(){
+    //     carouselPage=new Slider("#carouselPage",{
+    //         "onSlideChangeEnd":function(e){
+    //             tabActive(e.index);
+    //         }
+    //     });
+    // }
+    // //选中tab
+    // function tabActive(index){
+    //     for(var i=0,s;s=tab[i++];){
+    //         s.classList.remove("active");
+    //     }
+    //     tab[index].classList.add("active");
+    // }
+    // //绑定tab点击事件
+    // function tabBindClick(){
+    //     for(var i=0,t;t=tab[i++];){
+    //         (function(i){
+    //             t.addEventListener("click",function(){
+    //                 carouselPage.slideTo(i-1);
+    //                 tabActive(i-1);
+    //             },false);
+    //         })(i);
+    //     }
+    // }
     //tree function 
     function onTapTree(){
         EventUtil.addHandler(tree,"tap",function(e){
             //console.log(e.target);
-            var elLI,elUL,elIcon,selection
+            var elLI,elUL,elIcon,selection,
             selectCurrent =  function (){
-                var selectionCheckbox = $(selection).find('input');
+                selectionCheckbox  = $(selection).find('input');
                 selectionCheckbox.trigger('click');
                 $(selection).toggleClass('active');
-                if (selectionCheckbox.prop('checked')==true){
-                     selectChildren();
+                $(selection).find("icon-rdoadd");
+                toggleChildren();
+                // changeParent();
+                elIcon = selection.querySelector('.treeicon');
+                elUL = selection.parentNode.querySelector('ul');
+            },
+            toggleChildren = function(){
+                if ($(selection).hasClass('active')==true){
+                    $(selection).next().find('.treetitle').addClass('active');
+                    console.log("selectchildren");
                 }else{
-                     deselectChildren();
+                    $(selection).next().find('input').prop('checked',false);
+                    $(selection).next().find('.treetitle').removeClass('active');
                 }
-                changeParent();
-            },
-            selectChildren = function(){
-                $(selection).next().find('input').prop('checked',true);
-                $(selection).next().find('.treetitle').addClass('active');
-                console.log("selectchildren");
-            },
-            deselectChildren = function(){
-                $(selection).next().find('input').prop('checked',true);
-                $(selection).next().find('.treetitle').removeClass('active');
-                console.log("deselectchildren");
-            },
-            changeParent = function(){
-                $('.tree-box').find('input').onChange(function(){
-                    console.log('theres a change');
-                })
+                
             };
+            // closeChild = function(){
+            //     //有子节点，则展开或收缩子节点
+            //     elIcon.className="treeicon";
+            //     elUL.style.display="none";
+            // },
+            // addToDisplayDiv = function(){
+            //     var groupName = $(selectionCheckbox).data('groupname');
+            //     var groupId = $(selectionCheckbox).data('id');
+            //     console.log(groupName);
+            // };
+            // changeParent = function(){
+            //     console.log('theres a change');
+            // };
+            console.log(e.target);
             if(e.target.tagName.toLowerCase()=="ul"){
                 return;
             }
-            if(e.target.className.indexOf("treetitle")>=0){
-                //当点击标题标签时
-                selection = e.target;
-                selectCurrent();
-                return;
-            }else if(e.target.tagName.toLowerCase()=="a"){
-                //当点击有a标签时
-                //elLI=e.target.parentNode.parentNode;
-                selection = e.target.parentNode;
-                selectCurrent();
-                return;
-            }else if(e.target.tagName.toLowerCase()=="span"){
+            if(e.target.className.indexOf("icon-rdoadd")>= 0){
                 //当点击有a标签时
                 //elLI=e.target.parentNode.parentNode;
                 selection = e.target.parentNode;
@@ -438,37 +436,57 @@
             //     selectCurrent();
             //     return;
             // }
-            if(e.target.tagName.toLowerCase()=="i"){
+            if(e.target.className.indexOf("treetitle")>=0){
+                //当点击标题标签时
+                selection = e.target;
+                elLI=e.target.parentNode;
+                //selectCurrent();
+            } else if(e.target.tagName.toLowerCase()=="i"){
                 //当点击i标签时
-
                 elLI=e.target.parentNode.parentNode;
+                selection = e.target.parentNode;
                 //console.log("opennow!");
-            } 
-            else if(e.target.tagName.toLowerCase()=="li"){
+            } else if(e.target.tagName.toLowerCase()=="a"){
                 //当点击有a标签时
                 elLI=e.target.parentNode.parentNode;
-            } 
+                selection = e.target.parentNode;
+            } else if(e.target.className.indexOf("icon-persons")>=0){
+                elLI=e.target.parentNode.parentNode;
+                selection = e.target.parentNode;
+            }
+            // else if(e.target.tagName.toLowerCase()=="li"){
+            //     //当点击有a标签时
+            //     elLI=e.target.parentNode.parentNode;
+            // } 
             elUL=elLI.querySelector("ul");
             elIcon=elLI.querySelector(".treeicon");
-            
-            //没有子节点，则进入人员详情
             if(!elUL){
-                /*var nativePage=elLI.querySelector("a").getAttribute("data-href");
-                var param=elLI.id||"";
-                ExMobiWindow.open(nativePage, true,false,"",param);*/
-                console.log("没有子节点");
-                return;
+            /*var nativePage=elLI.querySelector("a").getAttribute("data-href");
+            var param=elLI.id||"";
+            ExMobiWindow.open(nativePage, true,false,"",param);*/
+            $(selection).find(".treeicon").remove();
+            var treeToast2 = new Toast("已到最底层了，此部门下没有子部门", {delay:2000});
+            treeToast2.show(); 
+            return;
             }
-            //有子节点，则展开或收缩子节点
             if(elUL.style.display=="none" || !elUL.style.display){
+                var selectionLevel = $(selection).data('level'),
+                childrenLevel = selectionLevel + 1
                 //展开节点
                 elIcon.className="treeicon active";
                 elUL.style.display="block";
+                console.log(selectionLevel);
+                //这里写加载mplus子节点方法
+
+                //给子节点加level
+                $(selection).next().children().find('treetitle').attr('data-level', childrenLevel);
             }else{
                 //收缩节点
                 elIcon.className="treeicon";
                 elUL.style.display="none";
             }
+            //没有子节点，则进入人员详情
+            
         });
     }
 
