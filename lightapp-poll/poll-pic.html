@@ -9,6 +9,7 @@
 		.grid-title{
 			position: absolute;
 			bottom:0;
+			left: 0;
 			box-sizing:border-box;
 			padding:0 6px;
 			width:100%;
@@ -17,7 +18,28 @@
 			background-color:rgba(0,0,0,.5);
 			color:white;
 		}
-		.grid.thumbnail input[type="checkbox"]{
+		/*无图片*/
+		.list span.checkbox:before{
+			font-family: "iconfont";
+			display:inline-block;
+			width: 22px;
+			height: 22px;
+			font-size: 22px;
+			line-height: 22px;
+			content: "\e9dd";
+			color: #bababa;
+		}
+		.list span.checkbox.active:before{
+			content: "\e9de";
+			color: #4587f7;
+		}
+		/*有图片*/
+		.grid.thumbnail li>a{
+			min-height: 280px;
+			background-size: cover;
+		}
+		.grid.thumbnail span.checkbox{
+			display:inline-block;
 			font-size:32px;
 			width: 32px;
 			height: 32px;
@@ -27,22 +49,13 @@
 			background-position:center top;
 			background-image: url(img/form/cbo.png);
 		}
-		.grid.thumbnail input[type="checkbox"]:checked{
+		.grid.thumbnail span.checkbox.active{
 			background-position:center bottom;
 		}
-		.grid.thumbnail input[type="checkbox"]:before {
-		  	content: '';
-		}
-		.grid.thumbnail a input[type=checkbox]{
+		.grid.thumbnail span.checkbox{
 			position: absolute;
 			top:5px;
 			right:5px;
-		}
-		.list input[type=checkbox]:before{
-			content: "\e9dd";
-		}
-		.list input[type=checkbox]:checked::before{
-			content: "\e9de";
 		}
 	</style>
 </head>
@@ -94,39 +107,39 @@
 			</ul>
 			<ul class="grid thumbnail" data-col="2" style="background-color:white;">
 				<li>
-					<a>
-						<input type="checkbox">
+					<a style="background-image: url(img/picture/login.png);">
+						<span class="checkbox"></span>
+						<input type="checkbox" class="hide">
 						<div class="grid-title box box-middle">
 							内容内容
 						</div>
-						<img src="img/picture/login.png">
 					</a>
 				</li>
 				<li>
-					<a>
-						<input type="checkbox">
+					<a style="background-image: url(img/picture/login.png);">
+						<span class="checkbox"></span>
+						<input type="checkbox" class="hide">
 						<div class="grid-title box box-middle">
 							内容内容
 						</div>
-						<img src="img/picture/login.png">
 					</a>
 				</li>
 				<li>
-					<a>
-						<input type="checkbox">
+					<a style="background-image: url(img/picture/login.png);">
+						<span class="checkbox"></span>
+						<input type="checkbox" class="hide">
 						<div class="grid-title box box-middle">
 							内容内容
 						</div>
-						<img src="img/picture/login.png">
 					</a>
 				</li>
 				<li>
-					<a>
-						<input type="checkbox">
+					<a style="background-image: url(img/picture/login.png);">
+						<span class="checkbox"></span>
+						<input type="checkbox" class="hide">
 						<div class="grid-title box box-middle">
 							内容内容
 						</div>
-						<img src="img/picture/login.png">
 					</a>
 				</li>
 			</ul>
@@ -136,7 +149,8 @@
                         <p>内容内容</p>
                     </div>
                     <div class="justify">
-                        <input type="checkbox">
+                        <span class="checkbox"></span>
+                        <input type="checkbox" class="hide">
                     </div>
 				</li>
 				<li>
@@ -144,7 +158,8 @@
                         <p>内容内容</p>
                     </div>
                     <div class="justify">
-                        <input type="checkbox">
+                        <span class="checkbox"></span>
+                        <input type="checkbox" class="hide">
                     </div>
 				</li>
 				<li>
@@ -152,7 +167,17 @@
                         <p>内容内容</p>
                     </div>
                     <div class="justify">
-                        <input type="checkbox">
+                    	<span class="checkbox"></span>
+                        <input type="checkbox" class="hide">
+                    </div>
+				</li>
+				<li>
+					<div class="justify-content">
+                        <p>内容内容</p>
+                    </div>
+                    <div class="justify">
+                    	<span class="checkbox"></span>
+                        <input type="checkbox" class="hide">
                     </div>
 				</li>
 			</ul>
@@ -164,9 +189,9 @@
     <script src="plugin/seedsui/seedsui.min.js"></script>
     <script type="text/javascript">
     	var checkedToast=new Toast("最多选2项");
-    	function getCheckbox(e){
+    	function selCheckbox(e,cboMaxCount){
+    		var cboCount=0;
     		var target=e.target;
-    		console.log(target);
     		var cbo;
     		if(target.tagName.toLowerCase()=="a"){
     			cbo=target.querySelector("input[type=checkbox]");
@@ -174,41 +199,31 @@
     			cbo=target.querySelector("input[type=checkbox]");
     		}else if(target.tagName.toLowerCase()=="p"){
     			cbo=target.parentNode.parentNode.querySelector("input[type=checkbox]");
-    		}else if(target.tagName.toLowerCase()=="img" || target.tagName.toLowerCase()=="div"){
+    		}else if(target.tagName.toLowerCase()=="img" || target.tagName.toLowerCase()=="div" || target.tagName.toLowerCase()=="span"){
     			cbo=target.parentNode.querySelector("input[type=checkbox]");
-    		}else if(target.tagName.toLowerCase()=="input"){
-    			cbo=target;
     		}
-    		console.log(cbo);
-    		return cbo;
-    	}
-    	function displayCheckbox(display){
-    		//显示其它的checkbox
-			[].slice.call(this.querySelectorAll("input[type=checkbox]")).forEach(function(n,i,a){
-				if(!n.checked){
-					n.style.display=display;
-				}
-			});
-    	}
-    	var cboCount=0;
-    	function checkedCheckbox(cbo,cboMaxCount){
-    		if(cbo.checked){
+
+    		if(cbo.checked==true){
     			cboCount--;
+    			cbo.previousElementSibling.classList.remove("active");
     			cbo.checked=false;
     			return;
     		}
-    		if(cboCount>=cboMaxCount){
-    			checkedToast.show();
-    			return;
-    		}
-    		if(!cbo.checked){
-    			cboCount++;
-    			cbo.checked=true;
-    		}
+    		[].slice.call(this.querySelectorAll("input[type=checkbox]")).forEach(function(n,i,a){
+				if(n.checked){
+					cboCount++;
+				}
+			});
+			if(cboCount>=cboMaxCount){
+				checkedToast.show();
+				return;
+			}
+			cbo.previousElementSibling.classList.add("active");
+    		cbo.checked=true;
     	}
+
     	document.getElementById("sel").addEventListener("click",function(e){
-    		var cbo=getCheckbox(e);
-    		checkedCheckbox.call(this,cbo,2);
+    		selCheckbox.call(this,e,2);
     	},false);
     </script>
 </body>
