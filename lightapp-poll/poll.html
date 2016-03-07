@@ -105,7 +105,7 @@
                     </div>
                 </li>
 			</ul>
-			<ul class="grid thumbnail" data-col="2" style="background-color:white;">
+			<ul class="grid thumbnail" data-col="2" style="background-color:white;" id="selImg">
 				<li>
 					<a style="background-image: url(img/picture/login.png);">
 						<span class="checkbox"></span>
@@ -143,7 +143,7 @@
 					</a>
 				</li>
 			</ul>
-			<ul class="list" id="sel">
+			<ul class="list" id="selFont">
 				<li>
 					<div class="justify-content">
                         <p>内容内容</p>
@@ -222,11 +222,26 @@
     		cbo.checked=true;
     	}
 
-    	document.getElementById("sel").addEventListener("click",function(e){
-    		selCheckbox.call(this,e,2);
-    	},false);
-
-    	//此为演示时
+    	//此为离线演示时，实际项目中请修改此函数
+    	function getParameter(argName){
+			var param = location.search.match(new RegExp("[\?\&]" + argName + "=([^\&]*)(\&?)","i"));
+			return param ? param[1] : param;
+		}
+		window.addEventListener("load",function(e){
+			var pollContainer=document.getElementById("selFont");
+			var isPic=getParameter("pic");
+			if(isPic){
+				pollContainer=document.getElementById("selImg");
+				document.getElementById("selFont").style.display="none";
+			}else{
+				pollContainer=document.getElementById("selFont");
+				document.getElementById("selImg").style.display="none";
+			}
+			pollContainer.addEventListener("click",function(e){
+	    		selCheckbox.call(this,e,2);
+	    	},false);
+		},false);
+		
     </script>
 </body>
 </html>
