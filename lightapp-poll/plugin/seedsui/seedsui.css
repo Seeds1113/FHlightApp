@@ -299,8 +299,8 @@ button.text-left {
   box-pack: end;
   -moz-box-pack: end;
   -webkit-box-pack: end;
-  -webkit-justify-content: -webkit-flex-end;
-  justify-content: -webkit-flex-end;
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
 }
 .box-middle,
 .box-middlecenter {
@@ -314,8 +314,8 @@ button.text-left {
   box-align: end;
   -moz-box-align: end;
   -webkit-box-align: end;
-  -webkit-align-items: -webkit-flex-end;
-  align-items: -webkit-flex-end;
+  -webkit-align-items: flex-end;
+  align-items: flex-end;
 }
 .box-vertical {
   -moz-box-orient: vertical;
@@ -330,6 +330,16 @@ button.text-left {
   box-orient: horizontal;
   -webkit-flex-flow: row;
   flex-flow: row;
+}
+.box-shrink div {
+  width: 100%;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-flex-shrink: 0;
+  -ms-flex: 0 0 auto;
+  flex-shrink: 0;
 }
 .box-flex-1 {
   -moz-box-flex: 1.0;
@@ -2406,6 +2416,7 @@ aside.active ~ #section_container .section_container_mask {
 .tabbar {
   position: relative;
   display: table;
+  margin: 0 auto;
 }
 .tab {
   position: relative;
@@ -2464,7 +2475,7 @@ aside.active ~ #section_container .section_container_mask {
 }
 /*rectbar*/
 .rectbar {
-  margin: 0 30px;
+  max-width: 96%;
 }
 .rectbar .tab {
   height: 34px;
@@ -4478,7 +4489,7 @@ input[type=range]:focus::-ms-fill-upper {
   display: -webkit-flex;
   display: box;
   display: -webkit-box;
-  padding: 6px 4px;
+  padding: 0 4px;
   box-sizing: border-box;
   border-width: 0 0 1px 0;
   border-style: solid;
@@ -4494,7 +4505,7 @@ input[type=range]:focus::-ms-fill-upper {
 }
 .list .justify,
 .list .justify-content {
-  padding: 4px;
+  padding: 10px 4px;
 }
 .list .justify,
 .list .licon,
@@ -4547,23 +4558,19 @@ input[type=range]:focus::-ms-fill-upper {
 .list .ricon {
   font-size: 12px;
 }
-/*无边框*/
-.list.noborder li {
-  border-width: 0;
-}
-/*无背景*/
-.list.nobg li {
-  background-color: transparent;
-}
-.list.nobg li:active {
-  background-color: transparent;
-}
 /*无点击*/
+.list.noclick li,
 .list li.noclick {
   background-color: white;
 }
+.list.noclick li:active,
 .list li.noclick:active {
   background-color: white;
+}
+/*无边框*/
+.list.noborder li,
+.list li.noborder {
+  border-width: 0;
 }
 /*无自适应*/
 .list li.nojustify {
@@ -4573,11 +4580,14 @@ input[type=range]:focus::-ms-fill-upper {
   display: block;
   max-width: 100%;
 }
-/*新闻列表*/
-.list.newlist [class^=mark-] {
+.list li.nojustify .justify-content ~ .justify {
+  padding-top: 0;
+}
+/*列表标记*/
+.list [class^=mark-] {
   margin-right: 4px;
 }
-/*邮件列表*/
+/*左圆形列表*/
 .list .round {
   width: 50px;
   height: 50px;
@@ -4594,16 +4604,9 @@ input[type=range]:focus::-ms-fill-upper {
   background-position: center center;
   background-repeat: no-repeat;
 }
-/*联系人列表*/
-.list.contactlist li {
-  border-width: 0;
-}
-.list.contactlist li .justify-content {
-  border-style: solid;
-  border-color: inherit;
-  border-width: 0 0 1px 0;
-}
-.list.contactlist .justify-content small:last-child {
+/*上下两端对齐*/
+.list.between .justify-content small:last-child,
+.list li.between .justify-content small:last-child {
   margin-top: 8px;
 }
 /*功能列表*/
@@ -4658,16 +4661,25 @@ input[type=range]:focus::-ms-fill-upper {
   position: absolute;
 }
 .list .top {
-  top: 4px;
+  top: 12px;
 }
 .list .bottom {
-  bottom: 4px;
+  bottom: 8px;
 }
 .list .left {
   left: 4px;
 }
 .list .right {
   right: 4px;
+}
+/*内容线*/
+.list.border-content li {
+  border-width: 0;
+}
+.list.border-content .justify-content {
+  border-style: solid;
+  border-color: inherit;
+  border-width: 0 0 1px 0;
 }
 /*----------------------------list.less(end)----------------------------*/
 /*-----------------------------loading.less(start)-----------------------------*/
@@ -5534,6 +5546,18 @@ table th {
 .treetitle .treeicon.active:before {
   content: "\e90e";
 }
+/*无子节点左侧图标*/
+.treetitle:only-child .treeicon {
+  left: -28px;
+  border-radius: 100%;
+  font-size: 16px;
+  color: white;
+  background-image: none;
+  background-color: #efcb03;
+}
+.treetitle:only-child .treeicon:before {
+  content: '';
+}
 /*----------------tree.less(end)--------------*/
 /*----------------validate.less(start)--------------*/
 /*安全级别*/
@@ -5741,6 +5765,70 @@ ul.weather-otherday li {
   display: inline-block;
 }
 /*-----------------------------weather.less(end)-----------------------------*/
+/*----------------------------calendar.less(start)----------------------------*/
+.calendar {
+  position: relative;
+  width: 100%;
+  border-style: solid;
+  border-width: 0 0 1px 0;
+  overflow: hidden;
+}
+.calendar-title {
+  font-size: 20px;
+  text-align: center;
+}
+.date_container {
+  overflow: hidden;
+  width: 300%;
+}
+.day {
+  width: 300%;
+}
+.week-day-line {
+  width: 33%;
+  display: inline-block;
+}
+.date_container:after {
+  display: table;
+  content: '';
+  clear: both;
+  zoom: 1;
+}
+.month-block {
+  width: 33%;
+  display: inline-block;
+}
+.day-name,
+.day-date {
+  display: inline-block;
+  text-align: center;
+  float: left;
+  width: 14%;
+}
+.day-name:first-child,
+.day-name:last-child,
+.day-date:first-child,
+.day-date:last-child {
+  width: 15%;
+}
+.day-date {
+  padding: 7px 0;
+}
+.day-date span.show-date {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  border-radius: 36px;
+}
+.day-date .active {
+  color: #fff;
+}
+.arrowleft,
+.arrowright {
+  font-size: 20px;
+}
+/*----------------------------calendar.less(end)----------------------------*/
 /*控件*/
 /*常用颜色*/
 /*-----------------------------global.less(start)-----------------------------*/
@@ -6497,6 +6585,31 @@ input[type="radio"][disabled]:checked {
   background: #f4f4f4;
 }
 /*-----------------------------loading.less(end)-----------------------------*/
+/*-----------------------------calendar.less(start)-----------------------------*/
+.calendar {
+  border-color: #e8e8e8;
+}
+.day-name {
+  color: #666666;
+}
+.day-date .today:not(.active) {
+  color: #4587f7;
+}
+.day-date .active {
+  background-color: #4587f7;
+}
+.arrowleft,
+.arrowright {
+  color: #e8e8e8;
+}
+.arrowleft:active,
+.arrowright:active {
+  color: #4587f7;
+}
+.not-this-month {
+  color: #e8e8e8;
+}
+/*-----------------------------calendar.less(end)-----------------------------*/
 /*----------------------------chat.less(start)----------------------------*/
 .chat .author i {
   color: #aaaaaa;
