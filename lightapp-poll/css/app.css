@@ -421,7 +421,7 @@
   white-space: nowrap;
 }
 .selection-box .selected-group {
-  border-radius: 50px;
+  border-radius: 8px;
   padding: 8px 8px;
   margin: 0 0 0 8px;
   background: #fff;
@@ -431,4 +431,5 @@
 }
 .selection-box .selected-group .icon-clear-fill {
   color: #aaa;
+  margin-left: 5px;
 }

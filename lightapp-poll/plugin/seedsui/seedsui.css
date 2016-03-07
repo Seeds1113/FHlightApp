@@ -5547,7 +5547,7 @@ table th {
   content: "\e90e";
 }
 /*无子节点左侧图标*/
-.treetitle:only-child .treeicon {
+/*.treetitle:only-child .treeicon {
   left: -28px;
   border-radius: 100%;
   font-size: 16px;
@@ -5557,7 +5557,7 @@ table th {
 }
 .treetitle:only-child .treeicon:before {
   content: '';
-}
+}*/
 /*----------------tree.less(end)--------------*/
 /*----------------validate.less(start)--------------*/
 /*安全级别*/
