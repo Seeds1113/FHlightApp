@@ -31,7 +31,7 @@
                         <span class="count"><span id="text-num">0</span>/250</span>
                         <a class="icon icon-pic add-pic" id="addMainPic"></a>
                         <a class="icon icon-trash delete-pic" style="display:none;" id="deleteMainPic"></a>
-                        <div class="main-pic"></div>
+                        <div class="main-pic" id="mainPicContainer"></div>
                         <input type="file" style="display:none;" id="mainImgFile">
                     </div>
                     <div class="multi-select">
@@ -94,7 +94,7 @@
                     </div>
                 </div>
                 <div class="content">
-                    <div class="listitem-select" id="selectPeople">
+                    <div class="listitem-select" id="selectPeople" href="#choosePeoplePage" data-target="section">
                         选人
                         <span class="group-info" id="selectPeopleText">请选择投票人员</span>
                         <i class="icon-arrowright"></i>
@@ -104,10 +104,11 @@
                 <div class="block margin8">
                     <button class="button block">发布</button>
                 </div>
-                <a class="button block outline margin8">预览</a>
+                <a class="button block outline margin8" id="previewBtn" href="#previewPage" data-target="section">预览</a>
             </form>
         </article>
 	</section>
+    <!--选人页面-->
     <section id="choosePeoplePage">
         <header>
            <div class="titlebar">
@@ -227,6 +228,132 @@
             <!-- /tree -->
         </article>
     </section>
+    <!-- 预览页面 -->
+    <section id="previewPage">
+        <header>
+            <div class="titlebar">
+                <a href="javascript:history.go(-1)">
+                    <i class="icon-arrowleft"></i>
+                    <span>返回</span>
+                </a>
+                <h1 class="text-center">投票</h1>
+            </div>
+        </header>
+        <article>
+            <div class="card overflow-hide">
+            <ul class="list noclick">
+                <li class="between">
+                    <div class="justify">
+                        <div class="round" style="background-image:url(img/photo/tx1.jpg)"></div>
+                    </div>
+                    <div class="justify-content">
+                        <p>Cindy</p>
+                        <small class="top right">于2016-02-28截止</small>
+                        <small>
+                            创建:2016-01-01
+                            <div class="progress-bar radiusround float-right" style="width:50%;margin:-2px 0 0 0;">
+                                <span class="progress" style="width: 25%"></span>
+                                <span class="text"><a class="timer" data-duration="1000" data-to="25">25</a>/100</span>
+                            </div>
+                        </small>
+                    </div>
+                </li>
+                <li class="nojustify noborder">
+                    <div class="justify-content">
+                        <p id="previewPageTitle">吃货的选择是？</p>
+                        <small class="nowrap">投票决定，最高票数当选</small>
+                    </div>
+                    <div class="justify">
+                        <img src="img/content/poll-main-default.jpg" class="width-full" id="previewMainPic">
+                    </div>
+                </li>
+                <li class="noborder">
+                    <div class="justify-content" style="height:30px;">
+                        <small class="top left">记名投票(最多选2项)</small>
+                        <small class="top right">0人参与投票</small>
+                    </div>
+                </li>
+            </ul>
+            <ul class="grid thumbnail" data-col="2" style="background-color:white;">
+                <li>
+                    <a style="background-image: url(img/picture/login.png);">
+                        <span class="checkbox"></span>
+                        <input type="checkbox" class="hide">
+                        <div class="grid-title box box-middle">
+                            内容内容
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a style="background-image: url(img/picture/login.png);">
+                        <span class="checkbox"></span>
+                        <input type="checkbox" class="hide">
+                        <div class="grid-title box box-middle">
+                            内容内容
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a style="background-image: url(img/picture/login.png);">
+                        <span class="checkbox"></span>
+                        <input type="checkbox" class="hide">
+                        <div class="grid-title box box-middle">
+                            内容内容
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a style="background-image: url(img/picture/login.png);">
+                        <span class="checkbox"></span>
+                        <input type="checkbox" class="hide">
+                        <div class="grid-title box box-middle">
+                            内容内容
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <ul class="list" id="sel">
+                <li>
+                    <div class="justify-content">
+                        <p>内容内容</p>
+                    </div>
+                    <div class="justify">
+                        <span class="checkbox"></span>
+                        <input type="checkbox" class="hide">
+                    </div>
+                </li>
+                <li>
+                    <div class="justify-content">
+                        <p>内容内容</p>
+                    </div>
+                    <div class="justify">
+                        <span class="checkbox"></span>
+                        <input type="checkbox" class="hide">
+                    </div>
+                </li>
+                <li>
+                    <div class="justify-content">
+                        <p>内容内容</p>
+                    </div>
+                    <div class="justify">
+                        <span class="checkbox"></span>
+                        <input type="checkbox" class="hide">
+                    </div>
+                </li>
+                <li>
+                    <div class="justify-content">
+                        <p>内容内容</p>
+                    </div>
+                    <div class="justify">
+                        <span class="checkbox"></span>
+                        <input type="checkbox" class="hide">
+                    </div>
+                </li>
+            </ul>
+            <a class="button block margin8">投票</a>
+            </div>
+        </article>
+    </section>
     <script src="plugin/jquery/jquery.min.js"></script>
     <script src="plugin/seedsui/seedsui.min.js"></script>
     <script>
@@ -249,7 +376,7 @@
     $("#addMainPic").click(function(){
         addImg = function (){
             //先做个假的后面要调m-plus方法访问本地能力
-            $(".main-pic").html('<img src="img/content/poll-main1.jpg" class="animated zoomIn">');
+            $(".main-pic").html('<img src="img/content/poll-main1.jpg" class="animated zoomIn" id="mainPic">');
             $("#addMainPic").hide();
             $("#deleteMainPic").show();
         };
@@ -358,7 +485,6 @@
         $("#choosePeoplePage").toggleClass("active animated fadeInUp");
     }
     function choosePerson(){
-        $("#selectPeople").click(toggleSelectPage);
         $("#closeSelectPage").click(function(){
             var selectedGroups = $(".selection-box").find(".selected-group");
             var groupInputValue = "";
@@ -372,7 +498,7 @@
                 console.log(groupInputValue);
             });
             $("#selectPeopleInput").val(groupInputValue);
-            toggleSelectPage();
+            history.go(-1);
         });
     }
     //选人页tab
@@ -541,6 +667,29 @@
             
         });
     }
+    //
+    // 预览function
+    function previewPage(){
+        var pollTitle = $("#pollTitle").val(),
+        pollContent = $("#pollMainContent").val(),
+        pollMainPic;
+        if ($("#previewPageTitle").html()==""){
+            $("#previewPageTitle").html("您还没有填写一个标题");
+            
+        }else {
+            $("#previewPageTitle").html(pollTitle);
+        }
+        if ($("#mainPicContainer").html()==""){
+            $("#previewMainPic").attr("src","img/content/poll-main-default.jpg");
+            
+        }else{
+            pollMainPic=$("#mainPic").attr("src");
+            $("#previewMainPic").attr("src",pollMainPic);
+        }
+    }
+    $("#previewBtn").click(function(){
+        previewPage();
+    });
 
     //初始化function
     window.addEventListener("load",function(){
@@ -557,6 +706,20 @@
         choosePerson();
         onTapTree();
         deleteSelection();
+        Section.init({
+            "onSectionOpenStart":function(e){
+                console.log("页面加载前"+e.sectionId);
+            },
+            "onSectionOpenEnd":function(e){
+                console.log("页面加载完成"+e.sectionId);
+            },
+            "onSectionCloseStart":function(e){
+                console.log("页面关闭前"+e.sectionId);
+            },
+            "onSectionCloseEnd":function(e){
+                console.log("页面关闭完成"+e.sectionId);
+            }
+        });
     },false);
 	//定义exmobi返回
 	function back(){history.go(-1);}
