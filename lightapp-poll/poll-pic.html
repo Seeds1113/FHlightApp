@@ -17,6 +17,21 @@
 			background-color:rgba(0,0,0,.5);
 			color:white;
 		}
+		input[type="checkbox"]{
+			font-size:32px;
+		}
+		input[type="checkbox"]:before {
+		  	content: "\e9cd";
+		}
+		input[type="checkbox"]:checked:before{
+			color:#4cd32e;
+		  	content: "\e9ce";
+		}
+		.grid.thumbnail a input[type=checkbox]{
+			position: absolute;
+			top:12px;
+			right:15px;
+		}
 	</style>
 </head>
 <body>
@@ -60,14 +75,15 @@
                 </li>
                 <li class="noborder">
                 	<div class="justify-content" style="height:30px;">
-                		<small class="top left">记名投票(多选)</small>
+                		<small class="top left">记名投票(最多选2项)</small>
                 		<small class="top right">0人参与投票</small>
                     </div>
                 </li>
 			</ul>
-			<ul class="grid thumbnail" data-col="2" style="background-color:white;">
+			<ul class="grid thumbnail" data-col="2" style="background-color:white;" id="sel">
 				<li>
 					<a>
+						<input type="checkbox">
 						<div class="grid-title box box-middle">
 							内容内容
 						</div>
@@ -76,6 +92,25 @@
 				</li>
 				<li>
 					<a>
+						<input type="checkbox">
+						<div class="grid-title box box-middle">
+							内容内容
+						</div>
+						<img src="img/picture/login.png">
+					</a>
+				</li>
+				<li>
+					<a>
+						<input type="checkbox">
+						<div class="grid-title box box-middle">
+							内容内容
+						</div>
+						<img src="img/picture/login.png">
+					</a>
+				</li>
+				<li>
+					<a>
+						<input type="checkbox">
 						<div class="grid-title box box-middle">
 							内容内容
 						</div>
@@ -88,5 +123,48 @@
 	</section>
 	<script src="plugin/jquery/jquery.min.js"></script>
     <script src="plugin/seedsui/seedsui.min.js"></script>
+    <script type="text/javascript">
+    	var checkedToast=new Toast("最多选2项");
+    	function getCheckbox(e){
+    		var target=e.target;
+    		var cbo;
+    		if(target.tagName.toLowerCase()=="a"){
+    			cbo=target.querySelector("input[type=checkbox]");
+    		}else if(target.tagName.toLowerCase()=="img" || target.tagName.toLowerCase()=="div"){
+    			cbo=target.parentNode.querySelector("input[type=checkbox]");
+    		}else if(target.tagName.toLowerCase()=="input"){
+    			cbo=target;
+    		}
+    		return cbo;
+    	}
+    	function displayCheckbox(display){
+    		//显示其它的checkbox
+			[].slice.call(this.querySelectorAll("input[type=checkbox]")).forEach(function(n,i,a){
+				if(!n.checked){
+					n.style.display=display;
+				}
+			});
+    	}
+    	var cboCount=0;
+    	function checkedCheckbox(cbo,cboMaxCount){
+    		if(cbo.checked){
+    			cboCount--;
+    			cbo.checked=false;
+    			return;
+    		}
+    		if(cboCount>=cboMaxCount){
+    			checkedToast.show();
+    			return;
+    		}
+    		if(!cbo.checked){
+    			cboCount++;
+    			cbo.checked=true;
+    		}
+    	}
+    	document.getElementById("sel").addEventListener("click",function(e){
+    		var cbo=getCheckbox(e);
+    		checkedCheckbox.call(this,cbo,2);
+    	},false);
+    </script>
 </body>
 </html>
