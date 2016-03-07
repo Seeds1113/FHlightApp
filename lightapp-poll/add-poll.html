@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>轻应用－投票－投票列表</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-	<link rel="stylesheet" href="plugin/seedsui/seedsui.css">
+    <meta charset="UTF-8">
+    <title>轻应用－投票－投票列表</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="plugin/seedsui/seedsui.css">
     <link rel="stylesheet" href="plugin/animate/animate.css">
-	<link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
-	<section id="pageAddPoll" class="active">
-		<header>
+    <section id="pageAddPoll" class="active">
+        <header>
            <div class="titlebar">
                 <a href="javascript:history.go(-1)">
                     <i class="icon-arrowleft"></i>
@@ -107,7 +107,7 @@
                 <a class="button block outline margin8" id="previewBtn" href="#previewPage" data-target="section">预览</a>
             </form>
         </article>
-	</section>
+    </section>
     <!--选人页面-->
     <section id="choosePeoplePage">
         <header>
@@ -673,18 +673,19 @@
         var pollTitle = $("#pollTitle").val(),
         pollContent = $("#pollMainContent").val(),
         pollMainPic;
-        if ($("#previewPageTitle").html()==""){
+        if (pollTitle.val()==""){
             $("#previewPageTitle").html("您还没有填写一个标题");
-            
         }else {
             $("#previewPageTitle").html(pollTitle);
         }
         if ($("#mainPicContainer").html()==""){
             $("#previewMainPic").attr("src","img/content/poll-main-default.jpg");
-            
         }else{
             pollMainPic=$("#mainPic").attr("src");
             $("#previewMainPic").attr("src",pollMainPic);
+        }
+        if (pollContent==""){
+            
         }
     }
     $("#previewBtn").click(function(){
@@ -721,8 +722,8 @@
             }
         });
     },false);
-	//定义exmobi返回
-	function back(){history.go(-1);}
-	</script>
+    //定义exmobi返回
+    function back(){history.go(-1);}
+    </script>
 </body>
 </html>
