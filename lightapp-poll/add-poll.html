@@ -96,8 +96,9 @@
                 <div class="content">
                     <div class="listitem-select" id="selectPeople">
                         选人
-                        <span class="group-info">请选择投票人员</span>
+                        <span class="group-info" id="selectPeopleText">请选择投票人员</span>
                         <i class="icon-arrowright"></i>
+                        <input type="text" style="display:none;" id="selectPeopleInput">
                     </div>
                 </div>
                 <div class="block margin8">
@@ -112,7 +113,7 @@
            <div class="titlebar">
                 <a id="closeSelectPage">
                     <i class="icon-arrowleft"></i>
-                    <span>返回</span>
+                    <span>确定</span>
                 </a>
                 <h1 class="text-center">选择人员</h1>
             </div>
@@ -191,7 +192,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <div class="treetitle" data-level="" data-groupid="7" data-groupname="开发一部" id="group-7">
+                                <div class="treetitle" data-level="" data-groupid="7" data-groupname="市场体系" id="group-7">
                                     <i class="treeicon"></i>
                                     <span class="icon icon-persons"></span>
                                     <a>市场体系</a>
@@ -200,7 +201,7 @@
                                 </div>
                                 <ul>
                                     <li>
-                                        <div class="treetitle" data-level="" data-groupid="8" data-groupname="开发一部" id="group-8">
+                                        <div class="treetitle" data-level="" data-groupid="8" data-groupname="上海办" id="group-8">
                                             <i class="treeicon"></i>
                                             <span class="icon icon-persons"></span>
                                             <a>上海办</a>
@@ -209,10 +210,10 @@
                                         </div>
                                     </li>
                                     <li>
-                                        <div class="treetitle" data-level="" data-groupid="9" data-groupname="开发二部超级牛" id="group-9">
+                                        <div class="treetitle" data-level="" data-groupid="9" data-groupname="广州办名字超长超长超长超" id="group-9">
                                             <i class="treeicon"></i>
                                             <span class="icon icon-persons"></span>
-                                            <a>上海办</a>
+                                            <a>广州办名字超长超长超长超</a>
                                             <a class="icon-rdoadd"></a>
                                             <!-- <input type="checkbox" class="group-checkbox" data-level="" data-groupid="7" data-groupname ="上海办"> -->
                                         </div>
@@ -352,15 +353,27 @@
         $("#secretPoll").trigger('click'); 
     });
     //开选人页面
+    function toggleSelectPage() {
+        $("#pageAddPoll").toggleClass("active animated fadeInUp");
+        $("#choosePeoplePage").toggleClass("active animated fadeInUp");
+    }
     function choosePerson(){
-        var toggleSelectPage = function(){
-            $("#pageAddPoll").toggleClass("active animated fadeInUp");
-            $("#choosePeoplePage").toggleClass("active animated fadeInUp");
-            //initSlider();
-            //tabBindClick();
-        };
         $("#selectPeople").click(toggleSelectPage);
-        $("#closeSelectPage").click(toggleSelectPage);
+        $("#closeSelectPage").click(function(){
+            var selectedGroups = $(".selection-box").find(".selected-group");
+            var groupInputValue = "";
+            $("#selectPeopleText").html("");
+            selectedGroups.each(function(i){
+                var groupName = $(selectedGroups[i]).data("groupname"),
+                groupID = $(selectedGroups[i]).data("groupid");
+                $("#selectPeopleText").append("&nbsp;"+groupName+",");
+                groupInputValue += groupID+",";
+                console.log(groupID);
+                console.log(groupInputValue);
+            });
+            $("#selectPeopleInput").val(groupInputValue);
+            toggleSelectPage();
+        });
     }
     //选人页tab
     // var tabbar=document.getElementById("tabbar");
@@ -446,27 +459,17 @@
     function onTapTree(){
         EventUtil.addHandler(tree,"tap",function(e){
             var addToDisplayDiv = function(){
-                var groupID = $(selection).attr("id"),
-                groupName = $(selection).data("groupname");
+                var treeID = $(selection).attr("id"),
+                groupName = $(selection).data("groupname"),
+                groupID = $(selection).data("groupid");
                 console.log(groupID + "  " + groupName);
                 //看selection-box是否为空
                 if($(".selection-box").is(':empty')){
                     $(".selection-box").slideDown();
                 }
-                $(".selection-box").append('<span class="selected-group" data-groupname="'+groupName+'" data-treeid="'+groupID+'" id="select'+groupID+'">'+groupName+'<a class="icon-clear-fill delete-selection"></a></span>');
+                $(".selection-box").append('<span class="selected-group" data-groupid="'+groupID+'" data-groupname="'+groupName+'" data-treeid="'+treeID+'" id="select'+treeID+'">'+groupName+'<a class="icon-clear-fill delete-selection"></a></span>');
                 deleteSelection();
             };
-            //console.log(e.target);
-            
-            // addToDisplayDiv = function(){
-            //     var groupName = $(selectionCheckbox).data('groupname');
-            //     var groupId = $(selectionCheckbox).data('id');
-            //     console.log(groupName);
-            // };
-            // changeParent = function(){
-            //     console.log('theres a change');
-            // };
-            //console.log(e.target);
             if(e.target.tagName.toLowerCase()=="ul"){
                 return;
             }
