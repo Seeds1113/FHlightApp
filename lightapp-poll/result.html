@@ -6,6 +6,44 @@
 	<title>投票</title>
 	<link rel="stylesheet" href="plugin/seedsui/seedsui.css">
 	<link rel="stylesheet" href="css/app.css">
+    <style type="text/css">
+    .doughnutblock{
+        position:relative;
+        padding:20px 0;
+    }
+    .doughnutblock label{
+        position:absolute;
+        bottom: 0;
+        width:100%;
+        text-align:center;
+
+        z-index: 9999;
+    }
+    .doughnutpercent{
+        position:absolute;
+        top:50%;
+        left:50%; 
+        width:110px;
+        height:110px;
+        color:white;
+        -webkit-transform:translate(-50%,-50%);
+        border-radius:100%;
+        overflow: hidden;
+        text-align:center;
+        background-size: cover;
+        background-position: center;
+
+        z-index: 9999;
+    }
+    .doughnutpercent-overlay{
+        background-color:rgba(0,0,0,.5);
+        width: 100%;
+        height: 100%;
+    }
+    .doughnutpercent .percent{
+        font-size:26px;
+    }
+    </style>
 </head>
 <body>
 	<section id="page_pollPic" class="active">
@@ -45,113 +83,172 @@
 					</div>
                 </li>
 			</ul>
-			<ul class="list result-list">
+			<ul class="list noclick">
 				<li>
-					<div class="justify-content" style="padding:12px;">
+					<div class="justify-content box box-middle">
 						<p>投票结果</p>
 					</div>
-				</li>
-				<li class="result-list nopadding">
-					<div class="justify nopadding result-img" style="background-image:url(img/picture/login.png);"></div>
-					<div class="progress-bar float-right">
-                        <span class="progress" style="width: 25%"></span>
-                        <span class="text"><a class="timer" data-duration="1000" data-to="25">25</a>/100</span>
-                    </div>
-                    <div class="selection-text box box-middle">
-                    	吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒!
-                    </div>
-				</li>
-				<li class="result-list nopadding">
-					<div class="justify nopadding result-img" style="background-image:url(img/picture/login.png);"></div>
-					<div class="progress-bar float-right">
-                        <span class="progress" style="width: 5%"></span>
-                        <span class="text"><a class="timer" data-duration="1000" data-to="5">5</a>/100</span>
-                    </div>
-                    <div class="selection-text box box-middle">
-                    	吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒!
-                    </div>
-				</li>
-				<li class="result-list nopadding">
-					<div class="justify nopadding result-img" style="background-image:url(img/picture/login.png);"></div>
-					<div class="progress-bar float-right">
-                        <span class="progress" style="width: 15%"></span>
-                        <span class="text"><a class="timer" data-duration="1000" data-to="15">15</a>/100</span>
-                    </div>
-                    <div class="selection-text box box-middle">
-                    	吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒!
-                    </div>
-				</li>
-				<li class="result-list nopadding">
-					<div class="justify nopadding result-img" style="background-image:url(img/picture/login.png);"></div>
-					<div class="progress-bar float-right">
-                        <span class="progress" style="width: 20%"></span>
-                        <span class="text"><a class="timer" data-duration="1000" data-to="20">20</a>/100</span>
-                    </div>
-                    <div class="selection-text box box-middle">
-                    	吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒!
-                    </div>
-				</li>
-				<li class="result-list nopadding">
-					<div class="justify nopadding result-img" style="background-image:url(img/picture/login.png);"></div>
-					<div class="progress-bar float-right">
-                        <span class="progress" style="width: 8%"></span>
-                        <span class="text"><a class="timer" data-duration="1000" data-to="8">8</a>/100</span>
-                    </div>
-                    <div class="selection-text box box-middle">
-                    	吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒!
-                    </div>
-				</li>
-				<li class="result-list nopadding">
-					<div class="justify nopadding result-img" style="background-image:url(img/picture/login.png);"></div>
-					<div class="progress-bar float-right">
-                        <span class="progress" style="width: 8%"></span>
-                        <span class="text"><a class="timer" data-duration="1000" data-to="8">8</a>/100</span>
-                    </div>
-                    <div class="selection-text box box-middle">
-                    	吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒!
-                    </div>
-				</li>
-				<li class="result-list nopadding">
-					<div class="justify nopadding result-img" style="background-image:url(img/picture/login.png);"></div>
-					<div class="progress-bar float-right">
-                        <span class="progress" style="width: 8%"></span>
-                        <span class="text"><a class="timer" data-duration="1000" data-to="8">8</a>/100</span>
-                    </div>
-                    <div class="selection-text box box-middle">
-                    	吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒!
-                    </div>
-				</li>
-				<li class="result-list nopadding">
-					<div class="justify nopadding result-img" style="background-image:url(img/picture/login.png);"></div>
-					<div class="progress-bar float-right">
-                        <span class="progress" style="width: 8%"></span>
-                        <span class="text"><a class="timer" data-duration="1000" data-to="8">8</a>/100</span>
-                    </div>
-                    <div class="selection-text box box-middle">
-                    	吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒!
-                    </div>
-				</li>
-				<li class="result-list nopadding">
-					<div class="justify nopadding result-img" style="background-image:url(img/picture/login.png);"></div>
-					<div class="progress-bar float-right">
-                        <span class="progress" style="width: 8%"></span>
-                        <span class="text"><a class="timer" data-duration="1000" data-to="8">8</a>/100</span>
-                    </div>
-                    <div class="selection-text box box-middle">
-                    	吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒!
-                    </div>
-				</li>
-				<li class="result-list nopadding">
-					<div class="justify nopadding result-img" style="background-image:url(img/picture/login.png);"></div>
-					<div class="progress-bar float-right">
-                        <span class="progress" style="width: 8%"></span>
-                        <span class="text"><a class="timer" data-duration="1000" data-to="8">8</a>/100</span>
-                    </div>
-                    <div class="selection-text box box-middle">
-                    	吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒!
+                    <div class="justify">
+                        <i class="icon-chartpie" style="font-size:24px;color:#4587f7;" onclick="toggleCharts(this)"></i>
                     </div>
 				</li>
 			</ul>
+            <div id="barcharts">
+                <ul class="list result-list">
+                    <li class="result-list nopadding">
+                        <div class="justify nopadding result-img" style="background-image:url(img/picture/login.png);"></div>
+                        <div class="progress-bar float-right">
+                            <span class="progress" style="width: 25%"></span>
+                            <span class="text"><a class="timer" data-duration="1000" data-to="25">25</a>/100</span>
+                        </div>
+                        <div class="selection-text box box-middle">
+                            吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒!
+                        </div>
+                    </li>
+                    <li class="result-list nopadding">
+                        <div class="justify nopadding result-img" style="background-image:url(img/picture/login.png);"></div>
+                        <div class="progress-bar float-right">
+                            <span class="progress" style="width: 5%"></span>
+                            <span class="text"><a class="timer" data-duration="1000" data-to="5">5</a>/100</span>
+                        </div>
+                        <div class="selection-text box box-middle">
+                            吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒!
+                        </div>
+                    </li>
+                    <li class="result-list nopadding">
+                        <div class="justify nopadding result-img" style="background-image:url(img/picture/login.png);"></div>
+                        <div class="progress-bar float-right">
+                            <span class="progress" style="width: 15%"></span>
+                            <span class="text"><a class="timer" data-duration="1000" data-to="15">15</a>/100</span>
+                        </div>
+                        <div class="selection-text box box-middle">
+                            吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒!
+                        </div>
+                    </li>
+                    <li class="result-list nopadding">
+                        <div class="justify nopadding result-img" style="background-image:url(img/picture/login.png);"></div>
+                        <div class="progress-bar float-right">
+                            <span class="progress" style="width: 20%"></span>
+                            <span class="text"><a class="timer" data-duration="1000" data-to="20">20</a>/100</span>
+                        </div>
+                        <div class="selection-text box box-middle">
+                            吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒!
+                        </div>
+                    </li>
+                    <li class="result-list nopadding">
+                        <div class="justify nopadding result-img" style="background-image:url(img/picture/login.png);"></div>
+                        <div class="progress-bar float-right">
+                            <span class="progress" style="width: 8%"></span>
+                            <span class="text"><a class="timer" data-duration="1000" data-to="8">8</a>/100</span>
+                        </div>
+                        <div class="selection-text box box-middle">
+                            吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒!
+                        </div>
+                    </li>
+                    <li class="result-list nopadding">
+                        <div class="justify nopadding result-img" style="background-image:url(img/picture/login.png);"></div>
+                        <div class="progress-bar float-right">
+                            <span class="progress" style="width: 8%"></span>
+                            <span class="text"><a class="timer" data-duration="1000" data-to="8">8</a>/100</span>
+                        </div>
+                        <div class="selection-text box box-middle">
+                            吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒!
+                        </div>
+                    </li>
+                    <li class="result-list nopadding">
+                        <div class="justify nopadding result-img" style="background-image:url(img/picture/login.png);"></div>
+                        <div class="progress-bar float-right">
+                            <span class="progress" style="width: 8%"></span>
+                            <span class="text"><a class="timer" data-duration="1000" data-to="8">8</a>/100</span>
+                        </div>
+                        <div class="selection-text box box-middle">
+                            吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒!
+                        </div>
+                    </li>
+                    <li class="result-list nopadding">
+                        <div class="justify nopadding result-img" style="background-image:url(img/picture/login.png);"></div>
+                        <div class="progress-bar float-right">
+                            <span class="progress" style="width: 8%"></span>
+                            <span class="text"><a class="timer" data-duration="1000" data-to="8">8</a>/100</span>
+                        </div>
+                        <div class="selection-text box box-middle">
+                            吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒!
+                        </div>
+                    </li>
+                    <li class="result-list nopadding">
+                        <div class="justify nopadding result-img" style="background-image:url(img/picture/login.png);"></div>
+                        <div class="progress-bar float-right">
+                            <span class="progress" style="width: 8%"></span>
+                            <span class="text"><a class="timer" data-duration="1000" data-to="8">8</a>/100</span>
+                        </div>
+                        <div class="selection-text box box-middle">
+                            吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒!
+                        </div>
+                    </li>
+                    <li class="result-list nopadding">
+                        <div class="justify nopadding result-img" style="background-image:url(img/picture/login.png);"></div>
+                        <div class="progress-bar float-right">
+                            <span class="progress" style="width: 8%"></span>
+                            <span class="text"><a class="timer" data-duration="1000" data-to="8">8</a>/100</span>
+                        </div>
+                        <div class="selection-text box box-middle">
+                            吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒!
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div id="piecharts" style="display: none;">
+                <ul class="grid" data-col="2">
+                    <li class="doughnutblock text-center">
+                        <div class="doughnutpercent" style="background-image:url(img/content/poll-main1.jpg)">
+                            <div class="doughnutpercent-overlay box box-middlecenter">
+                                <div>
+                                    <p class="percent">40%</p>
+                                    <p>26/64</p>
+                                </div>
+                            </div>
+                        </div>
+                        <label style="">内容内容内容</label>
+                        <canvas id="chart1" width="140" />
+                    </li>
+                    <li class="doughnutblock text-center">
+                        <div class="doughnutpercent" style="background-image:url(img/content/poll-main1.jpg)">
+                            <div class="doughnutpercent-overlay box box-middlecenter">
+                                <div>
+                                    <p class="percent">31%</p>
+                                    <p>20/64</p>
+                                </div>
+                            </div>
+                        </div>
+                        <label style="">内容内容内容</label>
+                        <canvas id="chart2" width="140" />
+                    </li>
+                    <li class="doughnutblock text-center">
+                        <div class="doughnutpercent" style="background-image:url(img/content/poll-main1.jpg)">
+                            <div class="doughnutpercent-overlay box box-middlecenter">
+                                <div>
+                                    <p class="percent">15%</p>
+                                    <p>10/64</p>
+                                </div>
+                            </div>
+                        </div>
+                        <label style="">内容内容内容</label>
+                        <canvas id="chart3" width="140" />
+                    </li>
+                    <li class="doughnutblock text-center">
+                        <div class="doughnutpercent" style="background-image:url(img/content/poll-main1.jpg)">
+                            <div class="doughnutpercent-overlay box box-middlecenter">
+                                <div>
+                                    <p class="percent">12%</p>
+                                    <p>8/64</p>
+                                </div>
+                            </div>
+                        </div>
+                        <label style="">内容内容内容</label>
+                        <canvas id="chart4" width="140" />
+                    </li>
+                </ul>
+            </div>
 			<ul class="list noclick noborder">
 				<li class="between">
 					<div class="justify">
@@ -175,62 +272,117 @@
 	</section>
 	<script src="plugin/jquery/jquery.min.js"></script>
     <script src="plugin/seedsui/seedsui.min.js"></script>
+    <script src="plugin/charts/Chart.min.js"></script>
     <script type="text/javascript">
-    	var checkedToast=new Toast("最多选2项");
-    	function selCheckbox(e,cboMaxCount){
-    		var cboCount=0;
-    		var target=e.target;
-    		var cbo;
-    		if(target.tagName.toLowerCase()=="a"){
-    			cbo=target.querySelector("input[type=checkbox]");
-    		}else if(target.tagName.toLowerCase()=="li"){
-    			cbo=target.querySelector("input[type=checkbox]");
-    		}else if(target.tagName.toLowerCase()=="p"){
-    			cbo=target.parentNode.parentNode.querySelector("input[type=checkbox]");
-    		}else if(target.tagName.toLowerCase()=="img" || target.tagName.toLowerCase()=="div" || target.tagName.toLowerCase()=="span"){
-    			cbo=target.parentNode.querySelector("input[type=checkbox]");
-    		}
+        //饼状图参数
+        var colors={fillColor:["#53c6fd","#ffae02","#3ae3ea","#ff6f36","#cf7af3","#4cd32e","#4587f7","#00c2eb","#ff618f","#21d9a1"],default:"#ebe8e3"};
+        var values=[26,20,10,8];
+        var doughnutConfig={
+            segmentShowStroke:false,
+            showTooltips:false,
+            animationEasing : "easeOut",
+            animationSteps:30,
 
-    		if(cbo.checked==true){
-    			cboCount--;
-    			cbo.previousElementSibling.classList.remove("active");
-    			cbo.checked=false;
-    			return;
-    		}
-    		[].slice.call(this.querySelectorAll("input[type=checkbox]")).forEach(function(n,i,a){
-				if(n.checked){
-					cboCount++;
-				}
-			});
-			if(cboCount>=cboMaxCount){
-				checkedToast.show();
-				return;
-			}
-			cbo.previousElementSibling.classList.add("active");
-    		cbo.checked=true;
-    	}
-
-    	//此为离线演示时，实际项目中请修改此函数
-    	function getParameter(argName){
-			var param = location.search.match(new RegExp("[\?\&]" + argName + "=([^\&]*)(\&?)","i"));
-			return param ? param[1] : param;
-		}
+        }
+        var doughnutData1 = [
+            {
+                value:values[0],
+                color:colors.fillColor[0],
+            },
+            {
+                value:values[1],
+                color:colors.default,
+            },
+            {
+                value:values[2],
+                color:colors.default,
+            },
+            {
+                value:values[3],
+                color:colors.default,
+            },
+        ];
+        var doughnutData2 = [
+            {
+                value:values[0],
+                color:colors.default,
+            },
+            {
+                value:values[1],
+                color:colors.fillColor[1],
+            },
+            {
+                value:values[2],
+                color:colors.default,
+            },
+            {
+                value:values[3],
+                color:colors.default,
+            },
+        ];
+        var doughnutData3 = [
+            {
+                value:values[0],
+                color:colors.default,
+            },
+            {
+                value:values[1],
+                color:colors.default,
+            },
+            {
+                value:values[2],
+                color:colors.fillColor[2],
+            },
+            {
+                value:values[3],
+                color:colors.default,
+            },
+        ];
+        var doughnutData4 = [
+            {
+                value:values[0],
+                color:colors.default,
+            },
+            {
+                value:values[1],
+                color:colors.default,
+            },
+            {
+                value:values[2],
+                color:colors.default,
+            },
+            {
+                value:values[3],
+                color:colors.fillColor[3],
+            },
+        ];
+        function toggleCharts(thisobj){
+            //切换到饼图
+            if($(thisobj).hasClass("icon-chartpie")){
+                $(thisobj)[0].className="icon-chartbar";
+                $("#piecharts").css("display","block");
+                $("#barcharts").css("display","none");
+                initCharts();
+            }else{
+                $(thisobj)[0].className="icon-chartpie";
+                $("#piecharts").css("display","none");
+                $("#barcharts").css("display","block");
+            }
+        }
+        function initCharts(){
+            //初始化饼状图
+            var ctx1 = document.getElementById("chart1").getContext("2d");
+            var doughnut1 = new Chart(ctx1).Doughnut(doughnutData1,doughnutConfig);
+            var ctx2 = document.getElementById("chart2").getContext("2d");
+            var doughnut2 = new Chart(ctx2).Doughnut(doughnutData2,doughnutConfig);
+            var ctx3 = document.getElementById("chart3").getContext("2d");
+            var doughnut3 = new Chart(ctx3).Doughnut(doughnutData3,doughnutConfig);
+            var ctx4 = document.getElementById("chart4").getContext("2d");
+            var doughnut4 = new Chart(ctx4).Doughnut(doughnutData4,doughnutConfig);
+        }
 		window.addEventListener("load",function(e){
 			Animate.counter();
-			var pollContainer=document.getElementById("selFont");
-			var isPic=getParameter("pic");
-			if(isPic){
-				pollContainer=document.getElementById("selImg");
-				document.getElementById("selFont").style.display="none";
-			}else{
-				pollContainer=document.getElementById("selFont");
-				document.getElementById("selImg").style.display="none";
-			}
-			pollContainer.addEventListener("click",function(e){
-	    		selCheckbox.call(this,e,2);
-	    	},false);
 		},false);
-		
     </script>
 </body>
 </html>
