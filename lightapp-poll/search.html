@@ -16,22 +16,57 @@
                 </a>
                 <h1 class="text-center">搜索</h1>
             </div>
-            <div style="background-color: #dcdbe0;padding:10px 0;">
-	            <div class="input-box margin8 lricon border-radius20">
-	                <i class="icon-search"></i>
-	                <input type="text" placeholder="搜索框" />
-	                <i class="icon-clear-fill"></i>
-	            </div>
-            </div>
+
+            <form class="searchbar" id="searchbox">
+                <div class="input-box lricon border-radius20" data-input="clear">
+                    <i class="icon-search"></i>
+                    <input type="search" placeholder="搜索框" class="search" />
+                    <i class="icon-clear-fill"></i>
+                </div>
+            </form>
 		</header>
-		<article>
-			
+		<article style="top:86px;">
+			<div class="box box-middlecenter" style="height:90%;" id="noData">
+				<img src="img/picture/nodata.png" style="width:250px;" />
+			</div>
+			<div id="hasData" style="display: none;">
+				<ul class="list">
+					<li>
+						<div class="justify">
+                            <div class="round" style="background-color:#59e461">
+                                <i class="icon-chatdot-fill"></i>
+                            </div>
+                        </div>
+                        <div class="justify-content box box-middle">
+                            <p>好吃的营养早餐</p>
+                        </div>
+					</li>
+					<li>
+						<div class="justify">
+                            <div class="round" style="background-color:#59e461">
+                                <i class="icon-chatdot-fill"></i>
+                            </div>
+                        </div>
+                        <div class="justify-content box box-middle">
+                            <p>好吃的营养早餐</p>
+                        </div>
+					</li>
+				</ul>
+			</div>
 		</article>
 	</section>
 	<script src="plugin/jquery/jquery.min.js"></script>
     <script src="plugin/seedsui/seedsui.min.js"></script>
     <script type="text/javascript">
-    	
+    	//表单控件初始化(主要是针对小眼睛和开关控件)
+    	window.addEventListener("load",function(){
+    		var f=new Form("#searchbox");
+    		f.container.addEventListener("submit",function(e){
+	            e.preventDefault();
+	            $("#noData").css("display","none");
+	            $("#hasData").css("display","block");
+	        },false);
+    	},false);
     </script>
 </body>
 </html>
