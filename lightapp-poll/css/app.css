@@ -488,3 +488,99 @@ section {
   top: 5px;
   right: 5px;
 }
+/*result 页面*/
+.list li.top-result {
+  background-color: #EBE8E3;
+  margin: 8px 0;
+}
+.list li.top-result .result-img {
+  max-width: 140px;
+  width: 35%;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+}
+.list li.top-result .crown {
+  width: 56px;
+  margin: 12px 0 8px 0;
+}
+.list li.top-result h1 {
+  font-weight: 400;
+  font-size: 20px;
+}
+.list li.top-result .progress-bar {
+  width: 100%;
+  margin: 12px 0;
+}
+.list li.top-result .selection-text {
+  text-align: left;
+  font-size: 12px;
+}
+.list li.result-list {
+  position: relative;
+}
+.list li.result-list .result-img {
+  max-width: 56px;
+  width: 56px;
+  height: 56px;
+  background-size: cover;
+  background-position: center;
+}
+.list li.result-list .progress-bar {
+  height: 56px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  background: #fff;
+}
+.list li.result-list .progress-bar .text {
+  text-align: right;
+  position: absolute;
+  top: 38px;
+  right: 70px;
+  color: #aaa;
+}
+.list li.result-list .progress-bar .text a {
+  color: #aaa;
+}
+.list li.result-list .selection-text {
+  position: absolute;
+  text-align: left;
+  width: 55%;
+  height: 56px;
+  z-index: 99;
+  left: 60px;
+  color: #333;
+  font-size: 12px;
+}
+.result-list:nth-child(2) .progress-bar .progress {
+  background: #53c6fd;
+}
+.result-list:nth-child(3) .progress-bar .progress {
+  background: #ffae02;
+}
+.result-list:nth-child(4) .progress-bar .progress {
+  background: #3ae3ea;
+}
+.result-list:nth-child(5) .progress-bar .progress {
+  background: #ff6f36;
+}
+.result-list:nth-child(6) .progress-bar .progress {
+  background: #cf7af3;
+}
+.result-list:nth-child(7) .progress-bar .progress {
+  background: #4cd32e;
+}
+.result-list:nth-child(8) .progress-bar .progress {
+  background: #4587f7;
+}
+.result-list:nth-child(9) .progress-bar .progress {
+  background: #00c2eb;
+}
+.result-list:nth-child(10) .progress-bar .progress {
+  background: #ff618f;
+}
+.result-list:nth-child(11) .progress-bar .progress {
+  background: #21d9a1;
+}

@@ -18,11 +18,11 @@
             </div>
 
             <form class="searchbar" id="searchbox">
-                <div class="input-box ricon border-radius20" data-input="clear">
+                <div class="input-box lricon border-radius20" data-input="clear">
+                    <i class="icon-search"></i>
                     <input type="search" placeholder="搜索框" class="search" />
                     <i class="icon-clear-fill"></i>
                 </div>
-                <a href="javascript:submit()"><span>搜索</span></a>
             </form>
 		</header>
 		<article style="top:86px;">
@@ -33,7 +33,9 @@
 				<ul class="list">
 					<li>
 						<div class="justify">
-                            <div class="round" style="background-image:url(img/content/poll-main-default.jpg)"></div>
+                            <div class="round" style="background-color:#59e461">
+                                <i class="icon-chatdot-fill"></i>
+                            </div>
                         </div>
                         <div class="justify-content box box-middle">
                             <p>好吃的营养早餐</p>
@@ -41,7 +43,9 @@
 					</li>
 					<li>
 						<div class="justify">
-                            <div class="round" style="background-image:url(img/content/poll-main-default.jpg)"></div>
+                            <div class="round" style="background-color:#59e461">
+                                <i class="icon-chatdot-fill"></i>
+                            </div>
                         </div>
                         <div class="justify-content box box-middle">
                             <p>好吃的营养早餐</p>
@@ -57,11 +61,12 @@
     	//表单控件初始化(主要是针对小眼睛和开关控件)
     	window.addEventListener("load",function(){
     		var f=new Form("#searchbox");
+    		f.container.addEventListener("submit",function(e){
+	            e.preventDefault();
+	            $("#noData").css("display","none");
+	            $("#hasData").css("display","block");
+	        },false);
     	},false);
-        function submit(){
-            $("#noData").css("display","none");
-            $("#hasData").css("display","block");
-        };
     </script>
 </body>
 </html>
