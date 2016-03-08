@@ -42,8 +42,9 @@
                         </div>
                         <div class="selection-num listitem-select">
                             最多投几项
-                            <select name="" id="">
+                            <select name="" id="maxSelectLimit">
                                 <option>无限制</option>
+                                <option>2</option>
                                 <option>3</option>
                                 <option>4</option>
                                 <option>5</option>
@@ -248,20 +249,20 @@
                     </div>
                     <div class="justify-content">
                         <p>Cindy</p>
-                        <small class="top right">于2016-02-28截止</small>
+                        <small class="top right">于<span id="previewExpDate">2016-02-28截止</span></small>
                         <small>
-                            创建:2016-01-01
+                            创建:<span id="today">2016-01-01</span>
                             <div class="progress-bar radiusround float-right" style="width:50%;margin:-2px 0 0 0;">
-                                <span class="progress" style="width: 25%"></span>
-                                <span class="text"><a class="timer" data-duration="1000" data-to="25">25</a>/100</span>
+                                <span class="progress" style="width:0"></span>
+                                <span class="text"><a class="timer" data-duration="1000" data-to="0">0</a>/100</span>
                             </div>
                         </small>
                     </div>
                 </li>
                 <li class="nojustify noborder">
                     <div class="justify-content">
-                        <p id="previewPageTitle">吃货的选择是？</p>
-                        <small class="nowrap">投票决定，最高票数当选</small>
+                        <p id="previewPageTitle"></p>
+                        <small id="previewPollContent"></small>
                     </div>
                     <div class="justify">
                         <img src="img/content/poll-main-default.jpg" class="width-full" id="previewMainPic">
@@ -269,13 +270,13 @@
                 </li>
                 <li class="noborder">
                     <div class="justify-content" style="height:30px;">
-                        <small class="top left">记名投票(最多选2项)</small>
+                        <small class="top left" id="previewMaxSelect">最多选<b>2</b>项</small>
                         <small class="top right">0人参与投票</small>
                     </div>
                 </li>
             </ul>
-            <ul class="grid thumbnail" data-col="2" style="background-color:white;">
-                <li>
+            <ul class="grid thumbnail hide" id="previewImgSelect" data-col="2" style="background-color:white;">
+                <!-- <li>
                     <a style="background-image: url(img/picture/login.png);">
                         <span class="checkbox"></span>
                         <input type="checkbox" class="hide">
@@ -283,37 +284,10 @@
                             内容内容
                         </div>
                     </a>
-                </li>
-                <li>
-                    <a style="background-image: url(img/picture/login.png);">
-                        <span class="checkbox"></span>
-                        <input type="checkbox" class="hide">
-                        <div class="grid-title box box-middle">
-                            内容内容
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a style="background-image: url(img/picture/login.png);">
-                        <span class="checkbox"></span>
-                        <input type="checkbox" class="hide">
-                        <div class="grid-title box box-middle">
-                            内容内容
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a style="background-image: url(img/picture/login.png);">
-                        <span class="checkbox"></span>
-                        <input type="checkbox" class="hide">
-                        <div class="grid-title box box-middle">
-                            内容内容
-                        </div>
-                    </a>
-                </li>
+                </li> -->
             </ul>
-            <ul class="list" id="sel">
-                <li>
+            <ul class="list hide" id="previewSelect">
+                <!-- <li>
                     <div class="justify-content">
                         <p>内容内容</p>
                     </div>
@@ -321,34 +295,7 @@
                         <span class="checkbox"></span>
                         <input type="checkbox" class="hide">
                     </div>
-                </li>
-                <li>
-                    <div class="justify-content">
-                        <p>内容内容</p>
-                    </div>
-                    <div class="justify">
-                        <span class="checkbox"></span>
-                        <input type="checkbox" class="hide">
-                    </div>
-                </li>
-                <li>
-                    <div class="justify-content">
-                        <p>内容内容</p>
-                    </div>
-                    <div class="justify">
-                        <span class="checkbox"></span>
-                        <input type="checkbox" class="hide">
-                    </div>
-                </li>
-                <li>
-                    <div class="justify-content">
-                        <p>内容内容</p>
-                    </div>
-                    <div class="justify">
-                        <span class="checkbox"></span>
-                        <input type="checkbox" class="hide">
-                    </div>
-                </li>
+                </li> -->
             </ul>
             <a class="button block margin8">投票</a>
             </div>
@@ -430,7 +377,7 @@
             addImgBtn = selection.querySelector('.icon-pic'),
             imgContainer = selection.querySelector('.img-container'),
             showConfrimBtn = function(){
-                console.log(confirmDeleteBtn);
+                //console.log(confirmDeleteBtn);
                 deleteBtn.classList.add('hidden');
                 confirmDeleteBtn.classList.add('animated','fadeInRight');
                 confirmDeleteBtn.classList.remove('hide');
@@ -672,8 +619,18 @@
     function previewPage(){
         var pollTitle = $("#pollTitle").val(),
         pollContent = $("#pollMainContent").val(),
-        pollMainPic;
-        if (pollTitle.val()==""){
+        pollMainPic,
+        maxCount = $("#maxSelectLimit").val(),
+        multiSelect = $("#multiSelect").prop("checked"),
+        today = new Date(),
+        day = today.getDate(),
+        month = today.getMonth()+1,
+        year = today.getFullYear(),
+        expDate = $("#expireDate").val(),
+        pictureSel=false,
+        selectionArray = $(".selection"),
+        selectionText = "未填写";
+        if (pollTitle==""){
             $("#previewPageTitle").html("您还没有填写一个标题");
         }else {
             $("#previewPageTitle").html(pollTitle);
@@ -685,8 +642,55 @@
             $("#previewMainPic").attr("src",pollMainPic);
         }
         if (pollContent==""){
-            
+            $("#previewPollContent").html("您还没有填写任何描述");
+        }else{
+            $("#previewPollContent").html(pollContent);
         }
+        if (multiSelect == true){
+            $("#previewMaxSelect").find("b").html(maxCount);
+        }else{
+            $("#previewMaxSelect").find("b").html("1");
+        }
+        $("#today").html(year+"-"+month+"-"+day);
+        $("#previewExpDate").html(expDate);
+        selectionArray.each(function(i,el){
+            var imgContainer = $(el).find(".img-container");
+            if(imgContainer.hasClass("hide")!=true){
+                pictureSel=true;
+            }
+        });
+        if (pictureSel==true){
+            $("#previewImgSelect").html("");
+            $("#previewImgSelect").removeClass("hide");
+            $("#previewSelect").addClass("hide");
+            selectionArray.each(function(i,el){
+                var imgContainer = $(el).find(".img-container"),
+                backgroundImg = "url(img/placeholder/placeholder-noimg.png)";
+                if($(el).find("input").val()!=""){
+                    selectionText = $(el).find("input").val();
+                }
+                if(imgContainer.hasClass("hide")!=true){
+                    backgroundImg = $(el).find(".img-container").css("background-image");
+                }
+                console.log(backgroundImg);
+                $("#previewImgSelect").append('<li><a style="background-image:'+backgroundImg.replace(/\"/g,"")+'; background-position:center;"><span class="checkbox"></span><input type="checkbox" class="hide"><div class="grid-title box box-middle">'+selectionText+'</div></a></li>');
+            });
+        }else{
+            $("#previewImgSelect").addClass("hide");
+            $("#previewSelect").removeClass("hide");
+            $("#previewSelect").html("");
+            selectionArray.each(function(i,el){
+                if($(el).find("input").val()!=""){
+                    selectionText = $(el).find("input").val();
+                }
+                $("#previewSelect").append('<li><div class="justify-content"><p>'+selectionText+'</p></div><div class="justify"><span class="checkbox"></span><input type="checkbox" class="hide"></div></li>');
+            });
+        }
+        // if (selectionImgArray.length > 0){
+        //     selectionImgArray.each(function(i,el){
+        //         console.log(i+" - "+el);
+        //     });
+        // }
     }
     $("#previewBtn").click(function(){
         previewPage();
@@ -699,6 +703,7 @@
             e.preventDefault();
             f.validate();
             //submit 方法写在下面
+            alert(1);
         },false);
         setDate();
         maxWordCount();
@@ -709,16 +714,16 @@
         deleteSelection();
         Section.init({
             "onSectionOpenStart":function(e){
-                console.log("页面加载前"+e.sectionId);
+                //console.log("页面加载前"+e.sectionId);
             },
             "onSectionOpenEnd":function(e){
-                console.log("页面加载完成"+e.sectionId);
+                //console.log("页面加载完成"+e.sectionId);
             },
             "onSectionCloseStart":function(e){
-                console.log("页面关闭前"+e.sectionId);
+                //console.log("页面关闭前"+e.sectionId);
             },
             "onSectionCloseEnd":function(e){
-                console.log("页面关闭完成"+e.sectionId);
+                //console.log("页面关闭完成"+e.sectionId);
             }
         });
     },false);

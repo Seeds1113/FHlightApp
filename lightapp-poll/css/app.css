@@ -467,6 +467,7 @@ section {
 .grid.thumbnail li > a {
   min-height: 280px;
   background-size: cover;
+  background-position: center;
 }
 .grid.thumbnail span.checkbox {
   display: inline-block;
