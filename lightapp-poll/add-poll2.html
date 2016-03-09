@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>轻应用－投票－投票列表</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<link rel="stylesheet" href="plugin/seedsui/seedsui.css">
+    <link rel="stylesheet" href="plugin/animate/animate.css">
+	<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+	<section id="pageAddPoll" class="active">
+		<header>
+           <div class="titlebar">
+                <a href="javascript:history.go(-1)">
+                    <i class="icon-arrowleft"></i>
+                    <span>返回</span>
+                </a>
+                <h1 class="text-center">新建投票</h1>
+            </div>
+        </header>
+        <article style="top:44px;bottom:0px;">
+            <form id="pollForm" class="poll-form">
+                <div class="content" style="border-top:0;">
+                    <div class="poll-title box box-middle">
+                        <img src="img/icon/icon-tag.png" class="list-icon">
+                        <input type="text" class="box-flex-1" id="pollTitle" name="voteInfo.title" placeholder="投票标题" data-rule-field="投票标题" data-rule="required">
+                    </div>
+                    <div class="poll-content clearfix">
+                        <textarea placeholder="填写投票描述，250字以内" id="pollMainContent" maxlength="250" name="voteInfo.content"></textarea>
+                        <span class="count"><span id="text-num">0</span>/250</span>
+                        <a class="icon icon-pic add-pic" id="addMainPic"></a>
+                        <a class="icon icon-trash delete-pic" style="display:none;" id="deleteMainPic"></a>
+                        <div class="main-pic"></div>
+                        <input type="file" style="display:none;" id="mainImgFile" name="voteInfo.content">
+                    </div>
+                    <div class="multi-select">
+                        <div class="listitem-switch">
+                            支持多选
+                            <div class="switch reverse notext" data-on="是" data-on-value="1" data-off="否" data-off-value="0" id="multiSelectSwitch"><div class="switch-handle"></div></div>
+                            <input type="checkbox" class="hide" id="multiSelect" name="voteInfo.multiple">
+                        </div>
+                        <div class="selection-num listitem-select">
+                            最多投几项
+                            <select name="voteInfo.maxChoose" id="">
+                                <option>无限制</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                            </select>
+                            <i class="icon-arrowright"></i>
+                        </div>
+                    </div>
+                    <ul class="selection-list">
+                        <li class="selection box">
+                            <span class="dot"></span><input class="box-flex-1" type="text" id="selection1" placeholder="输入选项内容">
+                            <a class="icon icon-pic"></a>
+                            <a class="icon icon-rdocancel-fill"></a>
+                            <a class="icon icon-trash hide"></a>
+                            <div class="img-container hide"></div>
+                        </li>
+                        <li class="selection box">
+                            <span class="dot"></span><input class="box-flex-1" type="text" id="selection2" placeholder="输入选项内容">
+                            <a class="icon icon-pic"></a>
+                            <a class="icon icon-rdocancel-fill"></a>
+                            <a class="icon icon-trash hide"></a>
+                            <div class="img-container hide"></div>
+                        </li>
+                        <li class="selection box">
+                            <span class="dot"></span><input class="box-flex-1" type="text" id="selection3" placeholder="输入选项内容">
+                            <a class="icon icon-pic"></a>
+                            <a class="icon icon-rdocancel-fill"></a>
+                            <a class="icon icon-trash hide"></a>
+                            <div class="img-container hide"></div>
+                        </li>
+                    </ul>
+                    <a class="add-selection">＋添加投票选项</a>
+                </div>
+                <div class="content">
+                    <div class="listitem-select">
+                        截止日期
+                        <input type="date" id="expireDate" value="" name="voteInfo.expire">
+                        <i class="icon-arrowright"></i>
+                    </div>
+                    <div class="listitem-switch" style="border-bottom:none;">
+                        匿名投票
+                        <div class="switch reverse notext" data-on="是" data-on-value="1" data-off="否" data-off-value="0" id="secretPollSwitch"><div class="switch-handle"></div></div>
+                        <input type="checkbox" class="hide" id="secretPoll" name="voteInfo.anonymouse">
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="listitem-select" id="selectPeople">
+                        选人
+                        <span class="group-info" id="selectPeopleText">请选择投票人员</span>
+                        <i class="icon-arrowright"></i>
+                        <input type="text" style="display:none;" id="selectPeopleInput">
+                    </div>
+                </div>
+                <div class="block margin8">
+                    <button class="button block" id="publish">发布</button>
+                </div>
+                <a class="button block outline margin8">预览</a>
+            </form>
+        </article>
+	</section>
+    <section id="choosePeoplePage">
+        <header>
+           <div class="titlebar">
+                <a id="closeSelectPage">
+                    <i class="icon-arrowleft"></i>
+                    <span>确定</span>
+                </a>
+                <h1 class="text-center">选择人员</h1>
+            </div>
+            <!-- <div class="tab-container">
+                <ul class="rectbar" id="tabbar">
+                    <li class="tab active">
+                        <label class="tab-label">组织架构</label>
+                    </li>
+                    <li class="tab">
+                        <label class="tab-label">群组</label>
+                    </li>
+                </ul>
+            </div> -->
+            <div class="selected-display"></div>
+        </header>
+        <article style="top:44px;bottom:0px;">
+            <div class="selection-box"></div>
+            <!-- tree -->
+            <div class="tree-box">
+                <ul class="tree" id="tree">
+                    <li>
+                        <div class="treetitle" data-level="1" data-groupid="1" data-groupname="业务产品部" id="group-1"> <i class="treeicon"></i>
+                            <span class="icon icon-persons"></span>
+                            <a>业务产品部</a>
+                            <a class="icon-rdoadd"></a>
+                            <!-- <input type="checkbox" class="group-checkbox" data-level="1" data-groupid="1" data-groupname="业务产品部"> -->
+                        </div>
+                        <ul>
+                            <li>
+                                <div class="treetitle" data-level="" data-groupid="2" data-groupname="研发体系" id="group-2">
+                                    <i class="treeicon"></i>
+                                    <span class="icon icon-persons"></span>
+                                    <a>研发体系</a>
+                                    <a class="icon-rdoadd"></a>
+                                    <!-- <input type="checkbox" class="group-checkbox" data-level="" data-groupid="2" data-groupname="研发体系"> -->
+                                </div>
+                                <ul>
+                                    <li>
+                                        <div class="treetitle" data-level="" data-groupid="3" data-groupname="开发一部" id="group-3">
+                                            <i class="treeicon"></i>
+                                            <span class="icon icon-persons"></span>
+                                            <a>开发一部</a>
+                                            <a class="icon-rdoadd"></a>
+                                            <!-- <input type="checkbox" class="group-checkbox" data-level="" data-groupid="3" data-groupname="开发一部"> -->
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="treetitle" data-level="" data-groupid="4" data-groupname ="开发二部" id="group-4">
+                                            <i class="treeicon"></i>
+                                            <span class="icon icon-persons"></span>
+                                            <a>开发二部</a>
+                                            <a class="icon-rdoadd"></a>
+                                            <!-- <input type="checkbox" class="group-checkbox" data-level="" data-groupid="4" data-groupname ="开发二部"> -->
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="treetitle" data-level="" data-groupid="5" data-groupname ="开发三部" id="group-5">
+                                            <i class="treeicon"></i>
+                                            <span class="icon icon-persons"></span>
+                                            <a>开发三部</a>
+                                            <a class="icon-rdoadd"></a>
+                                            <!-- <input type="checkbox" class="group-checkbox" data-level="" data-groupid="5" data-groupname ="开发三部"> -->
+                                        </div>
+                                        <ul>
+                                            <li>
+                                                <div class="treetitle" data-level="" data-groupid="6" data-groupname="开发一部" id="group-6">
+                                                    <i class="treeicon"></i>
+                                                    <span class="icon icon-persons"></span>
+                                                    <a>开发一组</a>
+                                                    <a class="icon-rdoadd"></a>
+                                                    <!-- <input type="checkbox" class="group-checkbox" data-level="" data-groupid="3" data-groupname="开发一部"> -->
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="treetitle" data-level="" data-groupid="7" data-groupname="市场体系" id="group-7">
+                                    <i class="treeicon"></i>
+                                    <span class="icon icon-persons"></span>
+                                    <a>市场体系</a>
+                                    <a class="icon-rdoadd"></a>
+                                    <!-- <input type="checkbox" class="group-checkbox" data-level="" data-groupid="6" data-groupname ="市场体系"> -->
+                                </div>
+                                <ul>
+                                    <li>
+                                        <div class="treetitle" data-level="" data-groupid="8" data-groupname="上海办" id="group-8">
+                                            <i class="treeicon"></i>
+                                            <span class="icon icon-persons"></span>
+                                            <a>上海办</a>
+                                            <a class="icon-rdoadd"></a>
+                                            <!-- <input type="checkbox" class="group-checkbox" data-level="" data-groupid="7" data-groupname ="上海办"> -->
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="treetitle" data-level="" data-groupid="9" data-groupname="广州办名字超长超长超长超" id="group-9">
+                                            <i class="treeicon"></i>
+                                            <span class="icon icon-persons"></span>
+                                            <a>广州办名字超长超长超长超</a>
+                                            <a class="icon-rdoadd"></a>
+                                            <!-- <input type="checkbox" class="group-checkbox" data-level="" data-groupid="7" data-groupname ="上海办"> -->
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /tree -->
+        </article>
+    </section>
+    <script src="plugin/jquery/jquery.min.js"></script>
+    <script src="plugin/seedsui/seedsui.min.js"></script>
+    <script src="js/ajaxModel.js"></script>
+    <script src="js/add-poll.js"></script>
+    <script>
+    var addImg;
+    var imgPop=new Actionsheet([
+        {
+            text : '相册',
+            handler : function(s){
+                addImg();
+                s.hide(); 
+            }
+        },{
+            text : '从相册选择',
+            handler : function(s){
+                addImg();
+                s.hide();
+            }
+        }
+    ]);
+    $("#addMainPic").click(function(){
+        addImg = function (){
+            //先做个假的后面要调m-plus方法访问本地能力
+            $(".main-pic").html('<img src="img/content/poll-main1.jpg" class="animated zoomIn">');
+            $("#addMainPic").hide();
+            $("#deleteMainPic").show();
+        };
+        imgPop.show(); 
+    });
+    $("#deleteMainPic").click(function(){
+        $(".main-pic").html('');
+        $("#addMainPic").show();
+        $("#deleteMainPic").hide();
+    });
+    //count function
+    function maxWordCount(){
+        var target = $("#pollMainContent"),
+        maxLimit = target.attr("maxlength");
+        target.on({
+            input: function(){
+                var val = target.val(),
+                count = val.length;
+                $("#text-num").html(count);
+                if(count>=maxLimit){
+                    $("#text-num").css("color","#fc4349");
+                }else{
+                    $("#text-num").css("color","#aaa");
+                }
+            }
+        });
+    }
+    //show 选择多选数量下啦
+    function showMultiSelect(){
+        var selectSwitch = $("#multiSelectSwitch");
+        selectSwitch.click(function(){
+            $(".selection-num").slideToggle();
+            $("#multiSelect").trigger('click'); 
+        });
+    }
+    //添加选项
+   $(".add-selection").click(function(){
+        var list = $(".selection-list"),
+        listItem = list.find("li"),
+        newListLength = listItem.length + 1;
+        console.log(newListLength);
+        list.append('<li class="selection box animated fadeIn"><span class="dot"></span><input class="box-flex-1" type="text" placeholder="输入选项内容" id="selection\"+ newListLength +\"><a class="icon icon-pic"></a> <a class="icon icon-rdocancel-fill"></a><a class="icon icon-trash hide"></a><div class="img-container hide"></div></li>');
+        operateSelection();
+    });
+    //删除选项+选项添加图片
+    function operateSelection(){
+        [].slice.call(document.querySelectorAll('.selection')).forEach(function(selection){
+            var deleteBtn = selection.querySelector('.icon-rdocancel-fill'),
+            confirmDeleteBtn = selection.querySelector('.icon-trash'),
+            selectionInput = selection.querySelector('input'),
+            addImgBtn = selection.querySelector('.icon-pic'),
+            imgContainer = selection.querySelector('.img-container'),
+            showConfrimBtn = function(){
+                console.log(confirmDeleteBtn);
+                deleteBtn.classList.add('hidden');
+                confirmDeleteBtn.classList.add('animated','fadeInRight');
+                confirmDeleteBtn.classList.remove('hide');
+            },
+            deleteSelection = function(){
+                selection.remove();
+            },
+            cancelDelete = function(){
+                confirmDeleteBtn.classList.remove('fadeInRight');
+                confirmDeleteBtn.classList.add('hide');
+                deleteBtn.classList.remove('hidden');
+            },
+            openAddImg = function(){
+                addImg = function(){
+                //暂时写了个假的到时候要用mplus方法
+                    imgContainer.style.backgroundImage = 'url(img/content/poll-main1.jpg)';
+                    imgContainer.classList.remove('hide');
+                    imgContainer.classList.add('animated','fadeIn');
+                };
+                imgPop.show();
+                cancelDelete();
+                console.log(1);
+            };
+            deleteBtn.addEventListener("click", showConfrimBtn);
+            confirmDeleteBtn.addEventListener("click", deleteSelection);
+            selectionInput.addEventListener("click", cancelDelete);
+            addImgBtn.addEventListener("click", openAddImg);
+        });
+    }
+    //set date
+    function setDate(){
+        var dateToast = new Toast("截止时间不能比今天日期早哦！"),
+        dateInput = document.getElementById('expireDate'),
+        today = new Date();
+        dateInput.valueAsDate = today;
+        $(dateInput).change(function(){
+            console.log('its empty');
+            var inputDate = dateInput.valueAsDate;
+            if (inputDate < today){
+                dateToast.show();
+                dateInput.valueAsDate = today;
+            }
+        });  
+    }
+    //匿名操作
+    $("#secretPollSwitch").click(function(){
+        $("#secretPoll").trigger('click'); 
+    });
+    //开选人页面
+    function toggleSelectPage() {
+        $("#pageAddPoll").toggleClass("active animated fadeInUp");
+        $("#choosePeoplePage").toggleClass("active animated fadeInUp");
+    }
+    function choosePerson(){
+        $("#selectPeople").click(toggleSelectPage);
+        $("#closeSelectPage").click(function(){
+            var selectedGroups = $(".selection-box").find(".selected-group");
+            var groupInputValue = "";
+            $("#selectPeopleText").html("");
+            selectedGroups.each(function(i){
+                var groupName = $(selectedGroups[i]).data("groupname"),
+                groupID = $(selectedGroups[i]).data("groupid");
+                $("#selectPeopleText").append("&nbsp;"+groupName+",");
+                groupInputValue += groupID+",";
+                console.log(groupID);
+                console.log(groupInputValue);
+            });
+            $("#selectPeopleInput").val(groupInputValue);
+            toggleSelectPage();
+        });
+    }
+    //选人页tab
+    // var tabbar=document.getElementById("tabbar");
+    // var tab=tabbar.querySelectorAll(".tab");
+    // var carouselPage;
+    // function initSlider(){
+    //     carouselPage=new Slider("#carouselPage",{
+    //         "onSlideChangeEnd":function(e){
+    //             tabActive(e.index);
+    //         }
+    //     });
+    // }
+    // //选中tab
+    // function tabActive(index){
+    //     for(var i=0,s;s=tab[i++];){
+    //         s.classList.remove("active");
+    //     }
+    //     tab[index].classList.add("active");
+    // }
+    // //绑定tab点击事件
+    // function tabBindClick(){
+    //     for(var i=0,t;t=tab[i++];){
+    //         (function(i){
+    //             t.addEventListener("click",function(){
+    //                 carouselPage.slideTo(i-1);
+    //                 tabActive(i-1);
+    //             },false);
+    //         })(i);
+    //     }
+    // }
+    //tree function 
+    var elLI,elUL,elIcon,selection,
+    deleteSelection = function(){
+        $(".delete-selection").click(function(){
+            var selectionTop = $(this).parent(),
+            selectionID = $(this).parent().data("treeid");
+            selection = $("#"+selectionID)[0];
+            console.log(selection);
+            selectionTop.fadeOut(500,function(){
+                selectionTop.remove();
+                if($(".selection-box").is(':empty')){
+                    $(".selection-box").slideUp();
+                }
+            });
+            removeCurrent(selection);
+            toggleChildren();
+        });
+    },
+    selectCurrent =  function (){
+        $(selection).addClass('active');
+        $(selection).find(".icon-rdoadd").fadeOut();
+        toggleChildren();
+        // changeParent();
+        // elIcon = selection.querySelector('.treeicon');
+        // elUL = selection.parentNode.querySelector('ul');
+    },
+    removeCurrent = function(){
+        $(selection).removeClass('active');
+        $(selection).find(".icon-rdoadd").fadeIn();
+        toggleChildren();
+    },
+    toggleChildren = function(){
+        var selectedChildren = $(selection).next().find('.treetitle.active'),
+        allChildren = $(selection).next().find('.treetitle'),
+        allChildrenAddIcon = $(selection).next().find(".icon-rdoadd");
+        if ($(selection).hasClass('active')==true){
+            allChildren.addClass('active');
+            allChildrenAddIcon.fadeOut();
+        }else{
+            allChildren.removeClass('active');
+            allChildrenAddIcon.fadeIn();
+        }
+        if (selectedChildren.length > 0) {
+            selectedChildren.each(function(index, value){
+                var childrenID = value.id;
+                $("#select"+childrenID).fadeOut(500,function(){
+                    $("#select"+childrenID).remove();
+                });
+            });
+        }
+    };
+
+    function onTapTree(){
+        EventUtil.addHandler(tree,"tap",function(e){
+            var addToDisplayDiv = function(){
+                var treeID = $(selection).attr("id"),
+                groupName = $(selection).data("groupname"),
+                groupID = $(selection).data("groupid");
+                console.log(groupID + "  " + groupName);
+                //看selection-box是否为空
+                if($(".selection-box").is(':empty')){
+                    $(".selection-box").slideDown();
+                }
+                $(".selection-box").append('<span class="selected-group" data-groupid="'+groupID+'" data-groupname="'+groupName+'" data-treeid="'+treeID+'" id="select'+treeID+'">'+groupName+'<a class="icon-clear-fill delete-selection"></a></span>');
+                deleteSelection();
+            };
+            if(e.target.tagName.toLowerCase()=="ul"){
+                return;
+            }
+            if(e.target.className.indexOf("icon-rdoadd")>= 0){
+                //当点击有a标签时
+                //elLI=e.target.parentNode.parentNode;
+                selection = e.target.parentNode;
+                selectCurrent();
+                addToDisplayDiv();
+                return;
+            }
+            // else if(e.target.tagName.toLowerCase()=="input"){
+            //     //当点击有a标签时
+            //     //elLI=e.target.parentNode.parentNode;
+            //     selection = e.target.parentNode;
+            //     selectCurrent();
+            //     return;
+            // }
+            if(e.target.className.indexOf("treetitle")>=0){
+                //当点击标题标签时
+                selection = e.target;
+                elLI=e.target.parentNode;
+                //selectCurrent();
+            } else if(e.target.tagName.toLowerCase()=="i"){
+                //当点击i标签时
+                elLI=e.target.parentNode.parentNode;
+                selection = e.target.parentNode;
+                //console.log("opennow!");
+            } else if(e.target.tagName.toLowerCase()=="a"){
+                //当点击有a标签时
+                elLI=e.target.parentNode.parentNode;
+                selection = e.target.parentNode;
+            } else if(e.target.className.indexOf("icon-persons")>=0){
+                elLI=e.target.parentNode.parentNode;
+                selection = e.target.parentNode;
+            }
+            // else if(e.target.tagName.toLowerCase()=="li"){
+            //     //当点击有a标签时
+            //     elLI=e.target.parentNode.parentNode;
+            // } 
+            elUL=elLI.querySelector("ul");
+            elIcon=elLI.querySelector(".treeicon");
+            if(!elUL){
+            /*var nativePage=elLI.querySelector("a").getAttribute("data-href");
+            var param=elLI.id||"";
+            ExMobiWindow.open(nativePage, true,false,"",param);*/
+            $(selection).find(".treeicon").remove();
+            var treeToast2 = new Toast("已到最底层了，此部门下没有子部门", {delay:2000});
+            treeToast2.show(); 
+            return;
+            }
+            if(elUL.style.display=="none" || !elUL.style.display){
+                var selectionLevel = $(selection).data('level'),
+                childrenLevel = selectionLevel + 1
+                //展开节点
+                elIcon.className="treeicon active";
+                elUL.style.display="block";
+                console.log(selectionLevel);
+                //这里写加载mplus子节点方法
+
+                //给子节点加level
+                $(selection).next().children().find('treetitle').attr('data-level', childrenLevel);
+            }else{
+                //收缩节点
+                elIcon.className="treeicon";
+                elUL.style.display="none";
+            }
+            //没有子节点，则进入人员详情
+            
+        });
+    }
+
+    //初始化function
+    window.addEventListener("load",function(){
+        var f=new Form("#pollForm");
+        f.container.addEventListener("submit",function(e){
+            e.preventDefault();
+            f.validate();
+            //submit 方法写在下面
+        },false);
+        setDate();
+        maxWordCount();
+        showMultiSelect();
+        operateSelection();
+        choosePerson();
+        onTapTree();
+        deleteSelection();
+    },false);
+	//定义exmobi返回
+	function back(){history.go(-1);}
+	</script>
+</body>
+</html>
