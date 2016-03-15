@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<title>投票</title>
+	<link rel="stylesheet" href="plugin/seedsui/seedsui.css">
+	<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+	<section id="page_pollPic" class="active">
+		<header>
+			<div class="titlebar">
+                <a href="javascript:history.go(-1)">
+                    <i class="icon-arrowleft"></i>
+                    <span>返回</span>
+                </a>
+                <h1 class="text-center">投票</h1>
+            </div>
+		</header>
+		<article>
+			<div class="card overflow-hide">
+			<ul class="list noclick">
+				<li class="nojustify nopadding">
+                    <div class="justify-content" style="padding:12px;">
+                        <p>吃货的选择是？</p>
+                        <small>投票决定，最高票数当选</small>
+                    </div>
+                    <div class="justify nopadding">
+                        <img src="img/picture/banner.jpg" class="width-full">
+                    </div>
+                </li>
+                <li class="nopadding top-result">
+					<div class="justify-content text-center" style="padding:12px 24px;">
+						<img src="img/icon/icon-crown.png" class="crown">
+						<h1>TOP CHOICE</h1>
+						<div class="progress-bar radiusround float-right">
+                            <span class="progress" style="width: 25%"></span>
+                            <span class="text"><a class="timer" data-duration="1000" data-to="25">25</a>/100</span>
+                        </div>
+                        <div class="selection-text">
+                        	吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒！
+                        </div>
+					</div>
+                </li>
+			</ul>
+			<ul class="list noclick">
+				<li>
+					<div class="justify-content box box-middle">
+						<p>投票结果</p>
+					</div>
+                    <div class="justify">
+                        <i class="icon-chartpie" style="font-size:24px;color:#4587f7;" onclick="toggleCharts(this)"></i>
+                    </div>
+				</li>
+			</ul>
+            <div id="barcharts">
+                <ul class="list result-list no-img">
+                    <li class="result-list nopadding box">
+                        <div class="progress-bar float-right box-flex-1">
+                            <span class="progress" style="width: 25%"></span>
+                            <span class="text"><a class="timer" data-duration="1000" data-to="25">25</a>/100</span>
+                        </div>
+                        <div class="selection-text box box-middle">
+                            吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒!
+                        </div>
+                    </li>
+                    <li class="result-list nopadding box">
+                        <div class="progress-bar float-right box-flex-1">
+                            <span class="progress" style="width: 5%"></span>
+                            <span class="text"><a class="timer" data-duration="1000" data-to="5">5</a>/100</span>
+                        </div>
+                        <div class="selection-text box box-middle">
+                            吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒!
+                        </div>
+                    </li>
+                    <li class="result-list nopadding box">
+                        <div class="progress-bar float-right box-flex-1">
+                            <span class="progress" style="width: 15%"></span>
+                            <span class="text"><a class="timer" data-duration="1000" data-to="15">15</a>/100</span>
+                        </div>
+                        <div class="selection-text box box-middle">
+                            吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒!
+                        </div>
+                    </li>
+                    <li class="result-list nopadding box">
+                        <div class="progress-bar float-right box-flex-1">
+                            <span class="progress" style="width: 20%"></span>
+                            <span class="text"><a class="timer" data-duration="1000" data-to="20">20</a>/100</span>
+                        </div>
+                        <div class="selection-text box box-middle">
+                            吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒!
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div id="piecharts"  class="pie-chart" style="display: none;">
+                <ul class="grid" data-col="2">
+                    <li class="doughnutblock text-center">
+                        <div class="doughnutpercent" style="background-image:url(img/content/poll-main1.jpg)">
+                            <div class="doughnutpercent-overlay box box-middlecenter">
+                                <div>
+                                    <p class="percent">40%</p>
+                                    <p>26/64</p>
+                                </div>
+                            </div>
+                        </div>
+                        <label style="">内容内容内容</label>
+                        <canvas id="chart1" width="140" />
+                    </li>
+                    <li class="doughnutblock text-center">
+                        <div class="doughnutpercent" style="background-image:url(img/content/poll-main1.jpg)">
+                            <div class="doughnutpercent-overlay box box-middlecenter">
+                                <div>
+                                    <p class="percent">31%</p>
+                                    <p>20/64</p>
+                                </div>
+                            </div>
+                        </div>
+                        <label style="">内容内容内容</label>
+                        <canvas id="chart2" width="140" />
+                    </li>
+                    <li class="doughnutblock text-center">
+                        <div class="doughnutpercent" style="background-image:url(img/content/poll-main1.jpg)">
+                            <div class="doughnutpercent-overlay box box-middlecenter">
+                                <div>
+                                    <p class="percent">15%</p>
+                                    <p>10/64</p>
+                                </div>
+                            </div>
+                        </div>
+                        <label style="">内容内容内容</label>
+                        <canvas id="chart3" width="140" />
+                    </li>
+                    <li class="doughnutblock text-center">
+                        <div class="doughnutpercent" style="background-image:url(img/content/poll-main1.jpg)">
+                            <div class="doughnutpercent-overlay box box-middlecenter">
+                                <div>
+                                    <p class="percent">12%</p>
+                                    <p>8/64</p>
+                                </div>
+                            </div>
+                        </div>
+                        <label style="">内容内容内容</label>
+                        <canvas id="chart4" width="140" />
+                    </li>
+                </ul>
+            </div>
+			<ul class="list noclick noborder">
+				<li class="between">
+					<div class="justify">
+                        <div class="round" style="background-image:url(img/photo/tx1.jpg)"></div>
+                    </div>
+					<div class="justify-content">
+						<p>Cindy</p>
+						<small class="top right">于2016-02-28截止</small>
+						<small>
+							创建:2016-01-01
+							<div class="progress-bar radiusround float-right" style="width:50%;margin:-2px 0 0 0;">
+                                <span class="progress" style="width: 25%"></span>
+                                <span class="text"><a class="timer" data-duration="1000" data-to="25">25</a>/100</span>
+                            </div>
+						</small>
+					</div>
+				</li>
+			</ul>
+			</div>
+		</article>
+	</section>
+	<script src="plugin/jquery/jquery.min.js"></script>
+    <script src="plugin/seedsui/seedsui.min.js"></script>
+    <script src="plugin/charts/Chart.min.js"></script>
+    <script type="text/javascript">
+        //饼状图参数
+        var colors={fillColor:["#53c6fd","#ffae02","#3ae3ea","#ff6f36","#cf7af3","#4cd32e","#4587f7","#00c2eb","#ff618f","#21d9a1"],default:"#ebe8e3"};
+        var values=[26,20,10,8];
+        var doughnutConfig={
+            segmentShowStroke:false,
+            showTooltips:false,
+            animationEasing : "easeOut",
+            animationSteps:30,
+
+        }
+        var doughnutData1 = [
+            {
+                value:values[0],
+                color:colors.fillColor[0],
+            },
+            {
+                value:values[1],
+                color:colors.default,
+            },
+            {
+                value:values[2],
+                color:colors.default,
+            },
+            {
+                value:values[3],
+                color:colors.default,
+            },
+        ];
+        var doughnutData2 = [
+            {
+                value:values[0],
+                color:colors.default,
+            },
+            {
+                value:values[1],
+                color:colors.fillColor[1],
+            },
+            {
+                value:values[2],
+                color:colors.default,
+            },
+            {
+                value:values[3],
+                color:colors.default,
+            },
+        ];
+        var doughnutData3 = [
+            {
+                value:values[0],
+                color:colors.default,
+            },
+            {
+                value:values[1],
+                color:colors.default,
+            },
+            {
+                value:values[2],
+                color:colors.fillColor[2],
+            },
+            {
+                value:values[3],
+                color:colors.default,
+            },
+        ];
+        var doughnutData4 = [
+            {
+                value:values[0],
+                color:colors.default,
+            },
+            {
+                value:values[1],
+                color:colors.default,
+            },
+            {
+                value:values[2],
+                color:colors.default,
+            },
+            {
+                value:values[3],
+                color:colors.fillColor[3],
+            },
+        ];
+        function toggleCharts(thisobj){
+            //切换到饼图
+            if($(thisobj).hasClass("icon-chartpie")){
+                $(thisobj)[0].className="icon-chartbar";
+                $("#piecharts").css("display","block");
+                $("#barcharts").css("display","none");
+                initCharts();
+            }else{
+                $(thisobj)[0].className="icon-chartpie";
+                $("#piecharts").css("display","none");
+                $("#barcharts").css("display","block");
+            }
+        }
+        function initCharts(){
+            //初始化饼状图
+            var ctx1 = document.getElementById("chart1").getContext("2d");
+            var doughnut1 = new Chart(ctx1).Doughnut(doughnutData1,doughnutConfig);
+            var ctx2 = document.getElementById("chart2").getContext("2d");
+            var doughnut2 = new Chart(ctx2).Doughnut(doughnutData2,doughnutConfig);
+            var ctx3 = document.getElementById("chart3").getContext("2d");
+            var doughnut3 = new Chart(ctx3).Doughnut(doughnutData3,doughnutConfig);
+            var ctx4 = document.getElementById("chart4").getContext("2d");
+            var doughnut4 = new Chart(ctx4).Doughnut(doughnutData4,doughnutConfig);
+        }
+		window.addEventListener("load",function(e){
+			Animate.counter();
+		},false);
+    </script>
+</body>
+</html>

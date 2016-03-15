@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<title>投票</title>
+	<link rel="stylesheet" href="plugin/seedsui/seedsui.css">
+	<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+	<section id="page_pollPic" class="active">
+		<header>
+			<div class="titlebar">
+                <a href="javascript:history.go(-1)">
+                    <i class="icon-arrowleft"></i>
+                    <span>返回</span>
+                </a>
+                <h1 class="text-center">投票</h1>
+            </div>
+		</header>
+		<article>
+			<div class="card overflow-hide">
+			<ul class="list noclick">
+				<li class="nojustify nopadding">
+                    <div class="justify-content" style="padding:12px;">
+                        <p>Agile Lite Logo 投票</p>
+                        <small>公司Agile Lite框架设计了新logo，大家投票决定Agile Lite Logo，最高票数当选</small>
+                    </div>
+                    <div class="justify nopadding">
+                        <img src="img/content/poll-main3.jpg" class="width-full">
+                    </div>
+                </li>
+                <li class="nopadding top-result">
+					<div class="justify nopadding result-img" style="background-image:url(img/content/poll3-img1.jpg);"></div>
+					<div class="justify-content text-center" style="padding:12px 24px;">
+						<img src="img/icon/icon-crown.png" class="crown">
+						<h1>TOP CHOICE</h1>
+						<div class="progress-bar radiusround float-right">
+                            <span class="progress" style="width: 25%"></span>
+                            <span class="text"><a class="timer" data-duration="1000" data-to="45">45</a>/100</span>
+                        </div>
+                        <div class="selection-text">
+                        	Agile Lite Logo 选择1
+                        </div>
+					</div>
+                </li>
+			</ul>
+			<ul class="list noclick">
+				<li>
+					<div class="justify-content box box-middle">
+						<p>投票结果</p>
+					</div>
+                    <div class="justify">
+                        <i class="icon-chartpie" style="font-size:24px;color:#4587f7;" onclick="toggleCharts(this)"></i>
+                    </div>
+				</li>
+			</ul>
+            <div id="barcharts">
+                <ul class="list result-list">
+                    <li class="result-list nopadding box">
+                        <div class="justify nopadding result-img" style="background-image:url(img/content/poll3-img1.jpg);"></div>
+                        <div class="progress-bar float-right box-flex-1">
+                            <span class="progress" style="width: 45%"></span>
+                            <span class="text"><a class="timer" data-duration="1000" data-to="45">45</a>/100</span>
+                        </div>
+                        <div class="selection-text box box-middle">
+                            Agile Lite Logo 选择1
+                        </div>
+                    </li>
+                    <li class="result-list nopadding box">
+                        <div class="justify nopadding result-img" style="background-image:url(img/content/poll3-img2.jpg);"></div>
+                        <div class="progress-bar float-right box-flex-1">
+                            <span class="progress" style="width: 5%"></span>
+                            <span class="text"><a class="timer" data-duration="1000" data-to="5">5</a>/100</span>
+                        </div>
+                        <div class="selection-text box box-middle">
+                            Agile Lite Logo 选择2
+                        </div>
+                    </li>
+                    <li class="result-list nopadding box">
+                        <div class="justify nopadding result-img" style="background-image:url(img/content/poll3-img3.jpg);"></div>
+                        <div class="progress-bar float-right box-flex-1">
+                            <span class="progress" style="width: 18%"></span>
+                            <span class="text"><a class="timer" data-duration="1000" data-to="18">18</a>/100</span>
+                        </div>
+                        <div class="selection-text box box-middle">
+                            Agile Lite Logo 选择3
+                        </div>
+                    </li>
+                    <li class="result-list nopadding box">
+                        <div class="justify nopadding result-img" style="background-image:url(img/content/poll3-img4.jpg);"></div>
+                        <div class="progress-bar float-right box-flex-1">
+                            <span class="progress" style="width: 10%"></span>
+                            <span class="text"><a class="timer" data-duration="1000" data-to="10">10</a>/100</span>
+                        </div>
+                        <div class="selection-text box box-middle">
+                            Agile Lite Logo 选择4
+                        </div>
+                    </li>
+                    <li class="result-list nopadding box">
+                        <div class="justify nopadding result-img" style="background-image:url(img/content/poll3-img5.jpg);"></div>
+                        <div class="progress-bar float-right box-flex-1">
+                            <span class="progress" style="width: 5%"></span>
+                            <span class="text"><a class="timer" data-duration="1000" data-to="5">5</a>/100</span>
+                        </div>
+                        <div class="selection-text box box-middle">
+                            Agile Lite Logo 选择5
+                        </div>
+                    </li>
+                    <li class="result-list nopadding box">
+                        <div class="justify nopadding result-img" style="background-image:url(img/content/poll3-img6.jpg);"></div>
+                        <div class="progress-bar float-right box-flex-1">
+                            <span class="progress" style="width: 5%"></span>
+                            <span class="text"><a class="timer" data-duration="1000" data-to="5">5</a>/100</span>
+                        </div>
+                        <div class="selection-text box box-middle">
+                            Agile Lite Logo 选择6
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div id="piecharts"  class="pie-chart" style="display: none;">
+                <ul class="grid" data-col="2">
+                    <li class="doughnutblock text-center">
+                        <div class="doughnutpercent" style="background-image:url(img/content/poll3-img1.jpg)">
+                            <div class="doughnutpercent-overlay box box-middlecenter">
+                                <div>
+                                    <p class="percent">45%</p>
+                                    <p>45/100</p>
+                                </div>
+                            </div>
+                        </div>
+                        <label style="">Agile Lite Logo 选择1</label>
+                        <canvas id="chart1" width="140" />
+                    </li>
+                    <li class="doughnutblock text-center">
+                        <div class="doughnutpercent" style="background-image:url(img/content/poll3-img2.jpg)">
+                            <div class="doughnutpercent-overlay box box-middlecenter">
+                                <div>
+                                    <p class="percent">5%</p>
+                                    <p>5/100</p>
+                                </div>
+                            </div>
+                        </div>
+                        <label style="">Agile Lite Logo 选择2</label>
+                        <canvas id="chart2" width="140" />
+                    </li>
+                    <li class="doughnutblock text-center">
+                        <div class="doughnutpercent" style="background-image:url(img/content/poll3-img3.jpg)">
+                            <div class="doughnutpercent-overlay box box-middlecenter">
+                                <div>
+                                    <p class="percent">18%</p>
+                                    <p>18/100</p>
+                                </div>
+                            </div>
+                        </div>
+                        <label style="">Agile Lite Logo 选择3</label>
+                        <canvas id="chart3" width="140" />
+                    </li>
+                    <li class="doughnutblock text-center">
+                        <div class="doughnutpercent" style="background-image:url(img/content/poll3-img4.jpg)">
+                            <div class="doughnutpercent-overlay box box-middlecenter">
+                                <div>
+                                    <p class="percent">10%</p>
+                                    <p>10/100</p>
+                                </div>
+                            </div>
+                        </div>
+                        <label style="">Agile Lite Logo 选择4</label>
+                        <canvas id="chart4" width="140" />
+                    </li>
+                    <li class="doughnutblock text-center">
+                        <div class="doughnutpercent" style="background-image:url(img/content/poll3-img5.jpg)">
+                            <div class="doughnutpercent-overlay box box-middlecenter">
+                                <div>
+                                    <p class="percent">5%</p>
+                                    <p>5/100</p>
+                                </div>
+                            </div>
+                        </div>
+                        <label style="">Agile Lite Logo 选择4</label>
+                        <canvas id="chart5" width="140" />
+                    </li>
+                    <li class="doughnutblock text-center">
+                        <div class="doughnutpercent" style="background-image:url(img/content/poll3-img6.jpg)">
+                            <div class="doughnutpercent-overlay box box-middlecenter">
+                                <div>
+                                    <p class="percent">5%</p>
+                                    <p>5/100</p>
+                                </div>
+                            </div>
+                        </div>
+                        <label style="">Agile Lite Logo 选择4</label>
+                        <canvas id="chart6" width="140" />
+                    </li>
+                </ul>
+            </div>
+			<ul class="list noclick noborder">
+				<li class="between">
+					<div class="justify">
+                        <div class="round" style="background-image:url(img/photo/tx1.jpg)"></div>
+                    </div>
+					<div class="justify-content">
+						<p>Cindy</p>
+						<small class="top right">于2016-02-07截止</small>
+						<small>
+							创建:2016-01-01
+							<div class="progress-bar radiusround float-right" style="width:50%;margin:-2px 0 0 0;">
+                                <span class="progress" style="width: 98%"></span>
+                                <span class="text"><a class="timer" data-duration="1000" data-to="98">98</a>/100</span>
+                            </div>
+						</small>
+					</div>
+				</li>
+			</ul>
+			</div>
+		</article>
+	</section>
+	<script src="plugin/jquery/jquery.min.js"></script>
+    <script src="plugin/seedsui/seedsui.min.js"></script>
+    <script src="plugin/charts/Chart.min.js"></script>
+    <script type="text/javascript">
+        //饼状图参数
+        var colors={fillColor:["#53c6fd","#ffae02","#3ae3ea","#ff6f36","#cf7af3","#4cd32e","#4587f7","#00c2eb","#ff618f","#21d9a1"],default:"#ebe8e3"};
+        var values=[45,5,18,10,5,5];
+        var doughnutConfig={
+            segmentShowStroke:false,
+            showTooltips:false,
+            animationEasing : "easeOut",
+            animationSteps:30,
+
+        }
+        var doughnutData1 = [
+            {
+                value:values[0],
+                color:colors.fillColor[0],
+            },
+            {
+                value:values[1],
+                color:colors.default,
+            },
+            {
+                value:values[2],
+                color:colors.default,
+            },
+            {
+                value:values[3],
+                color:colors.default,
+            },
+            {
+                value:values[4],
+                color:colors.default,
+            },
+            {
+                value:values[5],
+                color:colors.default,
+            },
+        ];
+        var doughnutData2 = [
+            {
+                value:values[0],
+                color:colors.default,
+            },
+            {
+                value:values[1],
+                color:colors.fillColor[1],
+            },
+            {
+                value:values[2],
+                color:colors.default,
+            },
+            {
+                value:values[3],
+                color:colors.default,
+            },
+            {
+                value:values[4],
+                color:colors.default,
+            },
+            {
+                value:values[5],
+                color:colors.default,
+            },
+        ];
+        var doughnutData3 = [
+            {
+                value:values[0],
+                color:colors.default,
+            },
+            {
+                value:values[1],
+                color:colors.default,
+            },
+            {
+                value:values[2],
+                color:colors.fillColor[2],
+            },
+            {
+                value:values[3],
+                color:colors.default,
+            },
+            {
+                value:values[4],
+                color:colors.default,
+            },
+            {
+                value:values[5],
+                color:colors.default,
+            },
+        ];
+        var doughnutData4 = [
+            {
+                value:values[0],
+                color:colors.default,
+            },
+            {
+                value:values[1],
+                color:colors.default,
+            },
+            {
+                value:values[2],
+                color:colors.default,
+            },
+            {
+                value:values[3],
+                color:colors.fillColor[3],
+            },
+            {
+                value:values[4],
+                color:colors.default,
+            },
+            {
+                value:values[5],
+                color:colors.default,
+            },
+        ];
+        var doughnutData5 = [
+            {
+                value:values[0],
+                color:colors.default,
+            },
+            {
+                value:values[1],
+                color:colors.default,
+            },
+            {
+                value:values[2],
+                color:colors.default,
+            },
+            {
+                value:values[3],
+                color:colors.default,
+            },
+            {
+                value:values[4],
+                color:colors.fillColor[4],
+            },
+            {
+                value:values[5],
+                color:colors.default,
+            },
+        ];
+        var doughnutData6 = [
+            {
+                value:values[0],
+                color:colors.default,
+            },
+            {
+                value:values[1],
+                color:colors.default,
+            },
+            {
+                value:values[2],
+                color:colors.default,
+            },
+            {
+                value:values[3],
+                color:colors.default,
+            },
+            {
+                value:values[4],
+                color:colors.default,
+            },
+            {
+                value:values[5],
+                color:colors.fillColor[5],
+            },
+        ];
+
+        function toggleCharts(thisobj){
+            //切换到饼图
+            if($(thisobj).hasClass("icon-chartpie")){
+                $(thisobj)[0].className="icon-chartbar";
+                $("#piecharts").css("display","block");
+                $("#barcharts").css("display","none");
+                initCharts();
+            }else{
+                $(thisobj)[0].className="icon-chartpie";
+                $("#piecharts").css("display","none");
+                $("#barcharts").css("display","block");
+            }
+        }
+        function initCharts(){
+            //初始化饼状图
+            var ctx1 = document.getElementById("chart1").getContext("2d");
+            var doughnut1 = new Chart(ctx1).Doughnut(doughnutData1,doughnutConfig);
+            var ctx2 = document.getElementById("chart2").getContext("2d");
+            var doughnut2 = new Chart(ctx2).Doughnut(doughnutData2,doughnutConfig);
+            var ctx3 = document.getElementById("chart3").getContext("2d");
+            var doughnut3 = new Chart(ctx3).Doughnut(doughnutData3,doughnutConfig);
+            var ctx4 = document.getElementById("chart4").getContext("2d");
+            var doughnut4 = new Chart(ctx4).Doughnut(doughnutData4,doughnutConfig);
+            var ctx5 = document.getElementById("chart5").getContext("2d");
+            var doughnut5 = new Chart(ctx5).Doughnut(doughnutData5,doughnutConfig);
+            var ctx6 = document.getElementById("chart6").getContext("2d");
+            var doughnut6 = new Chart(ctx6).Doughnut(doughnutData6,doughnutConfig);
+        }
+		window.addEventListener("load",function(e){
+			Animate.counter();
+		},false);
+    </script>
+</body>
+</html>

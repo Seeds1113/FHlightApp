@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<title>投票</title>
+	<link rel="stylesheet" href="plugin/seedsui/seedsui.css">
+	<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+	<section id="page_pollPic" class="active">
+		<header>
+			<div class="titlebar">
+                <a href="javascript:history.go(-1)">
+                    <i class="icon-arrowleft"></i>
+                    <span>返回</span>
+                </a>
+                <h1 class="text-center">投票</h1>
+            </div>
+		</header>
+		<article>
+			<div class="card overflow-hide">
+			<ul class="list noclick">
+				<li class="between">
+					<div class="justify">
+                        <div class="round" style="background-image:url(img/photo/tx1.jpg)"></div>
+                    </div>
+					<div class="justify-content">
+						<p>Cindy</p>
+						<small class="top right">于2016-02-28截止</small>
+						<small>
+							创建:2016-01-01
+							<div class="progress-bar radiusround float-right" style="width:50%;margin:-2px 0 0 0;">
+                                <span class="progress" style="width: 15%"></span>
+                                <span class="text"><a class="timer" data-duration="1000" data-to="15">15</a>/100</span>
+                            </div>
+						</small>
+					</div>
+				</li>
+				<li class="nojustify noborder nopadding">
+                    <div class="justify-content" style="padding:8px;">
+                        <p>公司早餐因该添加什么？</p>
+                        <small>投票决定公司早餐应该添加什么，最高票数当选，能投2样</small>
+                    </div>
+                    <div class="justify nopadding">
+                        <img src="img/content/poll-main1.jpg" class="width-full">
+                    </div>
+                </li>
+                <li class="noborder">
+                	<div class="justify-content" style="height:30px;">
+                		<small class="top left">记名投票(最多选2项)</small>
+                		<small class="top right">15人参与投票</small>
+                    </div>
+                </li>
+			</ul>
+			<ul class="grid thumbnail" data-col="2" style="background-color:white;" id="selImg">
+				<li>
+					<a style="background-image: url(img/content/poll1-img1.jpg);">
+						<span class="checkbox"></span>
+						<input type="checkbox" class="hide">
+						<div class="grid-title box box-middle">
+							吐司
+						</div>
+					</a>
+				</li>
+				<li>
+					<a style="background-image: url(img/content/poll1-img2.jpg);">
+						<span class="checkbox"></span>
+						<input type="checkbox" class="hide">
+						<div class="grid-title box box-middle">
+							油条
+						</div>
+					</a>
+				</li>
+				<li>
+					<a style="background-image: url(img/content/poll1-img3.jpg);">
+						<span class="checkbox"></span>
+						<input type="checkbox" class="hide">
+						<div class="grid-title box box-middle">
+							粥
+						</div>
+					</a>
+				</li>
+				<li>
+					<a style="background-image: url(img/content/poll1-img4.jpg);">
+						<span class="checkbox"></span>
+						<input type="checkbox" class="hide">
+						<div class="grid-title box box-middle">
+							三明治
+						</div>
+					</a>
+				</li>
+			</ul>
+			<ul class="list" id="selFont">
+				<li>
+					<div class="justify-content">
+                        <p>内容内容</p>
+                    </div>
+                    <div class="justify">
+                        <span class="checkbox"></span>
+                        <input type="checkbox" class="hide">
+                    </div>
+				</li>
+				<li>
+					<div class="justify-content">
+                        <p>内容内容</p>
+                    </div>
+                    <div class="justify">
+                        <span class="checkbox"></span>
+                        <input type="checkbox" class="hide">
+                    </div>
+				</li>
+				<li>
+					<div class="justify-content">
+                        <p>内容内容</p>
+                    </div>
+                    <div class="justify">
+                    	<span class="checkbox"></span>
+                        <input type="checkbox" class="hide">
+                    </div>
+				</li>
+				<li>
+					<div class="justify-content">
+                        <p>内容内容</p>
+                    </div>
+                    <div class="justify">
+                    	<span class="checkbox"></span>
+                        <input type="checkbox" class="hide">
+                    </div>
+				</li>
+			</ul>
+			<a class="button block margin8">投票</a>
+			</div>
+		</article>
+	</section>
+	<script src="plugin/jquery/jquery.min.js"></script>
+    <script src="plugin/seedsui/seedsui.min.js"></script>
+    <script type="text/javascript">
+    	var checkedToast=new Toast("最多选2项");
+    	function selCheckbox(e,cboMaxCount){
+    		var cboCount=0;
+    		var target=e.target;
+    		var cbo;
+    		if(target.tagName.toLowerCase()=="a"){
+    			cbo=target.querySelector("input[type=checkbox]");
+    		}else if(target.tagName.toLowerCase()=="li"){
+    			cbo=target.querySelector("input[type=checkbox]");
+    		}else if(target.tagName.toLowerCase()=="p"){
+    			cbo=target.parentNode.parentNode.querySelector("input[type=checkbox]");
+    		}else if(target.tagName.toLowerCase()=="img" || target.tagName.toLowerCase()=="div" || target.tagName.toLowerCase()=="span"){
+    			cbo=target.parentNode.querySelector("input[type=checkbox]");
+    		}
+
+    		if(cbo.checked==true){
+    			cboCount--;
+    			cbo.previousElementSibling.classList.remove("active");
+    			cbo.checked=false;
+    			return;
+    		}
+    		[].slice.call(this.querySelectorAll("input[type=checkbox]")).forEach(function(n,i,a){
+				if(n.checked){
+					cboCount++;
+				}
+			});
+			if(cboCount>=cboMaxCount){
+				checkedToast.show();
+				return;
+			}
+			cbo.previousElementSibling.classList.add("active");
+    		cbo.checked=true;
+    	}
+
+    	//此为离线演示时，实际项目中请修改此函数
+    	function getParameter(argName){
+			var param = location.search.match(new RegExp("[\?\&]" + argName + "=([^\&]*)(\&?)","i"));
+			return param ? param[1] : param;
+		}
+		window.addEventListener("load",function(e){
+			var pollContainer=document.getElementById("selFont");
+			var isPic=getParameter("pic");
+			if(isPic){
+				pollContainer=document.getElementById("selImg");
+				document.getElementById("selFont").style.display="none";
+			}else{
+				pollContainer=document.getElementById("selFont");
+				document.getElementById("selImg").style.display="none";
+			}
+			pollContainer.addEventListener("click",function(e){
+	    		selCheckbox.call(this,e,2);
+	    	},false);
+	    	Animate.counter();
+		},false);
+		
+    </script>
+</body>
+</html>
