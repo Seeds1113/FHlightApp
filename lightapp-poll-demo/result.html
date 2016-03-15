@@ -122,76 +122,76 @@
             <div id="piecharts"  class="pie-chart" style="display: none;">
                 <ul class="grid" data-col="2">
                     <li class="doughnutblock text-center">
-                        <div class="doughnutpercent" style="background-image:url(img/content/poll3-img1.jpg)">
-                            <div class="doughnutpercent-overlay box box-middlecenter">
-                                <div>
-                                    <p class="percent">45%</p>
-                                    <p>45/100</p>
-                                </div>
+                        <div class="doughnutblock-canvas" style="background-image:url(img/content/poll3-img2.jpg)">
+                            <canvas id="chart1" width="140" height="140"/>
+                        </div>
+                        <div class="doughnutblock-overlay box box-middlecenter">
+                            <div>
+                                <p class="percent">45%</p>
+                                <p>45/100</p>
                             </div>
                         </div>
                         <label style="">Agile Lite Logo 选择1</label>
-                        <canvas id="chart1" width="140" />
                     </li>
                     <li class="doughnutblock text-center">
-                        <div class="doughnutpercent" style="background-image:url(img/content/poll3-img2.jpg)">
-                            <div class="doughnutpercent-overlay box box-middlecenter">
-                                <div>
-                                    <p class="percent">5%</p>
-                                    <p>5/100</p>
-                                </div>
+                        <div class="doughnutblock-canvas" style="background-image:url(img/content/poll3-img2.jpg)">
+                            <canvas id="chart2" width="140" height="140"/>
+                        </div>
+                        <div class="doughnutblock-overlay box box-middlecenter">
+                            <div>
+                                <p class="percent">5%</p>
+                                <p>5/100</p>
                             </div>
                         </div>
                         <label style="">Agile Lite Logo 选择2</label>
-                        <canvas id="chart2" width="140" />
                     </li>
                     <li class="doughnutblock text-center">
-                        <div class="doughnutpercent" style="background-image:url(img/content/poll3-img3.jpg)">
-                            <div class="doughnutpercent-overlay box box-middlecenter">
-                                <div>
-                                    <p class="percent">18%</p>
-                                    <p>18/100</p>
-                                </div>
+                        <div class="doughnutblock-canvas" style="background-image:url(img/content/poll3-img3.jpg)">
+                            <canvas id="chart3" width="140" height="140"/>
+                        </div>
+                        <div class="doughnutblock-overlay box box-middlecenter">
+                            <div>
+                                <p class="percent">18%</p>
+                                <p>18/100</p>
                             </div>
                         </div>
                         <label style="">Agile Lite Logo 选择3</label>
-                        <canvas id="chart3" width="140" />
                     </li>
                     <li class="doughnutblock text-center">
-                        <div class="doughnutpercent" style="background-image:url(img/content/poll3-img4.jpg)">
-                            <div class="doughnutpercent-overlay box box-middlecenter">
-                                <div>
-                                    <p class="percent">10%</p>
-                                    <p>10/100</p>
-                                </div>
+                        <div class="doughnutblock-canvas" style="background-image:url(img/content/poll3-img4.jpg)">
+                            <canvas id="chart4" width="140" height="140"/>
+                        </div>
+                        <div class="doughnutblock-overlay box box-middlecenter">
+                            <div>
+                                <p class="percent">10%</p>
+                                <p>10/100</p>
                             </div>
                         </div>
                         <label style="">Agile Lite Logo 选择4</label>
-                        <canvas id="chart4" width="140" />
                     </li>
                     <li class="doughnutblock text-center">
-                        <div class="doughnutpercent" style="background-image:url(img/content/poll3-img5.jpg)">
-                            <div class="doughnutpercent-overlay box box-middlecenter">
-                                <div>
-                                    <p class="percent">5%</p>
-                                    <p>5/100</p>
-                                </div>
+                        <div class="doughnutblock-canvas" style="background-image:url(img/content/poll3-img5.jpg)">
+                            <canvas id="chart5" width="140" height="140"/>
+                        </div>
+                        <div class="doughnutblock-overlay box box-middlecenter">
+                            <div>
+                                <p class="percent">5%</p>
+                                <p>5/100</p>
                             </div>
                         </div>
-                        <label style="">Agile Lite Logo 选择4</label>
-                        <canvas id="chart5" width="140" />
+                        <label style="">Agile Lite Logo 选择5</label>
                     </li>
                     <li class="doughnutblock text-center">
-                        <div class="doughnutpercent" style="background-image:url(img/content/poll3-img6.jpg)">
-                            <div class="doughnutpercent-overlay box box-middlecenter">
-                                <div>
-                                    <p class="percent">5%</p>
-                                    <p>5/100</p>
-                                </div>
+                        <div class="doughnutblock-canvas" style="background-image:url(img/content/poll3-img6.jpg)">
+                            <canvas id="chart6" width="140" height="140"/>
+                        </div>
+                        <div class="doughnutblock-overlay box box-middlecenter">
+                            <div>
+                                <p class="percent">5%</p>
+                                <p>5/100</p>
                             </div>
                         </div>
-                        <label style="">Agile Lite Logo 选择4</label>
-                        <canvas id="chart6" width="140" />
+                        <label style="">Agile Lite Logo 选择6</label>
                     </li>
                 </ul>
             </div>
@@ -228,7 +228,7 @@
             showTooltips:false,
             animationEasing : "easeOut",
             animationSteps:30,
-
+            percentageInnerCutout:80
         }
         var doughnutData1 = [
             {
