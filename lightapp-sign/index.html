@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>轻应用－签到</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<link rel="stylesheet" href="plugin/seedsui/seedsui.css">
+    <link rel="stylesheet" href="plugin/animate/animate.css">
+	<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+	<section id="pagePolllist" class="active">
+		<header>
+           <div class="titlebar">
+                <a href="javascript:history.go(-1)">
+                    <i class="icon-arrowleft"></i>
+                    <span>返回</span>
+                </a>
+                <h1 class="text-center">签到</h1>
+                <a href="add-poll.html" class="right">
+                    <i class="icon-rdoadd"></i>
+                </a>
+                <a href="search.html" class="right" id="search-toggle">
+                    <i class="icon-search"></i>
+                </a>
+            </div>
+        </header>
+        <article style="top:84px;bottom:0px;">
+           adsf
+        </article>
+	</section>
+    <div id="popDelete" class="popup-delete">
+        <div class="content">
+            <span class="warning color-cancel">该投票将永远消失！</span>
+            <span class="text">您确定这么做？！</span>
+            <img class="warning-face" src="img/icon/icon-face-suprised.png">
+        </div>
+        <div class="popup-handler"><a class="confirm-btn">确定</a><a class="cancel-btn">取消</a></div>
+    </div>
+    <script src="plugin/jquery/jquery.min.js"></script>
+    <script src="plugin/seedsui/seedsui.min.js"></script>
+    <script>
+
+    //初始化function
+    window.addEventListener("load",function(){
+        var drag=new Dragrefresh("#page1",{
+            "onRefresh":function(e){
+                setTimeout(function(){
+                    e.refreshComplete();
+                }, 1000);
+                
+            },
+            "onRefreshComplete":function(e){
+                //完成刷新逻辑
+            },
+            "onRefreshOvertime":function(e){
+                 //超时刷新逻辑
+            }
+        });
+        var drag2=new Dragrefresh("#page2",{
+            "onRefresh":function(e){
+                setTimeout(function(){
+                    e.refreshComplete();
+                }, 1000);
+                
+            },
+            "onRefreshComplete":function(e){
+                //完成刷新逻辑
+            },
+            "onRefreshOvertime":function(e){
+                //超时刷新逻辑
+            }
+        });
+        //search clear
+        loadMore('page1', loadPage1);
+        loadMore('page2', loadPage2);
+    },false);
+	//定义exmobi返回
+	function back(){history.go(-1);}
+	</script>
+</body>
+</html>
