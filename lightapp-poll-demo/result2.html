@@ -23,8 +23,8 @@
 			<ul class="list noclick">
 				<li class="nojustify nopadding">
                     <div class="justify-content" style="padding:12px;">
-                        <p>吃货的选择是？</p>
-                        <small>投票决定，最高票数当选</small>
+                        <p>周五出去玩要去哪里？</p>
+                        <small>周五要部门活动了大家投票看看要去哪里做什么。</small>
                     </div>
                     <div class="justify nopadding">
                         <img src="img/picture/banner.jpg" class="width-full">
@@ -35,11 +35,11 @@
 						<img src="img/icon/icon-crown.png" class="crown">
 						<h1>TOP CHOICE</h1>
 						<div class="progress-bar radiusround float-right">
-                            <span class="progress" style="width: 25%"></span>
-                            <span class="text"><a class="timer" data-duration="1000" data-to="25">25</a>/100</span>
+                            <span class="progress" style="width: 55%"></span>
+                            <span class="text"><a class="timer" data-duration="1000" data-to="18">18</a>/33</span>
                         </div>
                         <div class="selection-text">
-                        	吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒！
+                        	爬紫金山
                         </div>
 					</div>
                 </li>
@@ -58,38 +58,38 @@
                 <ul class="list result-list no-img">
                     <li class="result-list nopadding box">
                         <div class="progress-bar float-right box-flex-1">
-                            <span class="progress" style="width: 25%"></span>
-                            <span class="text"><a class="timer" data-duration="1000" data-to="25">25</a>/100</span>
+                            <span class="progress" style="width: 55%"></span>
+                            <span class="text"><a class="timer" data-duration="1000" data-to="25">18</a>/33</span>
                         </div>
                         <div class="selection-text box box-middle">
-                            吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒!
-                        </div>
-                    </li>
-                    <li class="result-list nopadding box">
-                        <div class="progress-bar float-right box-flex-1">
-                            <span class="progress" style="width: 5%"></span>
-                            <span class="text"><a class="timer" data-duration="1000" data-to="5">5</a>/100</span>
-                        </div>
-                        <div class="selection-text box box-middle">
-                            吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒!
+                            爬紫金山
                         </div>
                     </li>
                     <li class="result-list nopadding box">
                         <div class="progress-bar float-right box-flex-1">
                             <span class="progress" style="width: 15%"></span>
-                            <span class="text"><a class="timer" data-duration="1000" data-to="15">15</a>/100</span>
+                            <span class="text"><a class="timer" data-duration="1000" data-to="5">5</a>/33</span>
                         </div>
                         <div class="selection-text box box-middle">
-                            吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒!
+                            去唱歌
                         </div>
                     </li>
                     <li class="result-list nopadding box">
                         <div class="progress-bar float-right box-flex-1">
-                            <span class="progress" style="width: 20%"></span>
-                            <span class="text"><a class="timer" data-duration="1000" data-to="20">20</a>/100</span>
+                            <span class="progress" style="width: 24%"></span>
+                            <span class="text"><a class="timer" data-duration="1000" data-to="8">8</a>/33</span>
                         </div>
                         <div class="selection-text box box-middle">
-                            吃早餐省体棒棒哒！吃早餐省体棒棒哒！吃早餐省体棒棒哒!
+                            去夫子庙
+                        </div>
+                    </li>
+                    <li class="result-list nopadding box">
+                        <div class="progress-bar float-right box-flex-1">
+                            <span class="progress" style="width: 1%"></span>
+                            <span class="text"><a class="timer" data-duration="1000" data-to="20">2</a>/33</span>
+                        </div>
+                        <div class="selection-text box box-middle">
+                            去吃火锅
                         </div>
                     </li>
                 </ul>
@@ -97,11 +97,59 @@
             <div id="piecharts"  class="pie-chart" style="display: none;">
                 <ul class="grid" data-col="2">
                     <li class="doughnutblock text-center">
+                        <div class="doughnutblock-canvas" style="background-color:">
+                            <canvas id="chart1" width="140" height="140"/>
+                        </div>
+                        <div class="doughnutblock-overlay box box-middlecenter">
+                            <div>
+                                <p class="percent">54.6%</p>
+                                <p>18/33</p>
+                            </div>
+                        </div>
+                        <label style="">爬紫金山</label>
+                    </li>
+                    <li class="doughnutblock text-center">
+                        <div class="doughnutblock-canvas" style="background-color:#fff;">
+                            <canvas id="chart2" width="140" height="140"/>
+                        </div>
+                        <div class="doughnutblock-overlay box box-middlecenter">
+                            <div>
+                                <p class="percent">15.2</p>
+                                <p>5/33</p>
+                            </div>
+                        </div>
+                        <label style="">去唱歌</label>
+                    </li>
+                    <li class="doughnutblock text-center">
+                        <div class="doughnutblock-canvas" style="background-color:#fff;">
+                            <canvas id="chart3" width="140" height="140"/>
+                        </div>
+                        <div class="doughnutblock-overlay box box-middlecenter">
+                            <div>
+                                <p class="percent">24.2%</p>
+                                <p>8/33</p>
+                            </div>
+                        </div>
+                        <label style="">去夫子庙</label>
+                    </li>
+                    <li class="doughnutblock text-center">
+                        <div class="doughnutblock-canvas" style="background-color:#fff;">
+                            <canvas id="chart4" width="140" height="140"/>
+                        </div>
+                        <div class="doughnutblock-overlay box box-middlecenter">
+                            <div>
+                                <p class="percent">6%</p>
+                                <p>2/33</p>
+                            </div>
+                        </div>
+                        <label style="">去吃火锅</label>
+                    </li>
+                    <!-- <li class="doughnutblock text-center">
                         <div class="doughnutpercent" style="background-image:url(img/content/poll-main1.jpg)">
                             <div class="doughnutpercent-overlay box box-middlecenter">
                                 <div>
-                                    <p class="percent">40%</p>
-                                    <p>26/64</p>
+                                    <p class="percent">54.5%</p>
+                                    <p>18/33</p>
                                 </div>
                             </div>
                         </div>
@@ -112,8 +160,8 @@
                         <div class="doughnutpercent" style="background-image:url(img/content/poll-main1.jpg)">
                             <div class="doughnutpercent-overlay box box-middlecenter">
                                 <div>
-                                    <p class="percent">31%</p>
-                                    <p>20/64</p>
+                                    <p class="percent">15.1</p>
+                                    <p>5/33</p>
                                 </div>
                             </div>
                         </div>
@@ -123,9 +171,9 @@
                     <li class="doughnutblock text-center">
                         <div class="doughnutpercent" style="background-image:url(img/content/poll-main1.jpg)">
                             <div class="doughnutpercent-overlay box box-middlecenter">
-                                <div>
-                                    <p class="percent">15%</p>
-                                    <p>10/64</p>
+                                <div>%
+                                    <p class="percent">24.2%</p>
+                                    <p>8/33</p>
                                 </div>
                             </div>
                         </div>
@@ -136,14 +184,14 @@
                         <div class="doughnutpercent" style="background-image:url(img/content/poll-main1.jpg)">
                             <div class="doughnutpercent-overlay box box-middlecenter">
                                 <div>
-                                    <p class="percent">12%</p>
-                                    <p>8/64</p>
+                                    <p class="percent">6%</p>
+                                    <p>2/33</p>
                                 </div>
                             </div>
                         </div>
                         <label style="">内容内容内容</label>
                         <canvas id="chart4" width="140" />
-                    </li>
+                    </li> -->
                 </ul>
             </div>
 			<ul class="list noclick noborder">
@@ -173,13 +221,13 @@
     <script type="text/javascript">
         //饼状图参数
         var colors={fillColor:["#53c6fd","#ffae02","#3ae3ea","#ff6f36","#cf7af3","#4cd32e","#4587f7","#00c2eb","#ff618f","#21d9a1"],default:"#ebe8e3"};
-        var values=[26,20,10,8];
+        var values=[18,5,18,2];
         var doughnutConfig={
             segmentShowStroke:false,
             showTooltips:false,
             animationEasing : "easeOut",
             animationSteps:30,
-
+            percentageInnerCutout:80
         }
         var doughnutData1 = [
             {
