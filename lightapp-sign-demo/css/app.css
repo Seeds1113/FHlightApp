@@ -1,0 +1,182 @@
+section {
+  background: #F4F4F4;
+}
+.content {
+  background-color: #fff;
+  border-bottom: 1px solid #E8E8E8;
+}
+.search-bar {
+  background-color: #dddddd;
+}
+.no-data {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.no-data .nodata-content {
+  color: #ccc;
+  text-align: center;
+  padding-bottom: 100px;
+}
+.no-data .nodata-content img {
+  width: 200px;
+  margin-bottom: 32px;
+}
+.date-info {
+  background-color: #4184FB;
+  display: relative;
+  color: #fff;
+  padding: 12px;
+}
+.date-info .day {
+  font-size: 24px;
+  line-height: 32px;
+  margin: 0;
+  padding: 0;
+}
+.date-info .date {
+  color: #fff;
+  line-height: 24px;
+  font-size: 14px;
+}
+.date-info .button {
+  position: absolute;
+  right: 12px;
+  top: 18px;
+  background-color: #fff;
+  color: #4184FB;
+  border-radius: 20px;
+}
+.date-info .button i {
+  padding: 0;
+  margin-right: 4px;
+  line-height: 18px;
+}
+.sign-list {
+  background: #fff;
+  padding: 0 12px 0 24px;
+}
+.sign-list .sign-info {
+  position: relative;
+  padding: 12px 12px 12px 24px;
+  border-left: 1px solid #ccc;
+}
+.sign-list .sign-info .clock {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 6px;
+  left: -15px;
+  background-color: #fff;
+}
+.sign-list .sign-info .clock .hour,
+.sign-list .sign-info .clock .minute {
+  -webkit-transition: all 800ms linear;
+}
+.sign-list .sign-info .time {
+  display: block;
+  color: #aaa;
+  font-size: 18px;
+}
+.sign-list .sign-info .title {
+  padding: 0px;
+  color: #4184FB;
+  font-size: 14px;
+  line-height: 32px;
+}
+.sign-list .sign-info .location {
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+.sign-list .sign-info .img-location {
+  height: 56px;
+  width: 56px;
+  border-radius: 56px;
+  background-size: cover;
+  margin: 0px 8px 12px 0;
+}
+.sign-list .sign-info hr {
+  border-top: 1px dotted #ccc;
+}
+.sign-list .sign-info:nth-child(1) .clock {
+  border-color: #53c6fd;
+}
+.sign-list .sign-info:nth-child(1) .clock .hour,
+.sign-list .sign-info:nth-child(1) .clock .minute,
+.sign-list .sign-info:nth-child(1) .clock .origin {
+  background-color: #53c6fd;
+}
+.sign-list .sign-info:nth-child(2) .clock {
+  border-color: #ffae02;
+}
+.sign-list .sign-info:nth-child(2) .clock .hour,
+.sign-list .sign-info:nth-child(2) .clock .minute,
+.sign-list .sign-info:nth-child(2) .clock .origin {
+  background-color: #ffae02;
+}
+.sign-list .sign-info:nth-child(3) .clock {
+  border-color: #3ae3ea;
+}
+.sign-list .sign-info:nth-child(3) .clock .hour,
+.sign-list .sign-info:nth-child(3) .clock .minute,
+.sign-list .sign-info:nth-child(3) .clock .origin {
+  background-color: #3ae3ea;
+}
+.sign-list .sign-info:nth-child(4) .clock {
+  border-color: #ff6f36;
+}
+.sign-list .sign-info:nth-child(4) .clock .hour,
+.sign-list .sign-info:nth-child(4) .clock .minute,
+.sign-list .sign-info:nth-child(4) .clock .origin {
+  background-color: #ff6f36;
+}
+.sign-list .sign-info:nth-child(5) .clock {
+  border-color: #cf7af3;
+}
+.sign-list .sign-info:nth-child(5) .clock .hour,
+.sign-list .sign-info:nth-child(5) .clock .minute,
+.sign-list .sign-info:nth-child(5) .clock .origin {
+  background-color: #cf7af3;
+}
+.sign-list .sign-info:nth-child(6) .clock {
+  border-color: #4cd32e;
+}
+.sign-list .sign-info:nth-child(6) .clock .hour,
+.sign-list .sign-info:nth-child(6) .clock .minute,
+.sign-list .sign-info:nth-child(6) .clock .origin {
+  background-color: #4cd32e;
+}
+.sign-list .sign-info:nth-child(7) .clock {
+  border-color: #4587f7;
+}
+.sign-list .sign-info:nth-child(7) .clock .hour,
+.sign-list .sign-info:nth-child(7) .clock .minute,
+.sign-list .sign-info:nth-child(7) .clock .origin {
+  background-color: #4587f7;
+}
+.sign-list .sign-info:nth-child(8) .clock {
+  border-color: #00c2eb;
+}
+.sign-list .sign-info:nth-child(8) .clock .hour,
+.sign-list .sign-info:nth-child(8) .clock .minute,
+.sign-list .sign-info:nth-child(8) .clock .origin {
+  background-color: #00c2eb;
+}
+.sign-list .sign-info:nth-child(9) .clock {
+  border-color: #ff618f;
+}
+.sign-list .sign-info:nth-child(9) .clock .hour,
+.sign-list .sign-info:nth-child(9) .clock .minute,
+.sign-list .sign-info:nth-child(9) .clock .origin {
+  background-color: #ff618f;
+}
+.sign-list .sign-info:nth-child(10) .clock {
+  border-color: #21d9a1;
+}
+.sign-list .sign-info:nth-child(10) .clock .hour,
+.sign-list .sign-info:nth-child(10) .clock .minute,
+.sign-list .sign-info:nth-child(10) .clock .origin {
+  background-color: #21d9a1;
+}

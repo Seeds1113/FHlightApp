@@ -28,51 +28,62 @@
                 <a class="sign-record button"><i class="icon-file-fill"></i>签到记录</a>
             </div>
         </header>
-        <article style="top:118px;bottom:0px;">
-            <ul class="sign-list animated fadeInUp">
+        <article style="top:124px;bottom:0px;">
+            <div class="no-data box box-middlecenter hidden"><!--暂无数据-->
+                <div class="nodata-content ">
+                    <img src="img/icon/no-data.png">
+                    <br>
+                    暂无投票，快去创建一个吧！
+                </div> 
+            </div>
+            <ul class="sign-list animated fadeInUp" id="signList">
                 <li class="sign-info">
-                    <div class="clock" id="clock">
+                    <div class="clock" data-clock="8:30">
                         <div class="hour"></div>
                         <div class="minute"></div>
                         <div class="origin"></div>
                     </div>
-                    <span class="time">8:00</span>
+                    <span class="time">8:30</span>
                     <span class="title">早上签到啦我来上班啦</span>
                     <div class="location"><i class="icon-position"></i>江苏省南京市建邺区沙洲街道万科金城</div>
                     <a class="img-location" style="background-image:url(img/content/location1-img1.jpg);"></a>
                     <a class="img-location" style="background-image:url(img/content/location1-img1.jpg);"></a>
                     <a class="img-location" style="background-image:url(img/content/location1-img1.jpg);"></a>
+                    <hr> 
                 </li>
                 <li class="sign-info">
-                    <div class="clock" id="clock">
+                    <div class="clock" data-clock="9:00">
                         <div class="hour"></div>
                         <div class="minute"></div>
                         <div class="origin"></div>
                     </div>
-                    <span class="time">8:00</span>
+                    <span class="time">9:00</span>
                     <span class="title">早上签到啦我来上班啦</span>
                     <div class="location"><i class="icon-position"></i>江苏省南京市建邺区沙洲街道万科金城</div>
+                    <hr>  
                 </li>
                 <li class="sign-info">
-                    <div class="clock" id="clock">
+                    <div class="clock" data-clock="11:24">
                         <div class="hour"></div>
                         <div class="minute"></div>
                         <div class="origin"></div>
                     </div>
-                    <span class="time">8:00</span>
+                    <span class="time">11:24</span>
                     <span class="title">早上签到啦我来上班啦</span>
                     <div class="location"><i class="icon-position"></i>江苏省南京市建邺区沙洲街道万科金城</div>
                     <a class="img-location" style="background-image:url(img/content/location1-img1.jpg);"></a>
+                    <hr> 
                 </li>
                 <li class="sign-info">
-                    <div class="clock" id="clock">
+                    <div class="clock" data-clock="15:30">
                         <div class="hour"></div>
                         <div class="minute"></div>
                         <div class="origin"></div>
                     </div>
-                    <span class="time">8:00</span>
+                    <span class="time">15:30</span>
                     <span class="title">早上签到啦我来上班啦</span>
                     <div class="location"><i class="icon-position"></i>江苏省南京市建邺区沙洲街道万科金城</div>
+                    <hr> 
                 </li>
             </ul>
         </article>
@@ -80,6 +91,12 @@
     <script src="plugin/jquery/jquery.min.js"></script>
     <script src="plugin/seedsui/seedsui.min.js"></script>
     <script>
+    function noData(){
+        var listLength = $("#signList").find(".sign-info").length;
+        if (listLength == 0){
+            container.find(".no-data").removeClass("hidden");
+        }
+    }
     function getDateDay(){
         var date = new Date();
         var weekday=new Array(7);
@@ -102,6 +119,7 @@
     //初始化function
     window.addEventListener("load",function(){
         getDateDay();
+        var c=DataClock();
     },false);
 	//定义exmobi返回
 	function back(){history.go(-1);}
