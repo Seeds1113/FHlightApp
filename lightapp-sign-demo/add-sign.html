@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="css/app.css">
 </head>
 <body>
-	<section id="pageSignList" class="active">
+	<section id="pageAddSign" class="active">
 		<header>
            <div class="titlebar" style="z-index:99;">
                 <a href="javascript:history.go(-1)">
@@ -17,25 +17,70 @@
                     <span>返回</span>
                 </a>
                 <h1 class="text-center">签到</h1>
-                <a href="" class="right">
-                    <i class="icon-position"></i>
-                </a>
             </div>
         </header>
-        <article style="top:124px;bottom:0px;">
-            
+        <article style="top:44px;bottom:0px;">
+            <div class="content">
+                <div class="date-input">
+                    <i class="icon-time"></i>
+                    <span class="date"></span>
+                    <span class="time"></span>
+                </div>
+                <hr>
+                <ul class="list location-list">
+                    <li>
+                        <i class="icon-position-fill"></i>
+                        <div class="justify-content">
+                            <p class="nowrap">江苏省南京市建邺区云龙山路88号</p>
+                            <small class="nowrap">地点微调</small>
+                        </div>
+                        <div class="justify">
+                            <i class="icon-arrowright"></i>
+                        </div>
+                    </li>
+                </ul>
+                <div class="info-content clearfix">
+                    <textarea placeholder="填写投票描述，250字以内" id="infoMainContent" maxlength="250"></textarea>
+                    <span class="count"><span id="text-num">0</span>/250</span>
+                    <ul class="grid album" data-col="2">
+                        <li><a class="img" style="background-image:url(img/content/location1-img1.jpg);"><span class="close"><i class="icon-close"></i></span></a></li>
+                        <li><a class="add-img"><i class="icon-camera-fill"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <a class="radius4 button block margin8">提交</a>
         </article>
 	</section>
     <script src="plugin/jquery/jquery.min.js"></script>
     <script src="plugin/seedsui/seedsui.min.js"></script>
     <script>
+    //count function
+    function maxWordCount(){
+        var target = $("#infoMainContent"),
+        maxLimit = target.attr("maxlength");
+        target.on({
+            input: function(){
+                var val = target.val(),
+                count = val.length;
+                $("#text-num").html(count);
+                if(count>=maxLimit){
+                    $("#text-num").css("color","#fc4349");
+                }else{
+                    $("#text-num").css("color","#aaa");
+                }
+            }
+        });
+    }
     function getDateDay(){
         var date = new Date();
         var weekday=new Array(7);
         var dd = date.getDate();
         var mm = date.getMonth();
         var yyyy = date.getFullYear();
+        var hour = date.getHours();
+        var minute = date.getMinutes();
         var fullDate = yyyy+"-"+mm+"-"+dd;
+        var time = hour+":"+minute;
         weekday[0]="星期日";
         weekday[1]="星期一";
         weekday[2]="星期二";
@@ -45,12 +90,13 @@
         weekday[6]="星期六";
         console.log(weekday[date.getDay()]);
         //$(".date").html();
-        $(".day").html(weekday[date.getDay()]);
+        $(".time").html(time);
         $(".date").html(fullDate);
     }
     //初始化function
     window.addEventListener("load",function(){
         getDateDay();
+        maxWordCount();
         var c=DataClock();
     },false);
 	//定义exmobi返回

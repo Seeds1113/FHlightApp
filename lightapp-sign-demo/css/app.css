@@ -1,6 +1,9 @@
 section {
   background: #F4F4F4;
 }
+hr {
+  border-top: 1px solid #e8e8e8;
+}
 .content {
   background-color: #fff;
   border-bottom: 1px solid #E8E8E8;
@@ -58,12 +61,14 @@ section {
 .sign-list {
   background: #fff;
   padding: 0 12px 0 24px;
-  margin-bottom: 86px;
 }
 .sign-list .sign-info {
   position: relative;
   padding: 12px 12px 12px 24px;
-  border-left: 1px solid #ccc;
+  border-left: 1px solid #e8e8e8;
+}
+.sign-list .sign-info.bottom-space {
+  height: 86px;
 }
 .sign-list .sign-info .clock {
   width: 24px;
@@ -80,18 +85,20 @@ section {
 }
 .sign-list .sign-info .time {
   display: block;
-  color: #aaa;
+  color: #777;
   font-size: 18px;
 }
-.sign-list .sign-info .title {
+.sign-list .sign-info .location {
   padding: 0px;
   color: #4184FB;
   font-size: 14px;
   line-height: 32px;
 }
-.sign-list .sign-info .location {
+.sign-list .sign-info .title {
   font-size: 12px;
   margin-bottom: 12px;
+  padding: 0px;
+  color: #aaa;
 }
 .sign-list .sign-info .img-location {
   height: 56px;
@@ -202,4 +209,82 @@ section {
   color: #fff;
   font-size: 40px;
   line-height: 56px;
+}
+.date-input {
+  line-height: 48px;
+  padding: 0 12px;
+  font-size: 18px;
+  color: #aaa;
+}
+.date-input i {
+  font-size: 18px;
+  line-height: 24px;
+  margin-right: 0px;
+  color: #aaa;
+}
+.date-input .date {
+  display: inline-block;
+  margin-right: 12px;
+}
+.location-list li {
+  padding: 0px 12px;
+}
+.location-list li .icon-position-fill {
+  color: #4184FB;
+  margin-top: 12px;
+  font-size: 18px;
+}
+.info-content {
+  padding: 0 12px 12px 12px;
+  position: relative;
+}
+.info-content textarea {
+  width: 100%;
+  height: 100px;
+  border: none;
+  resize: none;
+  margin: 12px 0 36px 0;
+  padding: 0;
+  position: relative;
+}
+.info-content .count {
+  position: absolute;
+  top: 120px;
+  right: 12px;
+  color: #aaa;
+}
+.info-content .add-img {
+  background: #FCFCFC;
+  border: 1px solid #E8E8E8;
+  height: 100px;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+.info-content .img {
+  background: #FCFCFC;
+  border: 1px solid #E8E8E8;
+  height: 100px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  position: relative;
+}
+.info-content .img .icon-clear-fill {
+  color: #fff;
+  font-size: 24px;
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+}
+.info-content .icon-camera-fill {
+  color: #D3D3D3;
+  height: 48px;
+  width: 48px;
+  font-size: 48px;
+}
+.day-date .active {
+  background: #F5C245;
+}
+.day-date .today:not(.active) {
+  background: #4184FB;
+  color: #fff;
 }

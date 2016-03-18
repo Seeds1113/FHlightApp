@@ -21,14 +21,57 @@
                     <i class="icon-position"></i>
                 </a>
             </div>
-            <div class="date-info animated fadeInDown">
-                <span class="day"></span>
-                <br>  
-                <span class="date"></span>
-                <a class="sign-record button"><i class="icon-file-fill"></i>签到记录</a>
+            <div class="calendar" id="calender_select_container" style="background:#fff;">
+                <ul class="list noborder nobg">
+                    <li style="padding:10px 0;">
+                        <div class="justify arrowleft">
+                            <i class="icon-arrowleft"></i>
+                        </div>
+                        <div class="justify-content calendar-title">2016-2-15 周一</div>
+                        <div class="justify arrowright">
+                            <i class="icon-arrowright"></i>
+                        </div>
+                    </li>
+                </ul>
+                <div class="calender_container">
+                    <div class='day'>
+                        <div class="week-day-line">
+                            <div class="day-name">日</div>
+                            <div class="day-name">一</div>
+                            <div class="day-name">二</div>
+                            <div class="day-name">三</div>
+                            <div class="day-name">四</div>
+                            <div class="day-name">五</div>
+                            <div class="day-name">六</div>
+                        </div>
+                        <div class="week-day-line">
+                            <div class="day-name">日</div>
+                            <div class="day-name">一</div>
+                            <div class="day-name">二</div>
+                            <div class="day-name">三</div>
+                            <div class="day-name">四</div>
+                            <div class="day-name">五</div>
+                            <div class="day-name">六</div>
+                        </div>
+                        <div class="week-day-line">
+                            <div class="day-name">日</div>
+                            <div class="day-name">一</div>
+                            <div class="day-name">二</div>
+                            <div class="day-name">三</div>
+                            <div class="day-name">四</div>
+                            <div class="day-name">五</div>
+                            <div class="day-name">六</div>
+                        </div>
+                    </div>
+                    <div class='date_container'>
+                        <div class="month_container">
+                            
+                        </div>
+                    </div>
+                </div>
             </div>
         </header>
-        <article style="top:124px;bottom:0px;">
+        <article style="top:194px;bottom:0px;background:#fff;">
             <div class="no-data box box-middlecenter hidden"><!--暂无数据-->
                 <div class="nodata-content ">
                     <img src="img/icon/no-data.png">
@@ -36,6 +79,7 @@
                     暂无投票，快去创建一个吧！
                 </div> 
             </div>
+            <div class="list-count"></div>
             <ul class="sign-list animated fadeInUp" id="signList">
                 <li class="sign-info">
                     <div class="clock" data-clock="8:30">
@@ -99,39 +143,40 @@
                 <li class="sign-info bottom-space"></li>
             </ul>
         </article>
-        <a href="add-sign.html" class="add-sign-btn animated zoomIn"><i class="icon-position-fill"></i></a>
 	</section>
     <script src="plugin/jquery/jquery.min.js"></script>
     <script src="plugin/seedsui/seedsui.min.js"></script>
     <script>
+    //日历
+    var tempWeekSelectObject = new DateSelect({
+            activeDate: new Date()
+        }),
+        tempDivId = "calender_select_container";
+    var tempCalenderObject = new Calender({
+        dateSelectObject: tempWeekSelectObject,
+        containerDivId: tempDivId,
+        onChange: function(date) {
+            console.log(date);
+        }
+    });
+    function calendarCollapse(){
+        tempCalenderObject.switchToWeek();
+    }
+    function calendarExpand(){
+        tempCalenderObject.switchToMonth();
+    }
+    function today(){
+        tempCalenderObject.jumpToDate(new Date());
+    }
+    //无数据
     function noData(){
         var listLength = $("#signList").find(".sign-info").length;
         if (listLength == 0){
             container.find(".no-data").removeClass("hidden");
         }
     }
-    function getDateDay(){
-        var date = new Date();
-        var weekday=new Array(7);
-        var dd = date.getDate();
-        var mm = date.getMonth();
-        var yyyy = date.getFullYear();
-        var fullDate = yyyy+"-"+mm+"-"+dd;
-        weekday[0]="星期日";
-        weekday[1]="星期一";
-        weekday[2]="星期二";
-        weekday[3]="星期三";
-        weekday[4]="星期四";
-        weekday[5]="星期五";
-        weekday[6]="星期六";
-        console.log(weekday[date.getDay()]);
-        //$(".date").html();
-        $(".day").html(weekday[date.getDay()]);
-        $(".date").html(fullDate);
-    }
     //初始化function
     window.addEventListener("load",function(){
-        getDateDay();
         var c=DataClock();
     },false);
 	//定义exmobi返回
