@@ -32,6 +32,7 @@ section {
 	display:relative;
 	color:#fff;
 	padding:12px;
+	height:56px;
 	.day {
 		font-size:24px;
 		line-height: 32px;
@@ -60,6 +61,7 @@ section {
 .sign-list {
 	background:#fff;
 	padding:0 12px 0 24px;
+	margin-bottom:86px;
 	.sign-info {
 		position: relative;
 		padding: 12px 12px 12px 24px;
@@ -68,11 +70,12 @@ section {
 			width:24px;
 			height:24px;
 			position: absolute;
-			top: 6px;
+			top: 8px;
 			left:-15px;
 			background-color:#fff;
 		}
 		.clock .hour,.clock .minute {
+			animation-delay: 500ms;
 			-webkit-transition:all 800ms linear;
 		}
 		.time {
@@ -180,5 +183,25 @@ section {
 				}
 			}
 		}
+	}
+}
+.add-sign-btn {
+	animation-delay: 500ms;
+	position: absolute;
+	display: block;
+	background:#4184FB;
+	width:56px;
+	height:56px;
+	margin:0 auto;
+	bottom:18px;
+	left:50%;
+	margin-left:-28px;
+	border-radius:58px;
+	text-align: center;
+	border: 5px solid #A8CBF6;
+	i {
+		color:#fff;
+		font-size: 40px;
+		line-height: 56px;
 	}
 }
