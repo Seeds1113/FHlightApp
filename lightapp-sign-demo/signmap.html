@@ -1,0 +1,224 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<title>local-map</title>
+	<link rel="stylesheet" href="plugin/seedsui/seedsui.min.css">
+	<style type="text/css">
+		#allmap{
+			height:100%;
+		}
+		.shrinkcase{
+			padding:10px 0;
+		}
+		.pin-label{
+			position: absolute;
+			width:28px;
+			height:28px;
+			text-align:center;
+			line-height:28px;
+			left:2px;
+			top:2px;
+			border-radius: 100%;
+			-webkit-transform:rotate(45deg);
+			-webkit-transform-origin:center; 
+
+			color: white;
+		}
+		#signPeople{
+			height: 75px;
+    		margin-top: 14px;
+		}
+		#signPeople li{
+			width: 75px;
+		}
+		#signPeople li>a{
+			width:50px;
+			height: 50px;
+			box-sizing:border-box;
+			border-style:solid;
+			border-width:2px;
+		}
+		#signPeople li>a.active{
+			background-color:white!important;
+			color:#333;
+		}
+		.signDate{
+			position: absolute;top:10px;left:10px;z-index: 99999;
+			background-color: #4587F7;
+			text-align: center;
+			border-radius: 20px;
+			overflow: hidden;
+			box-shadow: 1px 2px 2px 0 rgba(0,0,0,.4);
+		}
+		.signDate input[type=date]{
+			width:110px;
+			text-align: center;
+			color:white;
+			border-width:0;
+			background-color: transparent;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+	</style>
+</head>
+
+<body>
+	<section id="page_local_db" class="active">
+		<header>
+		    <div class="titlebar">
+		        <a href="javascript:history.go(-1)" class="left"><i class="icon-arrowleft"></i></a>
+		        <h1>签到地图</h1>
+		    </div>
+		</header>
+		<article style="bottom: 150px;">
+			<div class="signDate">
+				<input type="date" id="expireDate"/>
+			</div>
+			<div id="allmap"></div>
+		</article>
+		<footer style="height: 150px;background-color:white;">
+			<ul class="list noclick">
+				<li>
+					<div class="justify-content">最新签到<b>1</b>人（已签<b>1</b>人，未签<b>2</b>人）</div>
+					<div class="justify">
+						<a>详细></a>
+					</div>
+				</li>
+			</ul>
+			<div class="overflow-x" style="height: 112px;">
+				<div id="signPeople" style="width: 2000px;">
+					<ul class="grid app radiusround">
+						<li>
+							<a style="background-color: #53c6fd;border-color: #53c6fd;">
+								阳
+							</a>
+							<label class="grid-label">蔡宇阳</label>
+						</li>
+						<li>
+							<a style="background-color: #ffae02;border-color: #ffae02;">
+								波
+							</a>
+							<label class="grid-label">成少波</label>
+						</li>
+						<li>
+							<a style="background-color: #3ae3ea;border-color: #3ae3ea;">
+								进
+							</a>
+							<label class="grid-label">李进</label>
+						</li>
+						<li>
+							<a style="background-color: #ff6f36;border-color: #ff6f36;">
+								梅
+							</a>
+							<label class="grid-label">许啸梅</label>
+						</li>
+						<li>
+							<a style="background-color:#cf7af3;border-color: #cf7af3;">
+								婷
+							</a>
+							<label class="grid-label">李婷</label>
+						</li>
+						<li>
+							<a style="background-color: #53c6fd;border-color: #53c6fd;">
+								阳
+							</a>
+							<label class="grid-label">蔡宇阳</label>
+						</li>
+						<li>
+							<a style="background-color: #ffae02;border-color: #ffae02;">
+								波
+							</a>
+							<label class="grid-label">成少波</label>
+						</li>
+						<li>
+							<a style="background-color: #3ae3ea;border-color: #3ae3ea;">
+								进
+							</a>
+							<label class="grid-label">李进</label>
+						</li>
+						<li>
+							<a style="background-color: #ff6f36;border-color: #ff6f36;">
+								梅
+							</a>
+							<label class="grid-label">许啸梅</label>
+						</li>
+						<li>
+							<a style="background-color: #cf7af3;border-color: #cf7af3;">
+								婷
+							</a>
+							<label class="grid-label">李婷</label>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</footer>
+	</section>
+	
+	<script src="plugin/jquery/jquery.min.js"></script>
+	<script src="plugin/seedsui/seedsui.min.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=8830f84901336e9afd2c6d7033d2ebe5"></script>
+	<script>
+        //定义坐标和文字
+        var markerPeople=[[116.417854,39.921988,"<span class='color-1 bold'>蔡宇阳</span>&nbsp;早上8点<br>签到地址：北京市东城区王府井大街88号乐天银泰百货","<label class='pin-label'>阳</label>","#53c6fd"],
+        [116.406605,39.921585,"<span class='color-2 bold'>成少波</span>&nbsp;早上8点<br>签到地址：北京市东城区东华门大街","<label class='pin-label'>波</label>","#ffae02"],
+		[116.412222,39.912345,"<span class='color-3 bold'>李进</span>&nbsp;早上8点<br>签到地址：北京市东城区正义路甲5号","<label class='pin-label'>进</label>","#3ae3ea"]
+						];
+
+		var markerPerson=[[116.417854,39.921988,"<span class='color-1 bold'>蔡宇阳</span>&nbsp;早上8点<br>签到地址：北京市东城区王府井大街88号乐天银泰百货","<label class='pin-label'>1</label>","#53c6fd"],
+		[116.406605,39.921585,"<span class='color-1 bold'>蔡宇阳</span>&nbsp;早上8点<br>签到地址：北京市东城区东华门大街","<label class='pin-label'>2</label>","#53c6fd"]
+		];
+		//初始化地图
+		var b=new BaiduMap("allmap");
+		b.show(markerPeople);
+		//初始化日期
+	    function initSignDate(){
+	        var dateToast = new Toast("截止时间不能比今天日期晚哦！"),
+	        dateInput = document.getElementById('expireDate'),
+	        today = new Date();
+	        dateInput.valueAsDate = today;
+	        $(dateInput).change(function(){
+	            var inputDate = dateInput.valueAsDate;
+	            if (inputDate > today){
+	                dateToast.show();
+	                dateInput.valueAsDate = today;
+	            }
+	        });  
+	    }
+
+		//一个人与群组切换
+		var signPeople=document.getElementById("signPeople").getElementsByTagName("a");
+		function toogleMarker(target){
+			if(target.classList.contains("active")){
+				target.classList.remove("active");
+				b.show(markerPeople);
+				return;
+			}
+			[].slice.call(signPeople).forEach(function(n,i,a){
+				n.classList.remove("active");
+			})
+			target.classList.add("active");
+			b.show(markerPerson);
+		}
+
+		//点击签名的人
+		document.getElementById("signPeople").addEventListener("click",function(e){
+			var target=e.target;
+			if(target.tagName.toLowerCase()=="a"){
+				toogleMarker(target);
+			}
+		},false)
+
+	    //Entry
+	    window.addEventListener("load",function(){
+	    	initSignDate();
+	    },false)
+		//定义exmobi返回
+		function back(){history.go(-1);}
+	</script>
+</body>
+</html>
