@@ -99,16 +99,37 @@
         getDateDay();
         maxWordCount();
         var c=DataClock();
-        alert("load");
-        Mplus.getLocation(function(res){
-
-        },function(res){
-
-        })
+        
+        
     },false);
 
-	//定义exmobi返回
-	function back(){history.go(-1);}
+
+
+	
+    document.addEventListener("plusready",plusreadyFun, true);
+    
+    function plusreadyFun(){
+        document.removeEventListener("plusready",plusreadyFun, true);
+        var local_sessionId = window.localStorage.getItem("sessionId") || "";
+        
+        var token = NativeObj.getToken();
+        if(local_sessionId==token){
+            return;
+        }
+        window.localStorage.setItem("sessionId",escape(token));
+        alert("plusready")
+        mplus.getLocation({
+            success: function (res) {
+                alert(JSON.stringify(res));
+            },
+            fail: function (res) {
+                alert("fail");
+            }
+        });
+    }
+
+    //定义exmobi返回
+    function back(){history.go(-1);}
 	</script>
 </body>
 </html>
