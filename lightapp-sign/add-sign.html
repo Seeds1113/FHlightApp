@@ -47,12 +47,21 @@
                         <li><a class="add-img"><i class="icon-camera-fill"></i></a></li>
                     </ul>
                 </div>
+                <input id="longitude" type="hidden" value="120">
+                <input id="latitude" type="hidden" value="30">
+                <input id="address" type="hidden" value="南京市XXXXXX">
+                <input class="upload-image" type="hidden" value="1.png">
+                <input class="upload-image" type="hidden" value="2.png">
+                <input class="upload-image" type="hidden" value="3.png">
+                <input class="upload-image" type="hidden" value="4.png">
+                <input class="upload-image" type="hidden" value="5.png">
             </div>
-            <a class="radius4 button block margin8">提交</a>
+            <a id="submit-sign" class="radius4 button block margin8">提交</a>
         </article>
 	</section>
     <script src="plugin/jquery/jquery.min.js"></script>
     <script src="plugin/seedsui/seedsui.min.js"></script>
+    <script type="text/javascript" src="js/ajaxModel.js"></script>
     <script src="js/Mplus.js"></script>
     <script>
     //count function
@@ -76,7 +85,7 @@
         var date = new Date();
         var weekday=new Array(7);
         var dd = date.getDate();
-        var mm = date.getMonth();
+        var mm = date.getMonth()+1;
         var yyyy = date.getFullYear();
         var hour = date.getHours();
         var minute = date.getMinutes();
@@ -93,7 +102,44 @@
         //$(".date").html();
         $(".time").html(time);
         $(".date").html(fullDate);
+        return fullDate+" "+time+":00";
     }
+
+    function createSignInfo() {
+        var url = "/tss/sign/saveSign.action",
+            contentLength = $("#infoMainContent").val().length
+            params = {
+                "sign.signTime" : getDateDay(),
+                "sign.content" : $("#infoMainContent").val(),
+                "sign.longitude" : $("#longitude").val(),
+                "sign.latitude" : $("#latitude").val(),
+                "sign.address" : $("#address").val()
+            };
+
+        if(contentLength>250) {
+            new Toast("内容超出限制").show();
+            return;
+        }
+
+        params = $.extend(params,getImages());
+
+        ajaxModel.postData(url,params).then(function(res) {
+            if(res.state === "success"){
+                window.location("./index.html");
+            }else{
+                new Toast("提交失败").show();
+            }
+        })
+    }
+
+    function getImages() {
+        var imageObj = {};
+        $(".upload-image").each(function(index,obj) {
+            imageObj['sign.images['+index+']'] = obj.value;
+        })
+        return imageObj;
+    }
+
     //初始化function
     window.addEventListener("load",function(){
         getDateDay();
@@ -106,6 +152,10 @@
 
         })
     },false);
+
+    $("#submit-sign").click(function() {
+        createSignInfo();
+    })
 
 	//定义exmobi返回
 	function back(){history.go(-1);}
