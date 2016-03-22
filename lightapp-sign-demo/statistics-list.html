@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轻应用－投票－投票列表</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="plugin/seedsui/seedsui.min.css">
+    <link rel="stylesheet" href="plugin/animate/animate.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+    <section id="pagePolllist" class="active">
+        <header>
+           <div class="titlebar">
+                <a href="javascript:history.go(-1)">
+                    <i class="icon-arrowleft"></i>
+                    <span>返回</span>
+                </a>
+                <h1 class="text-center">统计</h1>
+            </div>
+            <!-- <div class="titlebar search-bar">
+                <h1 style="padding: 0 42px 0 8px">
+                    <input type="search" id="search" placeholder="搜索">
+                    <i class="icon-clear-fill clear-input"></i>
+                </h1>
+                <a class="right">
+                    <span>搜索</span>
+                </a>
+            </div> -->
+            <ul class="tabbar animate-oneline" id="tabbar">
+                <li class="tab active">
+                    <label class="tab-label">以签到(6)</label>
+                </li>
+                <li class="tab">
+                    <label class="tab-label">未签到(10)</label>
+                </li>
+            </ul>
+        </header>
+        <article style="top:84px;bottom:0px;">
+            <div class="slider-container" id="carouselPage" style="height:100%;">
+                <div class="slider-wrapper">
+                    <div class="slider-slide" id="page1">
+                        <div class="content">
+                            <div class="list-date-selection">
+                                <input type="date" value="2015-03-18">
+                                <i class="icon-calendar"></i>
+                            </div>
+                            <ul class="sign-list2">
+                                <li class="box" onclick="window.location='statistic-detail.html';">
+                                    <a class="icon-name" style="background-color: #3ae3ea;border-color: #3ae3ea;">
+                                        进
+                                    </a>
+                                    <div class="info box-flex-1">
+                                        <div class="info-top">
+                                            <label class="person-name">李进</label>
+                                            <div class="sign-number">今天签到<span>2</span>次</div>
+                                        </div>
+                                        <div class="info-bottom box">
+                                            <i class="icon-position-fill"></i>
+                                            <div class="box-flex-1">
+                                                <span class="time">9:45</span>
+                                                <span class="location">江苏省南京市建邺区沙洲街道万科金城</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <i class="icon-arrowright box box-middle"></i>
+                                </li>
+                                <li class="box" onclick="window.location='statistic-detail.html';">
+                                    <a class="icon-name" style="background-color: #ffae02;border-color: #ffae02;">
+                                        波
+                                    </a>
+                                    <div class="info box-flex-1">
+                                        <div class="info-top">
+                                            <label class="person-name">成少波</label>
+                                            <div class="sign-number">今天签到<span>2</span>次</div>
+                                        </div>
+                                        <div class="info-bottom box">
+                                            <i class="icon-position-fill"></i>
+                                            <div class="box-flex-1">
+                                                <span class="time">9:45</span>
+                                                <span class="location">江苏省南京市建邺区沙洲街道万科金城江苏省南京市建邺区沙洲街道万科金城</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <i class="icon-arrowright box box-middle"></i>
+                                </li>
+                                <li class="box" onclick="window.location='statistic-detail.html';">
+                                    <a class="icon-name" style="background-color:#53c6fd;border-color: #53c6fd;">
+                                        阳
+                                    </a>
+                                    <div class="info box-flex-1">
+                                        <div class="info-top">
+                                            <label class="person-name">蔡宇阳</label>
+                                            <div class="sign-number">今天签到<span>2</span>次</div>
+                                        </div>
+                                        <div class="info-bottom box">
+                                            <i class="icon-position-fill"></i>
+                                            <div class="box-flex-1">
+                                                <span class="time">9:45</span>
+                                                <span class="location">江苏省南京市建邺区沙洲街道万科金城</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <i class="icon-arrowright box box-middle"></i>
+                                </li>
+                                <li class="box" onclick="window.location='statistic-detail.html';">
+                                    <a class="icon-name" style="background-color: #ff6f36;border-color: #ff6f36;">
+                                        进
+                                    </a>
+                                    <div class="info box-flex-1">
+                                        <div class="info-top">
+                                            <label class="person-name">许啸梅</label>
+                                            <div class="sign-number">今天签到<span>2</span>次</div>
+                                        </div>
+                                        <div class="info-bottom box">
+                                            <i class="icon-position-fill"></i>
+                                            <div class="box-flex-1">
+                                                <span class="time">9:45</span>
+                                                <span class="location">江苏省南京市建邺区沙洲街道万科金城</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <i class="icon-arrowright box box-middle"></i>
+                                </li> 
+                            </ul>
+                        </div>
+                    </div>
+                    <!--page2-->
+                    <div class="slider-slide" id="page2">
+                        <div class="content">
+                            <div class="list-date-selection">
+                                <input type="date" value="2015-03-18">
+                                <i class="icon-calendar"></i>
+                            </div>
+                            <ul class="grid app radiusround unsigned-list">
+                                <li>
+                                    <a style="background-color: #53c6fd;border-color: #53c6fd;">
+                                        阳
+                                    </a>
+                                    <label class="grid-label">蔡宇阳</label>
+                                </li>
+                                <li>
+                                    <a style="background-color: #ffae02;border-color: #ffae02;">
+                                        波
+                                    </a>
+                                    <label class="grid-label">成少波</label>
+                                </li>
+                                <li>
+                                    <a style="background-color: #3ae3ea;border-color: #3ae3ea;">
+                                        进
+                                    </a>
+                                    <label class="grid-label">李进</label>
+                                </li>
+                                <li>
+                                    <a style="background-color: #ff6f36;border-color: #ff6f36;">
+                                        梅
+                                    </a>
+                                    <label class="grid-label">许啸梅</label>
+                                </li>
+                                <li>
+                                    <a style="background-color:#cf7af3;border-color: #cf7af3;">
+                                        婷
+                                    </a>
+                                    <label class="grid-label">李婷</label>
+                                </li>
+                                <li>
+                                    <a style="background-color: #53c6fd;border-color: #53c6fd;">
+                                        阳
+                                    </a>
+                                    <label class="grid-label">蔡宇阳</label>
+                                </li>
+                                <li>
+                                    <a style="background-color: #ffae02;border-color: #ffae02;">
+                                        波
+                                    </a>
+                                    <label class="grid-label">成少波</label>
+                                </li>
+                                <li>
+                                    <a style="background-color: #3ae3ea;border-color: #3ae3ea;">
+                                        进
+                                    </a>
+                                    <label class="grid-label">李进</label>
+                                </li>
+                                <li>
+                                    <a style="background-color: #ff6f36;border-color: #ff6f36;">
+                                        梅
+                                    </a>
+                                    <label class="grid-label">许啸梅</label>
+                                </li>
+                                <li>
+                                    <a style="background-color: #cf7af3;border-color: #cf7af3;">
+                                        婷
+                                    </a>
+                                    <label class="grid-label">李婷</label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+    <script src="plugin/jquery/jquery.min.js"></script>
+    <script src="plugin/seedsui/seedsui.min.js"></script>
+    <script>
+    //tab 有关操作
+    var tabbar=document.getElementById("tabbar");
+    var tab=tabbar.querySelectorAll(".tab");
+    var carouselPage;
+    function initSlider(){
+        carouselPage=new Slider("#carouselPage",{
+            "onSlideChangeEnd":function(e){
+                tabActive(e.index);
+            }
+        });
+    }
+
+
+    //选中tab
+    function tabActive(index){
+        for(var i=0,t;t=tab[i++];){
+            t.classList.remove("active");
+        }
+        tab[index].classList.add("active");
+    }
+    //绑定tab点击事件
+    function tabBindClick(){
+        for(var i=0,t;t=tab[i++];){
+            (function(i){
+                t.addEventListener("click",function(){
+                    carouselPage.slideTo(i-1);
+                    tabActive(i-1);
+                },false);
+            })(i);
+        }
+    }
+
+
+    //lazyload img
+    function lazyloadImg(){
+        $("[data-src]").each(function(){
+            (function(s){
+                var img=document.createElement("img");
+                img.setAttribute("src",$(s).data('src'));
+                img.onload=function(){
+                    $(s).attr('src', $(s).data('src'));
+                }
+            })(this);
+        });
+    }
+
+
+    //clear input function
+    function clearInput(){
+        [].slice.call(document.querySelectorAll('.clear-input')).forEach(function(clearBtn){
+            var input = clearBtn.previousElementSibling;
+            clearCurrent = function(ev) {
+                ev.preventDefault();
+                input.value="";
+            };
+            clearBtn.addEventListener('click',clearCurrent);
+        });
+    }
+
+
+    //滚动到底部加载 function
+    function loadMore(container, callback) {
+        var wrapper = document.getElementById(container)
+        wrapper.onscroll=function(e){
+            var contentHeight=wrapper.scrollHeight;
+            var wrapperHeight=wrapper.clientHeight;
+            var scrollAmount = wrapper.scrollTop;
+            //console.log(contentHeight+" - "+wrapperHeight+" - "+scrollAmount);
+            if (scrollAmount+wrapperHeight == contentHeight){
+                var loadDiv = wrapper.querySelector(".load-more");
+                //loadDiv.style.visibility = "visible";
+                callback();
+            }
+        }
+    }
+    function loadPage1(){
+        //console.log(1);
+        //page1 加载 ajax 写这里
+    }
+    function loadPage2(){
+        //console.log(2);
+        //page1 加载 ajax 写这里
+    }
+    
+    //card 有关操作
+    var delcardid;
+    var popup = $("#popDelete");
+    var pageMaxCount = 4;
+    function hideLoadDiv(containerID){
+        var container =$("#"+containerID)
+        var cardLength=container.find(".card").length;
+        console.log(cardLength);
+        //这里去服务器获取数据再加一条进来
+        if (cardLength <= pageMaxCount && cardLength > 0) {
+            container.find(".load-more").hide();
+        } else if (cardLength == 0){
+            container.find(".no-data").removeClass("hidden");
+        }
+    }
+    
+
+    //初始化function
+    window.addEventListener("load",function(){
+        var drag=new Dragrefresh("#page1",{
+            "onRefresh":function(e){
+                setTimeout(function(){
+                    e.refreshComplete();
+                }, 1000);
+                
+            },
+            "onRefreshComplete":function(e){
+                //完成刷新逻辑
+            },
+            "onRefreshOvertime":function(e){
+                 //超时刷新逻辑
+            }
+        });
+        var drag2=new Dragrefresh("#page2",{
+            "onRefresh":function(e){
+                setTimeout(function(){
+                    e.refreshComplete();
+                }, 1000);
+                
+            },
+            "onRefreshComplete":function(e){
+                //完成刷新逻辑
+            },
+            "onRefreshOvertime":function(e){
+                //超时刷新逻辑
+            }
+        });
+        //search clear
+        initSlider();
+        tabBindClick();
+        lazyloadImg();
+        // loadMore('page1', loadPage1);
+        // loadMore('page2', loadPage2);
+    },false);
+    //定义exmobi返回
+    function back(){history.go(-1);}
+    </script>
+</body>
+</html>
