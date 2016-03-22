@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>轻应用－投票－投票列表</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-	<link rel="stylesheet" href="plugin/seedsui/seedsui.css">
+	<link rel="stylesheet" href="plugin/seedsui/seedsui.min.css">
     <link rel="stylesheet" href="plugin/animate/animate.css">
 	<link rel="stylesheet" href="css/app.css">
 </head>
@@ -53,7 +53,7 @@
                                 暂无投票，快去创建一个吧！
                             </div> 
                         </div>
-                        <div class="card" onclick="window.location='poll.html?pic=true';">
+                        <div class="card" onclick="window.location.href='poll.html'">
                             <img src="img/placeholder/placeholder-main.png" data-src="img/content/poll-main1.jpg" class="img-main">
                             <div class="poll-info">
                                 <h1 class="title"><i class="dot"></i>公司早餐因该添加什么？</h1>
@@ -65,7 +65,7 @@
                                 <span class="status color-success">未投</span>
                             </div>
                         </div>
-                        <div class="card" onclick="window.location='poll2.html';">
+                        <div class="card" onclick="window.location.href='poll2.html'">
                             <img src="img/placeholder/placeholder-main.png" data-src="img/content/poll-main-default.jpg" class="img-main">
                             <div class="poll-info">
                                 <h1 class="title"><i class="dot"></i>周五出去玩要去哪里？</h1>
@@ -77,7 +77,7 @@
                                 <span class="status color-success">未投</span>
                             </div>
                         </div>
-                        <div class="card" onclick="window.location='result3.html';">
+                        <div class="card" onclick="window.location.href='result3.html';">
                             <img src="img/placeholder/placeholder-main.png" data-src="img/content/poll-main3.jpg" class="img-main">
                             <div class="poll-info">
                                 <h1 class="title"><i class="dot"></i>Agile Lite Logo 投票</h1>
@@ -86,7 +86,7 @@
                                     <span class="progress" style="width: 100%"></span>
                                     <span class="text"><a class="timer" data-duration="1000" data-to="100">100</a>/100</span>
                                 </div>
-                                <span class="status color-disable">以投</span>
+                                <span class="status color-disable">已投</span>
                             </div>
                         </div>
                         <div class="load-more"><div class="loading"></div>正在加载更多...</div>
@@ -100,7 +100,7 @@
                                 暂无投票，快去创建一个吧！
                             </div> 
                         </div>
-                        <div class="card" id="pollId1" onclick="window.location='result.html';">
+                        <div class="card" id="pollId1" onclick="window.location='result1.html';">
                             <a class="btn-delete"><i class="icon-close"></i></a>
                             <img src="img/placeholder/placeholder-main.png" data-src="img/content/poll-main1.jpg" class="img-main">
                             <div class="poll-info">
@@ -276,10 +276,11 @@
             var deleteBtn = card.querySelector('.btn-delete');
             console.log(deleteBtn);
             if(deleteBtn){
-                deleteBtn.addEventListener("click",function(){
+                deleteBtn.addEventListener("click",function(e){
                     delcardid = card.id;
                     popup.dialog();
                     console.log(delcardid);
+                    e.stopPropagation();
                 },false);   
             }
         });
