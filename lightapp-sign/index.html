@@ -37,73 +37,56 @@
                 </div> 
             </div>
             <ul class="sign-list animated fadeInUp" id="signList">
-                <li class="sign-info">
-                    <div class="clock" data-clock="8:30">
-                        <div class="hour"></div>
-                        <div class="minute"></div>
-                        <div class="origin"></div>
-                    </div>
-                    <span class="time">8:30</span>
-                    <span class="location"><i class="icon-position"></i>江苏省南京市建邺区沙洲街道万科金城</span>
-                    <div class="title">我来上班了！！快看我地点!!!! 我来上班了！！快看我地点快看我地点快看我地点快看我地点</div>
-                    <a class="img-location" style="background-image:url(img/content/location1-img1.jpg);"></a>
-                    <a class="img-location" style="background-image:url(img/content/location1-img1.jpg);"></a>
-                    <a class="img-location" style="background-image:url(img/content/location1-img1.jpg);"></a>
-                    <hr> 
-                </li>
-                <li class="sign-info">
-                    <div class="clock" data-clock="9:00">
-                        <div class="hour"></div>
-                        <div class="minute"></div>
-                        <div class="origin"></div>
-                    </div>
-                    <span class="time">9:00</span>
-                    <span class="location"><i class="icon-position"></i>江苏省南京市建邺区沙洲街道万科金城</span>
-                    <div class="title">我来上班了！！快看我地点</div>
-                    <hr>  
-                </li>
-                <li class="sign-info">
-                    <div class="clock" data-clock="11:24">
-                        <div class="hour"></div>
-                        <div class="minute"></div>
-                        <div class="origin"></div>
-                    </div>
-                    <span class="time">11:24</span>
-                    <span class="location"><i class="icon-position"></i>江苏省南京市建邺区沙洲街道万科金城</span>
-                    <div class="title">我来上班了！！快看我地点</div>
-                    <a class="img-location" style="background-image:url(img/content/location1-img1.jpg);"></a>
-                    <hr> 
-                </li>
-                <li class="sign-info">
-                    <div class="clock" data-clock="15:30">
-                        <div class="hour"></div>
-                        <div class="minute"></div>
-                        <div class="origin"></div>
-                    </div>
-                    <span class="time">15:30</span>
-                    <span class="location"><i class="icon-position"></i>江苏省南京市建邺区沙洲街道万科金城</span>
-                    <div class="title">我来上班了！！快看我地点</div>
-                    <hr> 
-                </li>
-                <li class="sign-info">
-                    <div class="clock" data-clock="18:03">
-                        <div class="hour"></div>
-                        <div class="minute"></div>
-                        <div class="origin"></div>
-                    </div>
-                    <span class="time">18:03</span>
-                    <span class="location"><i class="icon-position"></i>江苏省南京市建邺区沙洲街道万科金城</span>
-                    <div class="title">我来上班了！！快看我地点</div>
-                    <hr> 
-                </li>
-                <li class="sign-info bottom-space"></li>
+               <!--  <li class="sign-info">
+                   <div class="clock" data-clock="8:30">
+                       <div class="hour"></div>
+                       <div class="minute"></div>
+                       <div class="origin"></div>
+                   </div>
+                   <span class="time">8:30</span>
+                   <span class="location"><i class="icon-position"></i>江苏省南京市建邺区沙洲街道万科金城</span>
+                   <div class="title">我来上班了！！快看我地点!!!! 我来上班了！！快看我地点快看我地点快看我地点快看我地点</div>
+                   <a class="img-location" style="background-image:url(img/content/location1-img1.jpg);"></a>
+                   <a class="img-location" style="background-image:url(img/content/location1-img1.jpg);"></a>
+                   <a class="img-location" style="background-image:url(img/content/location1-img1.jpg);"></a>
+                   <hr> 
+               </li>
+               
+               <li class="sign-info bottom-space"></li> -->
             </ul>
         </article>
         <a href="add-sign.html" class="add-sign-btn animated zoomIn"><i class="icon-position-fill"></i></a>
 	</section>
+<script id="mySignInfo-tpl" type="text/x-handlebars-template">
+{{#each signList}}
+<li class="sign-info">
+    <div class="clock" data-clock="{{timer signTime}}">
+        <div class="hour"></div>
+        <div class="minute"></div>
+        <div class="origin"></div>
+    </div>
+    <span class="time">{{timer signTime}}</span>
+    <span class="location"><i class="icon-position"></i>{{address}}</span>
+    <div class="title">{{content}}</div>
+    {{#each images}}
+    <a class="img-location" style="background-image:url(img/content/location1-img1.jpg);" data-bg="{{this}}"></a>
+    {{/each}}
+    <hr> 
+</li>
+{{/each}}      
+</script>
     <script src="plugin/jquery/jquery.min.js"></script>
     <script src="plugin/seedsui/seedsui.min.js"></script>
+    <script src="plugin/handlebars/handlebars.js"></script>
+    <script src="js/ajaxModel.js"></script>
     <script>
+    var URL = {
+        queryMySign:"/tss/sign/queryMySign.action"
+    },
+    Template = {
+        "mySignInfo":$("#mySignInfo-tpl").html()
+    }
+
     function noData(){
         var listLength = $("#signList").find(".sign-info").length;
         if (listLength == 0){
@@ -132,10 +115,38 @@
     //初始化function
     window.addEventListener("load",function(){
         getDateDay();
-        var c=DataClock();
+        // var c=DataClock();
+        queryMySign();
+
     },false);
+
+    function queryMySign(){
+        ajaxModel.getData(URL.queryMySign,{
+            "signDate":"2016-03-21"
+        }).then(function(res){
+            if(res.state === "success"){
+                var data = res.data;
+                if(data.length == 0){
+                    $(".no-data").removeClass("hidden");
+                }else{
+                    $(".no-data").addClass("hidden");
+                    var html = Handlebars.compile(Template.mySignInfo)({"signList":data});
+                    console.log(html);
+                    $("#signList").html(html);
+                    var c=DataClock();
+                }
+                
+            }else{
+                new Toast(res.msg).show();
+            }
+        })
+    }
 	//定义exmobi返回
 	function back(){history.go(-1);}
+
+    Handlebars.registerHelper("timer",function(value){
+        return value.split(/[\s]/)[1].substring(0,5);
+    })
 	</script>
 </body>
 </html>
