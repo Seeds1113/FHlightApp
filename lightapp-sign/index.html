@@ -131,7 +131,6 @@
                 }else{
                     $(".no-data").addClass("hidden");
                     var html = Handlebars.compile(Template.mySignInfo)({"signList":data});
-                    console.log(html);
                     $("#signList").html(html);
                     var c=DataClock();
                 }
@@ -144,6 +143,27 @@
 	//定义exmobi返回
 	function back(){history.go(-1);}
 
+    function lazyloadImg(container){
+        $("[data-bg],[data-img]").each(function(){
+            (function(s){
+                var img = new Image();
+                var data = $(s).data();
+                if($(s).data("img")){
+                    img.src = $(s).data('img');
+                    img.onload=function(){
+                        $(s).attr('src', img.src);
+                    }
+                }else{
+                    img.src = $(s).data('bg');
+                    img.onload=function(){
+                        $(s).css("background-image","url(" + img.src + ")");
+                    }
+                }
+                
+            })(this);
+        });
+    }
+    /*Handlebars*/
     Handlebars.registerHelper("timer",function(value){
         return value.split(/[\s]/)[1].substring(0,5);
     })

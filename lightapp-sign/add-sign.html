@@ -53,6 +53,7 @@
 	</section>
     <script src="plugin/jquery/jquery.min.js"></script>
     <script src="plugin/seedsui/seedsui.min.js"></script>
+    <script src="js/Mplus.js"></script>
     <script>
     //count function
     function maxWordCount(){
@@ -98,7 +99,14 @@
         getDateDay();
         maxWordCount();
         var c=DataClock();
+        alert("load");
+        Mplus.getLocation(function(res){
+
+        },function(res){
+
+        })
     },false);
+
 	//定义exmobi返回
 	function back(){history.go(-1);}
 	</script>
