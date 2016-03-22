@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 	<title>投票</title>
-	<link rel="stylesheet" href="plugin/seedsui/seedsui.css">
+	<link rel="stylesheet" href="plugin/seedsui/seedsui.min.css">
 	<link rel="stylesheet" href="css/app.css">
 </head>
 <body>
@@ -91,44 +91,6 @@
 					</a>
 				</li>
 			</ul>
-			<ul class="list" id="selFont">
-				<li>
-					<div class="justify-content">
-                        <p>内容内容</p>
-                    </div>
-                    <div class="justify">
-                        <span class="checkbox"></span>
-                        <input type="checkbox" class="hide">
-                    </div>
-				</li>
-				<li>
-					<div class="justify-content">
-                        <p>内容内容</p>
-                    </div>
-                    <div class="justify">
-                        <span class="checkbox"></span>
-                        <input type="checkbox" class="hide">
-                    </div>
-				</li>
-				<li>
-					<div class="justify-content">
-                        <p>内容内容</p>
-                    </div>
-                    <div class="justify">
-                    	<span class="checkbox"></span>
-                        <input type="checkbox" class="hide">
-                    </div>
-				</li>
-				<li>
-					<div class="justify-content">
-                        <p>内容内容</p>
-                    </div>
-                    <div class="justify">
-                    	<span class="checkbox"></span>
-                        <input type="checkbox" class="hide">
-                    </div>
-				</li>
-			</ul>
 			<a class="button block margin8">投票</a>
 			</div>
 		</article>
@@ -176,15 +138,15 @@
 			return param ? param[1] : param;
 		}
 		window.addEventListener("load",function(e){
-			var pollContainer=document.getElementById("selFont");
-			var isPic=getParameter("pic");
+			var pollContainer=document.getElementById("selImg");
+			/*var isPic=getParameter("pic");
 			if(isPic){
 				pollContainer=document.getElementById("selImg");
 				document.getElementById("selFont").style.display="none";
 			}else{
 				pollContainer=document.getElementById("selFont");
 				document.getElementById("selImg").style.display="none";
-			}
+			}*/
 			pollContainer.addEventListener("click",function(e){
 	    		selCheckbox.call(this,e,2);
 	    	},false);

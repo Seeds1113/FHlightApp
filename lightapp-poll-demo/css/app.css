@@ -380,62 +380,7 @@ section {
 .tab-container .rectbar .active .tab-label {
   color: #fff;
 }
-.tree .treetitle {
-  position: relative;
-}
-.tree .treetitle:active {
-  background: #ffffff;
-}
-.tree .treetitle .icon-persons {
-  background-color: #FFC02C;
-  display: inline-block;
-  vertical-align: middle;
-  width: 32px;
-  height: 32px;
-  font-size: 24px;
-  color: #fff;
-  border-radius: 100%;
-  text-align: center;
-  line-height: 32px;
-  margin-left: 4px;
-  margin-right: -4px;
-}
-.tree .treetitle.active {
-  color: #4587F7;
-}
-.tree .treetitle.active .icon-persons {
-  background-color: #4587F7;
-}
-.tree .treetitle .icon-rdoadd {
-  position: absolute;
-  right: 12px;
-  top: 0px;
-  font-size: 24px;
-  color: #aaa;
-}
-.tree .treetitle input[type=checkbox] {
-  display: none;
-}
-.selection-box {
-  display: none;
-  background-color: #DDDCE1;
-  height: 48px;
-  overflow-x: scroll;
-  white-space: nowrap;
-}
-.selection-box .selected-group {
-  border-radius: 8px;
-  padding: 8px 8px;
-  margin: 0 0 0 8px;
-  background: #fff;
-  color: #2F5489;
-  margin-top: 5px;
-  display: inline-block;
-}
-.selection-box .selected-group .icon-clear-fill {
-  color: #aaa;
-  margin-left: 5px;
-}
+// poll 
 .grid-title {
   position: absolute;
   bottom: 0;

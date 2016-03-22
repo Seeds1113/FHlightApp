@@ -5,7 +5,74 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 	<title>local-map</title>
 	<link rel="stylesheet" href="plugin/seedsui/seedsui.min.css">
+<<<<<<< HEAD
 	<link rel="stylesheet" href="css/app.css">
+=======
+	<style type="text/css">
+		#allmap{
+			height:100%;
+		}
+		.shrinkcase{
+			padding:10px 0;
+		}
+		.pin-label{
+			position: absolute;
+			width:28px;
+			height:28px;
+			text-align:center;
+			line-height:28px;
+			left:2px;
+			top:2px;
+			border-radius: 100%;
+			-webkit-transform:rotate(45deg);
+			-webkit-transform-origin:center; 
+
+			color: white;
+		}
+		#signPeople{
+			height: 75px;
+    		margin-top: 14px;
+		}
+		#signPeople li{
+			width: 75px;
+		}
+		#signPeople li>a{
+			width:50px;
+			height: 50px;
+			box-sizing:border-box;
+			border-style:solid;
+			border-width:2px;
+		}
+		#signPeople li>a.active{
+			background-color:white!important;
+			color:#333;
+		}
+		.signDate{
+			position: absolute;top:10px;left:10px;z-index: 99999;
+			background-color: #4587F7;
+			text-align: center;
+			border-radius: 20px;
+			overflow: hidden;
+			box-shadow: 1px 2px 2px 0 rgba(0,0,0,.4);
+		}
+		.signDate input[type=date]{
+			width:110px;
+			text-align: center;
+			color:white;
+			border-width:0;
+			background-color: transparent;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+		#signPeople.grid.app li{
+			float:none; 
+    		display: inline-block;
+		}
+	</style>
+>>>>>>> origin/master
 </head>
 
 <body>

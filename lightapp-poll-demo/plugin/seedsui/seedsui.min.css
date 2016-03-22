@@ -139,6 +139,10 @@ pre {
   overflow-y: hidden;
   overflow-x: auto;
 }
+.horizontal {
+  overflow-x: auto;
+  white-space: nowrap;
+}
 .overflow-y {
   overflow-y: hidden;
   overflow-x: auto;
@@ -301,6 +305,13 @@ button.text-left {
   -webkit-box-align: center;
   -webkit-align-items: center;
   align-items: center;
+}
+.box-top {
+  box-align: start;
+  -moz-box-align: start;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
 }
 .box-bottom {
   box-align: end;
@@ -587,7 +598,7 @@ button.text-left {
 hr {
   border: none;
   clear: both;
-  border-width: 2px 0 0 0;
+  border-width: 1px 0 0 0;
   border-style: solid;
 }
 br {
@@ -2163,6 +2174,19 @@ aside.active ~ #section_container .section_container_mask {
   -webkit-box-align: center;
   -webkit-align-items: center;
 }
+.statusbar .mark-desaturate {
+  padding: 8px;
+  margin: 5px 0 5px 8px;
+  background: #fff;
+  display: inline-block;
+}
+.statusbar .mark-desaturate:last-child {
+  margin-right: 8px;
+}
+.statusbar .mark-desaturate [class*="icon-"] {
+  color: #aaa;
+  margin-left: 5px;
+}
 /*----------------------------bar.less(end)----------------------------*/
 /*----------------titlebar.less(start)--------------*/
 .titlebar {
@@ -2752,11 +2776,11 @@ button.onlyicon [class*="icon-"] {
 .mark-cancel,
 .mark-warn,
 .mark-disable,
-.mark-primary {
+.mark-primary,
+.mark-desaturate {
   font-size: 0.95em;
   padding: 2px 5px;
   border-radius: 3px;
-  color: #fff;
 }
 /*------------------------------button.less(end)------------------------------*/
 /*------------------------------buttongroup.less(start)------------------------------*/
@@ -4047,6 +4071,8 @@ input[type=range]:focus::-ms-fill-upper {
   border-radius: 100%;
   border-style: solid;
   border-width: 2px;
+  -webkit-transition-duration: 500ms;
+  -webkit-transition-delay: 0;
 }
 .clock .origin {
   position: absolute;
@@ -4067,7 +4093,10 @@ input[type=range]:focus::-ms-fill-upper {
   margin-left: -1px;
   border-radius: 1px;
   -webkit-transform-origin: center bottom;
-  -webkit-transition: all 200ms linear;
+  -webkit-transition-property: all;
+  -webkit-transition-timing-function: ease;
+  -webkit-transition-duration: inherit;
+  -webkit-transition-delay: inherit;
 }
 .clock .hour {
   height: 35%;
@@ -4439,45 +4468,48 @@ input[type=range]:focus::-ms-fill-upper {
   height: 32px;
   line-height: 32px;
 }
-.list .justify {
+.justify {
   min-width: 0px;
   max-width: 90px;
-}
-.list .justify,
-.list .justify-content {
-  padding: 10px 4px;
-}
-.list .justify,
-.list .licon,
-.list .ricon,
-.list .round {
   display: flex;
   display: -webkit-flex;
   display: box;
   display: -webkit-box;
-  box-pack: center;
-  -webkit-box-pack: center;
-  justify-content: center;
-  -webkit-justify-content: center;
-  box-align: center;
-  -webkit-box-align: center;
-  align-items: center;
-  -webkit-align-items: center;
 }
-.list .justify img {
+.justify,
+.justify-content {
+  padding: 10px 4px;
+}
+/* .list .justify,.list .licon,.list .ricon,.list .round{
+	display: flex;
+	display: -webkit-flex;
+	display: box;
+	display: -webkit-box;
+
+	box-pack:center;
+	-webkit-box-pack:center;
+	justify-content:center;
+	-webkit-justify-content:center;
+	
+	box-align:center;
+	-webkit-box-align:center;
+	align-items:center;
+	-webkit-align-items:center;
+}  */
+.justify img {
   max-width: 100%;
 }
-.list .justify-content {
+.justify-content {
   overflow: hidden;
   position: relative;
   -webkit-box-flex: 1.0;
   box-flex: 1.0;
 }
-.list .justify-content > p,
-.list .justify-content > a {
+.justify-content > p,
+.justify-content > a {
   line-height: 1.5em;
 }
-.list .justify-content small {
+.justify-content small {
   display: block;
   line-height: 1.5em;
 }
@@ -5460,16 +5492,55 @@ table th {
 .treetitle:active {
   background-color: #ddd;
 }
-/*右侧人数*/
-.treetitle small {
+/*树标题-图标*/
+.treetitle .round {
+  background-color: #FFC02C;
+  display: inline-block;
+  vertical-align: middle;
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+  color: #fff;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 32px;
+}
+.treetitle [class*=icon-].round {
+  font-size: 24px;
+}
+.treeicon + .round {
+  margin-right: -4px;
+  margin-left: 4px;
+}
+.treetitle .icon {
+  font-size: 24px;
+  color: #aaa;
+}
+.treetitle .top,
+.treetitle .right,
+.treetitle .middle,
+.treetitle .bottom {
   position: absolute;
-  right: 10px;
+}
+.treetitle .right {
+  right: 12px;
+}
+.treetitle .middle {
   top: 50%;
   -webkit-transform: translateY(-50%);
 }
-/*中间文字*/
+/*树标题-选中效果*/
+.treetitle.active {
+  color: #4587F7;
+}
+.treetitle.active .round {
+  background-color: #4587F7;
+}
+/*树标题-文字颜色*/
 .treetitle a {
   color: inherit;
+}
+.treetitle .icontitle {
   padding: 15px 0 15px 8px;
 }
 /*左侧图标*/
@@ -5495,16 +5566,13 @@ table th {
 .treetitle .treeicon.active:before {
   content: "\e90e";
 }
-/*无子节点左侧图标*/
-.treetitle.lastchild .treeicon {
+/*修改左侧箭头图标*/
+.treetitle .treeicon.round {
   left: -28px;
   border-radius: 100%;
   font-size: 16px;
-  color: white;
-  background-image: none;
-  background-color: #efcb03;
 }
-.treetitle.lastchild .treeicon:before {
+.treetitle .treeicon.round:before {
   content: '';
 }
 /*----------------tree.less(end)--------------*/
@@ -6229,6 +6297,14 @@ input[type="button"].outline .tip,
   color: #aaaaaa;
 }
 /*多彩标签按钮*/
+.mark-info,
+.mark-success,
+.mark-cancel,
+.mark-warn,
+.mark-disable,
+.mark-primary {
+  color: #ffffff;
+}
 .mark-disable {
   background-color: #d9d9d9;
 }
@@ -6288,9 +6364,10 @@ keygen,
 input[list],
 textarea {
   border-color: #e8e8e8;
+  background-color: #ffffff;
 }
 .input-box {
-  background-color: white;
+  background-color: #ffffff;
 }
 /*----------------form.less(end)--------------*/
 /*----------------inputbox.less(start)--------------*/
@@ -6541,6 +6618,9 @@ li.sliver {
   color: #aaaaaa;
   border-color: #e8e8e8;
   background-color: #f4f4f4;
+}
+.statusbar {
+  background-color: #e8e8e8;
 }
 /*----------------------------bar.less(end)----------------------------*/
 /*-----------------------------loading.less(start)-----------------------------*/

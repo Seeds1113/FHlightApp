@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <title>轻应用－投票－投票列表</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-    <link rel="stylesheet" href="plugin/seedsui/seedsui.css">
+    <link rel="stylesheet" href="plugin/seedsui/seedsui.min.css">
     <link rel="stylesheet" href="plugin/animate/animate.css">
     <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
+    <!--新建投票页面-->
     <section id="pageAddPoll" class="active">
         <header>
            <div class="titlebar">
@@ -95,7 +96,7 @@
                     </div>
                 </div>
                 <div class="content">
-                    <div class="listitem-select" id="selectPeople" href="#choosePeoplePage" data-target="section">
+                    <div class="listitem-select" id="selectPeople" onclick="AniOpen('choosePeoplePage')">
                         选人
                         <span class="group-info" id="selectPeopleText">请选择投票人员</span>
                         <i class="icon-arrowright"></i>
@@ -105,7 +106,7 @@
                 <div class="block margin8">
                     <button class="button block">发布</button>
                 </div>
-                <a class="button block outline margin8" id="previewBtn" href="#previewPage" data-target="section">预览</a>
+                <a class="button block outline margin8" id="previewBtn">预览</a>
             </form>
         </article>
     </section>
@@ -132,60 +133,60 @@
             <div class="selected-display"></div>
         </header>
         <article style="top:44px;bottom:0px;">
-            <div class="selection-box"></div>
+            <div id="selection-box" class="statusbar horizontal hide" style="height:46px;"></div>
             <!-- tree -->
             <div class="tree-box">
                 <ul class="tree" id="tree">
                     <li>
                         <div class="treetitle" data-level="1" data-groupid="1" data-groupname="业务产品部" id="group-1"> <i class="treeicon"></i>
-                            <span class="icon icon-persons"></span>
-                            <a>业务产品部</a>
-                            <a class="icon-rdoadd"></a>
+                            <span class="icon-persons round"></span>
+                            <a class="icontitle">业务产品部</a>
+                            <a class="icon icon-rdoadd right middle"></a>
                             <!-- <input type="checkbox" class="group-checkbox" data-level="1" data-groupid="1" data-groupname="业务产品部"> -->
                         </div>
                         <ul>
                             <li>
                                 <div class="treetitle" data-level="" data-groupid="2" data-groupname="研发体系" id="group-2">
                                     <i class="treeicon"></i>
-                                    <span class="icon icon-persons"></span>
-                                    <a>研发体系</a>
-                                    <a class="icon-rdoadd"></a>
+                                    <span class="icon-persons round"></span>
+                                    <a class="icontitle">研发体系</a>
+                                    <a class="icon icon-rdoadd right middle"></a>
                                     <!-- <input type="checkbox" class="group-checkbox" data-level="" data-groupid="2" data-groupname="研发体系"> -->
                                 </div>
                                 <ul>
                                     <li>
                                         <div class="treetitle" data-level="" data-groupid="3" data-groupname="开发一部" id="group-3">
                                             <i class="treeicon"></i>
-                                            <span class="icon icon-persons"></span>
-                                            <a>开发一部</a>
-                                            <a class="icon-rdoadd"></a>
+                                            <span class="icon-persons round"></span>
+                                            <a class="icontitle">开发一部</a>
+                                            <a class="icon icon-rdoadd right middle"></a>
                                             <!-- <input type="checkbox" class="group-checkbox" data-level="" data-groupid="3" data-groupname="开发一部"> -->
                                         </div>
                                     </li>
                                     <li>
                                         <div class="treetitle" data-level="" data-groupid="4" data-groupname ="开发二部" id="group-4">
                                             <i class="treeicon"></i>
-                                            <span class="icon icon-persons"></span>
-                                            <a>开发二部</a>
-                                            <a class="icon-rdoadd"></a>
+                                            <span class="icon-persons round"></span>
+                                            <a class="icontitle">开发二部</a>
+                                            <a class="icon icon-rdoadd right middle"></a>
                                             <!-- <input type="checkbox" class="group-checkbox" data-level="" data-groupid="4" data-groupname ="开发二部"> -->
                                         </div>
                                     </li>
                                     <li>
                                         <div class="treetitle" data-level="" data-groupid="5" data-groupname ="开发三部" id="group-5">
                                             <i class="treeicon"></i>
-                                            <span class="icon icon-persons"></span>
-                                            <a>开发三部</a>
-                                            <a class="icon-rdoadd"></a>
+                                            <span class="icon-persons round"></span>
+                                            <a class="icontitle">开发三部</a>
+                                            <a class="icon icon-rdoadd right middle"></a>
                                             <!-- <input type="checkbox" class="group-checkbox" data-level="" data-groupid="5" data-groupname ="开发三部"> -->
                                         </div>
                                         <ul>
                                             <li>
                                                 <div class="treetitle" data-level="" data-groupid="6" data-groupname="开发一部" id="group-6">
                                                     <i class="treeicon"></i>
-                                                    <span class="icon icon-persons"></span>
-                                                    <a>开发一组</a>
-                                                    <a class="icon-rdoadd"></a>
+                                                    <span class="icon-persons round"></span>
+                                                    <a class="icontitle">开发一组</a>
+                                                    <a class="icon icon-rdoadd right middle"></a>
                                                     <!-- <input type="checkbox" class="group-checkbox" data-level="" data-groupid="3" data-groupname="开发一部"> -->
                                                 </div>
                                             </li>
@@ -196,27 +197,27 @@
                             <li>
                                 <div class="treetitle" data-level="" data-groupid="7" data-groupname="市场体系" id="group-7">
                                     <i class="treeicon"></i>
-                                    <span class="icon icon-persons"></span>
-                                    <a>市场体系</a>
-                                    <a class="icon-rdoadd"></a>
+                                    <span class="icon-persons round"></span>
+                                    <a class="icontitle">市场体系</a>
+                                    <a class="icon icon-rdoadd right middle"></a>
                                     <!-- <input type="checkbox" class="group-checkbox" data-level="" data-groupid="6" data-groupname ="市场体系"> -->
                                 </div>
                                 <ul>
                                     <li>
                                         <div class="treetitle" data-level="" data-groupid="8" data-groupname="上海办" id="group-8">
                                             <i class="treeicon"></i>
-                                            <span class="icon icon-persons"></span>
-                                            <a>上海办</a>
-                                            <a class="icon-rdoadd"></a>
+                                            <span class="icon-persons round"></span>
+                                            <a class="icontitle">上海办</a>
+                                            <a class="icon icon-rdoadd right middle"></a>
                                             <!-- <input type="checkbox" class="group-checkbox" data-level="" data-groupid="7" data-groupname ="上海办"> -->
                                         </div>
                                     </li>
                                     <li>
                                         <div class="treetitle" data-level="" data-groupid="9" data-groupname="广州办名字超长超长超长超" id="group-9">
                                             <i class="treeicon"></i>
-                                            <span class="icon icon-persons"></span>
-                                            <a>广州办名字超长超长超长超</a>
-                                            <a class="icon-rdoadd"></a>
+                                            <span class="icon-persons round"></span>
+                                            <a class="icontitle">广州办名字超长超长超长超</a>
+                                            <a class="icon icon-rdoadd right middle"></a>
                                             <!-- <input type="checkbox" class="group-checkbox" data-level="" data-groupid="7" data-groupname ="上海办"> -->
                                         </div>
                                     </li>
@@ -233,7 +234,7 @@
     <section id="previewPage">
         <header>
             <div class="titlebar">
-                <a href="javascript:history.go(-1)">
+                <a href="javascript:AniBack('previewPage')">
                     <i class="icon-arrowleft"></i>
                     <span>返回</span>
                 </a>
@@ -408,9 +409,9 @@
         });
     }
     //set date
+    var dateToast = new Toast("截止时间不能比今天日期早哦！")
     function setDate(){
-        var dateToast = new Toast("截止时间不能比今天日期早哦！"),
-        dateInput = document.getElementById('expireDate'),
+        var dateInput = document.getElementById('expireDate'),
         today = new Date();
         dateInput.valueAsDate = today;
         $(dateInput).change(function(){
@@ -433,7 +434,7 @@
     }
     function choosePerson(){
         $("#closeSelectPage").click(function(){
-            var selectedGroups = $(".selection-box").find(".selected-group");
+            var selectedGroups = $("#selection-box").find(".mark-desaturate");
             var groupInputValue = "";
             $("#selectPeopleText").html("");
             selectedGroups.each(function(i){
@@ -445,38 +446,9 @@
                 console.log(groupInputValue);
             });
             $("#selectPeopleInput").val(groupInputValue);
-            history.go(-1);
+            AniBack('choosePeoplePage');
         });
     }
-    //选人页tab
-    // var tabbar=document.getElementById("tabbar");
-    // var tab=tabbar.querySelectorAll(".tab");
-    // var carouselPage;
-    // function initSlider(){
-    //     carouselPage=new Slider("#carouselPage",{
-    //         "onSlideChangeEnd":function(e){
-    //             tabActive(e.index);
-    //         }
-    //     });
-    // }
-    // //选中tab
-    // function tabActive(index){
-    //     for(var i=0,s;s=tab[i++];){
-    //         s.classList.remove("active");
-    //     }
-    //     tab[index].classList.add("active");
-    // }
-    // //绑定tab点击事件
-    // function tabBindClick(){
-    //     for(var i=0,t;t=tab[i++];){
-    //         (function(i){
-    //             t.addEventListener("click",function(){
-    //                 carouselPage.slideTo(i-1);
-    //                 tabActive(i-1);
-    //             },false);
-    //         })(i);
-    //     }
-    // }
     //tree function 
     var elLI,elUL,elIcon,selection,
     deleteSelection = function(){
@@ -487,8 +459,8 @@
             console.log(selection);
             selectionTop.fadeOut(500,function(){
                 selectionTop.remove();
-                if($(".selection-box").is(':empty')){
-                    $(".selection-box").slideUp();
+                if($("#selection-box").is(':empty')){
+                    $("#selection-box").slideUp();
                 }
             });
             removeCurrent(selection);
@@ -528,7 +500,7 @@
             });
         }
     };
-
+    var treeToast2 = new Toast("已到最底层了，此部门下没有子部门", {delay:2000});
     function onTapTree(){
         EventUtil.addHandler(tree,"tap",function(e){
             var addToDisplayDiv = function(){
@@ -537,10 +509,10 @@
                 groupID = $(selection).data("groupid");
                 console.log(groupID + "  " + groupName);
                 //看selection-box是否为空
-                if($(".selection-box").is(':empty')){
-                    $(".selection-box").slideDown();
+                if($("#selection-box").is(':empty')){
+                    $("#selection-box").slideDown();
                 }
-                $(".selection-box").append('<span class="selected-group" data-groupid="'+groupID+'" data-groupname="'+groupName+'" data-treeid="'+treeID+'" id="select'+treeID+'">'+groupName+'<a class="icon-clear-fill delete-selection"></a></span>');
+                $("#selection-box").append('<span class="mark-desaturate" data-groupid="'+groupID+'" data-groupname="'+groupName+'" data-treeid="'+treeID+'" id="select'+treeID+'">'+groupName+'<a class="icon-clear-fill delete-selection"></a></span>');
                 deleteSelection();
             };
             if(e.target.tagName.toLowerCase()=="ul"){
@@ -586,13 +558,9 @@
             elUL=elLI.querySelector("ul");
             elIcon=elLI.querySelector(".treeicon");
             if(!elUL){
-            /*var nativePage=elLI.querySelector("a").getAttribute("data-href");
-            var param=elLI.id||"";
-            ExMobiWindow.open(nativePage, true,false,"",param);*/
-            $(selection).find(".treeicon").remove();
-            var treeToast2 = new Toast("已到最底层了，此部门下没有子部门", {delay:2000});
-            treeToast2.show(); 
-            return;
+                $(selection).find(".treeicon").remove();
+                treeToast2.show(); 
+                return;
             }
             if(elUL.style.display=="none" || !elUL.style.display){
                 var selectionLevel = $(selection).data('level'),
@@ -616,6 +584,7 @@
     }
     //
     // 预览function
+
     function previewPage(){
         var pollTitle = $("#pollTitle").val(),
         pollContent = $("#pollMainContent").val(),
@@ -686,11 +655,15 @@
                 $("#previewSelect").append('<li><div class="justify-content"><p>'+selectionText+'</p></div><div class="justify"><span class="checkbox"></span><input type="checkbox" class="hide"></div></li>');
             });
         }
-        // if (selectionImgArray.length > 0){
-        //     selectionImgArray.each(function(i,el){
-        //         console.log(i+" - "+el);
-        //     });
-        // }
+        AniOpen("previewPage");
+    }
+    function AniOpen(argId){
+        $("#"+argId).css({"left":"100%"}).addClass("active").animate({left:"0px"},200);
+    }
+    function AniBack(argId){
+        $("#"+argId).css({left:"0px"}).animate({left:"100%"},200,function(){
+            $(this).removeClass("active");
+        });
     }
     $("#previewBtn").click(function(){
         previewPage();
@@ -701,9 +674,11 @@
         var f=new Form("#pollForm");
         f.container.addEventListener("submit",function(e){
             e.preventDefault();
-            f.validate();
             //submit 方法写在下面
-            alert(1);
+            var flag=f.validate();
+            if(flag){
+                window.location.href="index.html";
+            }
         },false);
         setDate();
         maxWordCount();
@@ -712,20 +687,6 @@
         choosePerson();
         onTapTree();
         deleteSelection();
-        Section.init({
-            "onSectionOpenStart":function(e){
-                //console.log("页面加载前"+e.sectionId);
-            },
-            "onSectionOpenEnd":function(e){
-                //console.log("页面加载完成"+e.sectionId);
-            },
-            "onSectionCloseStart":function(e){
-                //console.log("页面关闭前"+e.sectionId);
-            },
-            "onSectionCloseEnd":function(e){
-                //console.log("页面关闭完成"+e.sectionId);
-            }
-        });
     },false);
     //定义exmobi返回
     function back(){history.go(-1);}
