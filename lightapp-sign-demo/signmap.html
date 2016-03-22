@@ -5,66 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 	<title>local-map</title>
 	<link rel="stylesheet" href="plugin/seedsui/seedsui.min.css">
-	<style type="text/css">
-		#allmap{
-			height:100%;
-		}
-		.shrinkcase{
-			padding:10px 0;
-		}
-		.pin-label{
-			position: absolute;
-			width:28px;
-			height:28px;
-			text-align:center;
-			line-height:28px;
-			left:2px;
-			top:2px;
-			border-radius: 100%;
-			-webkit-transform:rotate(45deg);
-			-webkit-transform-origin:center; 
-
-			color: white;
-		}
-		#signPeople{
-			height: 75px;
-    		margin-top: 14px;
-		}
-		#signPeople li{
-			width: 75px;
-		}
-		#signPeople li>a{
-			width:50px;
-			height: 50px;
-			box-sizing:border-box;
-			border-style:solid;
-			border-width:2px;
-		}
-		#signPeople li>a.active{
-			background-color:white!important;
-			color:#333;
-		}
-		.signDate{
-			position: absolute;top:10px;left:10px;z-index: 99999;
-			background-color: #4587F7;
-			text-align: center;
-			border-radius: 20px;
-			overflow: hidden;
-			box-shadow: 1px 2px 2px 0 rgba(0,0,0,.4);
-		}
-		.signDate input[type=date]{
-			width:110px;
-			text-align: center;
-			color:white;
-			border-width:0;
-			background-color: transparent;
-			-webkit-touch-callout: none;
-			-webkit-user-select: none;
-			-moz-user-select: none;
-			-ms-user-select: none;
-			user-select: none;
-		}
-	</style>
+	<link rel="stylesheet" href="css/app.css">
 </head>
 
 <body>
@@ -85,76 +26,74 @@
 			<ul class="list noclick">
 				<li>
 					<div class="justify-content">最新签到<b>1</b>人（已签<b>1</b>人，未签<b>2</b>人）</div>
-					<div class="justify">
-						<a>详细></a>
-					</div>
+					<a href="statistics-list.html" class="justify">
+						详细 >
+					</a>
 				</li>
 			</ul>
-			<div class="overflow-x" style="height: 112px;">
-				<div id="signPeople" style="width: 2000px;">
-					<ul class="grid app radiusround">
-						<li>
-							<a style="background-color: #53c6fd;border-color: #53c6fd;">
-								阳
-							</a>
-							<label class="grid-label">蔡宇阳</label>
-						</li>
-						<li>
-							<a style="background-color: #ffae02;border-color: #ffae02;">
-								波
-							</a>
-							<label class="grid-label">成少波</label>
-						</li>
-						<li>
-							<a style="background-color: #3ae3ea;border-color: #3ae3ea;">
-								进
-							</a>
-							<label class="grid-label">李进</label>
-						</li>
-						<li>
-							<a style="background-color: #ff6f36;border-color: #ff6f36;">
-								梅
-							</a>
-							<label class="grid-label">许啸梅</label>
-						</li>
-						<li>
-							<a style="background-color:#cf7af3;border-color: #cf7af3;">
-								婷
-							</a>
-							<label class="grid-label">李婷</label>
-						</li>
-						<li>
-							<a style="background-color: #53c6fd;border-color: #53c6fd;">
-								阳
-							</a>
-							<label class="grid-label">蔡宇阳</label>
-						</li>
-						<li>
-							<a style="background-color: #ffae02;border-color: #ffae02;">
-								波
-							</a>
-							<label class="grid-label">成少波</label>
-						</li>
-						<li>
-							<a style="background-color: #3ae3ea;border-color: #3ae3ea;">
-								进
-							</a>
-							<label class="grid-label">李进</label>
-						</li>
-						<li>
-							<a style="background-color: #ff6f36;border-color: #ff6f36;">
-								梅
-							</a>
-							<label class="grid-label">许啸梅</label>
-						</li>
-						<li>
-							<a style="background-color: #cf7af3;border-color: #cf7af3;">
-								婷
-							</a>
-							<label class="grid-label">李婷</label>
-						</li>
-					</ul>
-				</div>
+			<div class="overflow-x" style="height: 112px;white-space:nowrap;">
+				<ul id="signPeople" class="grid app radiusround">
+					<li>
+						<a style="background-color: #53c6fd;border-color: #53c6fd;">
+							阳
+						</a>
+						<label class="grid-label">蔡宇阳</label>
+					</li>
+					<li>
+						<a style="background-color: #ffae02;border-color: #ffae02;">
+							波
+						</a>
+						<label class="grid-label">成少波</label>
+					</li>
+					<li>
+						<a style="background-color: #3ae3ea;border-color: #3ae3ea;">
+							进
+						</a>
+						<label class="grid-label">李进</label>
+					</li>
+					<li>
+						<a style="background-color: #ff6f36;border-color: #ff6f36;">
+							梅
+						</a>
+						<label class="grid-label">许啸梅</label>
+					</li>
+					<li>
+						<a style="background-color:#cf7af3;border-color: #cf7af3;">
+							婷
+						</a>
+						<label class="grid-label">李婷</label>
+					</li>
+					<li>
+						<a style="background-color: #53c6fd;border-color: #53c6fd;">
+							阳
+						</a>
+						<label class="grid-label">蔡宇阳</label>
+					</li>
+					<li>
+						<a style="background-color: #ffae02;border-color: #ffae02;">
+							波
+						</a>
+						<label class="grid-label">成少波</label>
+					</li>
+					<li>
+						<a style="background-color: #3ae3ea;border-color: #3ae3ea;">
+							进
+						</a>
+						<label class="grid-label">李进</label>
+					</li>
+					<li>
+						<a style="background-color: #ff6f36;border-color: #ff6f36;">
+							梅
+						</a>
+						<label class="grid-label">许啸梅</label>
+					</li>
+					<li>
+						<a style="background-color: #cf7af3;border-color: #cf7af3;">
+							婷
+						</a>
+						<label class="grid-label">李婷</label>
+					</li>
+				</ul>
 			</div>
 		</footer>
 	</section>

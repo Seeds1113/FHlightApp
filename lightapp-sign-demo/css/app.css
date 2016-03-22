@@ -27,6 +27,18 @@ hr {
   width: 200px;
   margin-bottom: 32px;
 }
+.tabbar.animate-oneline .tab .tab-label {
+  font-size: 16px;
+}
+.tabbar.animate-oneline .tab::before {
+  height: 2px;
+  width: 60%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) scale3d(0, 1, 1);
+}
+.tabbar.animate-oneline .tab.active::before {
+  -webkit-transform: translateX(-50%) scale3d(1, 1, 1);
+}
 .date-info {
   background-color: #4184FB;
   display: relative;
@@ -297,4 +309,182 @@ hr {
   font-size: 24px;
   margin-top: 2px;
   margin-right: 10px;
+}
+.list-date-selection {
+  text-align: right;
+  padding: 4px 12px;
+}
+.list-date-selection input[type=date] {
+  border: none;
+  text-align: right;
+  color: #777 ;
+}
+.list-date-selection .icon-calendar {
+  font-size: 24px;
+  color: #F5C245;
+  line-height: 48px;
+}
+.sign-list2 li {
+  padding: 24px 12px;
+  border-bottom: 1px solid #E8E8E8;
+}
+.sign-list2 li:last-of-type {
+  border-bottom: none;
+}
+.sign-list2 li .icon-name {
+  width: 56px;
+  height: 56px;
+  text-align: center;
+  line-height: 60px;
+  font-size: 16px;
+  border-radius: 56px;
+  color: #fff;
+  display: inline-block;
+  font-weight: bold;
+}
+.sign-list2 li .info {
+  padding: 0 12px;
+}
+.sign-list2 li .info .info-top {
+  border-bottom: 1px solid #E8E8E8;
+  line-height: 16px;
+  padding-bottom: 8px;
+}
+.sign-list2 li .info .info-top .person-name {
+  float: left ;
+  font-size: 18px;
+  font-weight: bold;
+  color: #000;
+}
+.sign-list2 li .info .info-top .sign-number {
+  text-align: right;
+  font-weight: bold;
+  font-size: 14px;
+  color: #777;
+}
+.sign-list2 li .info .info-top .sign-number span {
+  color: #F5C245;
+}
+.sign-list2 li .info .info-bottom {
+  margin-top: 8px;
+}
+.sign-list2 li .info .info-bottom .icon-position-fill {
+  color: #4184FB;
+  font-size: 20px;
+  margin-right: 8px;
+}
+.sign-list2 li .info .info-bottom .time {
+  display: block;
+  color: #999;
+  font-size: 16px;
+  line-height: 24px;
+}
+.sign-list2 li .info .info-bottom .location {
+  font-size: 12px;
+}
+.unsigned-list {
+  padding: 4px 0;
+}
+.unsigned-list li {
+  margin: 8px 0;
+}
+#allmap {
+  height: 100%;
+}
+.shrinkcase {
+  padding: 10px 0;
+}
+.pin-label {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  text-align: center;
+  line-height: 28px;
+  left: 2px;
+  top: 2px;
+  border-radius: 100%;
+  -webkit-transform: rotate(45deg);
+  -webkit-transform-origin: center;
+  color: white;
+}
+#signPeople {
+  height: 75px;
+  margin-top: 14px;
+}
+#signPeople li {
+  width: 75px;
+}
+#signPeople li > a {
+  width: 50px;
+  height: 50px;
+  box-sizing: border-box;
+  border-style: solid;
+  border-width: 2px;
+}
+#signPeople li > a.active {
+  background-color: white!important;
+  color: #333;
+}
+.signDate {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 99999;
+  background-color: #4587F7;
+  text-align: center;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 1px 2px 2px 0 rgba(0, 0, 0, 0.4);
+}
+.signDate input[type=date] {
+  width: 110px;
+  text-align: center;
+  color: white;
+  border-width: 0;
+  background-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+#signPeople.grid.app li {
+  float: none;
+  display: inline-block;
+}
+.selected-group {
+  border-radius: 8px;
+  padding: 8px 8px;
+  margin: 8px;
+  background: #fff;
+  color: #2F5489;
+  margin-top: 5px;
+  display: inline-block;
+}
+.selected-group a {
+  color: #aaa;
+  margin-left: 5px;
+}
+#selection-box {
+  height: 46px;
+  overflow-x: auto;
+  white-space: nowrap;
+  display: none;
+}
+.list-person-info a {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 42px;
+  font-size: 16px;
+  border-radius: 56px;
+  color: #fff;
+  display: inline-block;
+  font-weight: bold;
+  margin-top: 12px;
+  margin-left: 5px;
+}
+.list-person-info .name {
+  font-size: 16px;
+  font-weight: bold;
 }

@@ -16,62 +16,13 @@
                     <i class="icon-arrowleft"></i>
                     <span>返回</span>
                 </a>
-                <h1 class="text-center">签到记录</h1>
+                <h1 class="text-center">统计</h1>
                 <a href="" class="right">
                     <i class="icon-position"></i>
                 </a>
             </div>
-            <div class="calendar animated fadeInDown" id="calender_select_container" style="background:#fff;">
-                <ul class="list noborder nobg">
-                    <li style="padding:10px 0;">
-                        <div class="justify arrowleft">
-                            <i class="icon-arrowleft"></i>
-                        </div>
-                        <div class="justify-content calendar-title">2016-2-15 周一</div>
-                        <div class="justify arrowright">
-                            <i class="icon-arrowright"></i>
-                        </div>
-                    </li>
-                </ul>
-                <div class="calender_container">
-                    <div class='day'>
-                        <div class="week-day-line">
-                            <div class="day-name">日</div>
-                            <div class="day-name">一</div>
-                            <div class="day-name">二</div>
-                            <div class="day-name">三</div>
-                            <div class="day-name">四</div>
-                            <div class="day-name">五</div>
-                            <div class="day-name">六</div>
-                        </div>
-                        <div class="week-day-line">
-                            <div class="day-name">日</div>
-                            <div class="day-name">一</div>
-                            <div class="day-name">二</div>
-                            <div class="day-name">三</div>
-                            <div class="day-name">四</div>
-                            <div class="day-name">五</div>
-                            <div class="day-name">六</div>
-                        </div>
-                        <div class="week-day-line">
-                            <div class="day-name">日</div>
-                            <div class="day-name">一</div>
-                            <div class="day-name">二</div>
-                            <div class="day-name">三</div>
-                            <div class="day-name">四</div>
-                            <div class="day-name">五</div>
-                            <div class="day-name">六</div>
-                        </div>
-                    </div>
-                    <div class='date_container'>
-                        <div class="month_container">
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
         </header>
-        <article style="top:194px;bottom:0px;background:#fff;border:1px solid #e8e8e8;">
+        <article style="top:44px;bottom:0px;background:#fff;border:1px solid #e8e8e8;">
             <div class="sign-count"><i class="icon-cbook"></i>共签到5次</div>
             <div class="no-data box box-middlecenter hidden"><!--暂无数据-->
                 <div class="nodata-content ">
@@ -81,6 +32,12 @@
                 </div> 
             </div>
             <div class="list-count"></div>
+            <div class="list-person-info">
+                <a style="background-color: #53c6fd;border-color: #53c6fd;">
+                    阳
+                </a>
+                <span class="name">蔡宇阳</span>
+            </div>
             <ul class="sign-list animated fadeInUp" id="signList">
                 <li class="sign-info">
                     <div class="clock" data-clock="8:30">
@@ -148,33 +105,6 @@
     <script src="plugin/seedsui/seedsui.min.js"></script>
     <script>
     //日历
-    var tempWeekSelectObject = new DateSelect({
-            activeDate: new Date()
-        }),
-        tempDivId = "calender_select_container";
-    var tempCalenderObject = new Calender({
-        dateSelectObject: tempWeekSelectObject,
-        containerDivId: tempDivId,
-        onChange: function(date) {
-            console.log(date);
-        }
-    });
-    function calendarCollapse(){
-        tempCalenderObject.switchToWeek();
-    }
-    function calendarExpand(){
-        tempCalenderObject.switchToMonth();
-    }
-    function today(){
-        tempCalenderObject.jumpToDate(new Date());
-    }
-    //无数据
-    function noData(){
-        var listLength = $("#signList").find(".sign-info").length;
-        if (listLength == 0){
-            container.find(".no-data").removeClass("hidden");
-        }
-    }
     //初始化function
     window.addEventListener("load",function(){
         var c=DataClock();
