@@ -1,0 +1,300 @@
+section {
+  background: #F4F4F4;
+}
+hr {
+  border-top: 1px solid #e8e8e8;
+}
+.content {
+  background-color: #fff;
+  border-bottom: 1px solid #E8E8E8;
+}
+.search-bar {
+  background-color: #dddddd;
+}
+.no-data {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.no-data .nodata-content {
+  color: #ccc;
+  text-align: center;
+  padding-bottom: 100px;
+}
+.no-data .nodata-content img {
+  width: 200px;
+  margin-bottom: 32px;
+}
+.date-info {
+  background-color: #4184FB;
+  display: relative;
+  color: #fff;
+  padding: 12px;
+  height: 56px;
+}
+.date-info .day {
+  font-size: 24px;
+  line-height: 32px;
+  margin: 0;
+  padding: 0;
+}
+.date-info .date {
+  color: #fff;
+  line-height: 24px;
+  font-size: 14px;
+}
+.date-info .button {
+  position: absolute;
+  right: 12px;
+  top: 18px;
+  background-color: #fff;
+  color: #4184FB;
+  border-radius: 20px;
+}
+.date-info .button i {
+  padding: 0;
+  margin-right: 4px;
+  line-height: 18px;
+}
+.sign-list {
+  background: #fff;
+  padding: 0 12px 0 24px;
+}
+.sign-list .sign-info {
+  position: relative;
+  padding: 12px 12px 12px 24px;
+  border-left: 1px solid #e8e8e8;
+}
+.sign-list .sign-info.bottom-space {
+  height: 86px;
+}
+.sign-list .sign-info .clock {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 8px;
+  left: -15px;
+  background-color: #fff;
+}
+.sign-list .sign-info .clock .hour,
+.sign-list .sign-info .clock .minute {
+  animation-delay: 500ms;
+  -webkit-transition: all 800ms linear;
+}
+.sign-list .sign-info .time {
+  display: block;
+  color: #777;
+  font-size: 18px;
+}
+.sign-list .sign-info .location {
+  padding: 0px;
+  color: #4184FB;
+  font-size: 14px;
+  line-height: 32px;
+}
+.sign-list .sign-info .title {
+  font-size: 12px;
+  margin-bottom: 12px;
+  padding: 0px;
+  color: #aaa;
+}
+.sign-list .sign-info .img-location {
+  height: 56px;
+  width: 56px;
+  border-radius: 56px;
+  background-size: cover;
+  margin: 0px 8px 12px 0;
+}
+.sign-list .sign-info hr {
+  border-top: 1px dotted #ccc;
+}
+.sign-list .sign-info:nth-child(1) .clock {
+  border-color: #53c6fd;
+}
+.sign-list .sign-info:nth-child(1) .clock .hour,
+.sign-list .sign-info:nth-child(1) .clock .minute,
+.sign-list .sign-info:nth-child(1) .clock .origin {
+  background-color: #53c6fd;
+}
+.sign-list .sign-info:nth-child(2) .clock {
+  border-color: #ffae02;
+}
+.sign-list .sign-info:nth-child(2) .clock .hour,
+.sign-list .sign-info:nth-child(2) .clock .minute,
+.sign-list .sign-info:nth-child(2) .clock .origin {
+  background-color: #ffae02;
+}
+.sign-list .sign-info:nth-child(3) .clock {
+  border-color: #3ae3ea;
+}
+.sign-list .sign-info:nth-child(3) .clock .hour,
+.sign-list .sign-info:nth-child(3) .clock .minute,
+.sign-list .sign-info:nth-child(3) .clock .origin {
+  background-color: #3ae3ea;
+}
+.sign-list .sign-info:nth-child(4) .clock {
+  border-color: #ff6f36;
+}
+.sign-list .sign-info:nth-child(4) .clock .hour,
+.sign-list .sign-info:nth-child(4) .clock .minute,
+.sign-list .sign-info:nth-child(4) .clock .origin {
+  background-color: #ff6f36;
+}
+.sign-list .sign-info:nth-child(5) .clock {
+  border-color: #cf7af3;
+}
+.sign-list .sign-info:nth-child(5) .clock .hour,
+.sign-list .sign-info:nth-child(5) .clock .minute,
+.sign-list .sign-info:nth-child(5) .clock .origin {
+  background-color: #cf7af3;
+}
+.sign-list .sign-info:nth-child(6) .clock {
+  border-color: #4cd32e;
+}
+.sign-list .sign-info:nth-child(6) .clock .hour,
+.sign-list .sign-info:nth-child(6) .clock .minute,
+.sign-list .sign-info:nth-child(6) .clock .origin {
+  background-color: #4cd32e;
+}
+.sign-list .sign-info:nth-child(7) .clock {
+  border-color: #4587f7;
+}
+.sign-list .sign-info:nth-child(7) .clock .hour,
+.sign-list .sign-info:nth-child(7) .clock .minute,
+.sign-list .sign-info:nth-child(7) .clock .origin {
+  background-color: #4587f7;
+}
+.sign-list .sign-info:nth-child(8) .clock {
+  border-color: #00c2eb;
+}
+.sign-list .sign-info:nth-child(8) .clock .hour,
+.sign-list .sign-info:nth-child(8) .clock .minute,
+.sign-list .sign-info:nth-child(8) .clock .origin {
+  background-color: #00c2eb;
+}
+.sign-list .sign-info:nth-child(9) .clock {
+  border-color: #ff618f;
+}
+.sign-list .sign-info:nth-child(9) .clock .hour,
+.sign-list .sign-info:nth-child(9) .clock .minute,
+.sign-list .sign-info:nth-child(9) .clock .origin {
+  background-color: #ff618f;
+}
+.sign-list .sign-info:nth-child(10) .clock {
+  border-color: #21d9a1;
+}
+.sign-list .sign-info:nth-child(10) .clock .hour,
+.sign-list .sign-info:nth-child(10) .clock .minute,
+.sign-list .sign-info:nth-child(10) .clock .origin {
+  background-color: #21d9a1;
+}
+.add-sign-btn {
+  animation-delay: 500ms;
+  position: absolute;
+  display: block;
+  background: #4184FB;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto;
+  bottom: 18px;
+  left: 50%;
+  margin-left: -28px;
+  border-radius: 58px;
+  text-align: center;
+  border: 5px solid #A8CBF6;
+}
+.add-sign-btn i {
+  color: #fff;
+  font-size: 40px;
+  line-height: 56px;
+}
+.date-input {
+  line-height: 48px;
+  padding: 0 12px;
+  font-size: 18px;
+  color: #aaa;
+}
+.date-input i {
+  font-size: 18px;
+  line-height: 24px;
+  margin-right: 0px;
+  color: #aaa;
+}
+.date-input .date {
+  display: inline-block;
+  margin-right: 12px;
+}
+.location-list li {
+  padding: 0px 12px;
+}
+.location-list li .icon-position-fill {
+  color: #4184FB;
+  margin-top: 12px;
+  font-size: 18px;
+}
+.info-content {
+  padding: 0 12px 12px 12px;
+  position: relative;
+}
+.info-content textarea {
+  width: 100%;
+  height: 100px;
+  border: none;
+  resize: none;
+  margin: 12px 0 36px 0;
+  padding: 0;
+  position: relative;
+}
+.info-content .count {
+  position: absolute;
+  top: 120px;
+  right: 12px;
+  color: #aaa;
+}
+.info-content .add-img {
+  background: #FCFCFC;
+  border: 1px solid #E8E8E8;
+  height: 100px;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+.info-content .img {
+  background: #FCFCFC;
+  border: 1px solid #E8E8E8;
+  height: 100px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  position: relative;
+}
+.info-content .img .icon-clear-fill {
+  color: #fff;
+  font-size: 24px;
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+}
+.info-content .icon-camera-fill {
+  color: #D3D3D3;
+  height: 48px;
+  width: 48px;
+  font-size: 48px;
+}
+.day-date .active {
+  background: #F5C245;
+}
+.day-date .today:not(.active) {
+  background: #4184FB;
+  color: #fff;
+}
+.sign-count {
+  background: #4184FB;
+  color: #fff;
+  padding: 8px 12px;
+}
+.sign-count .icon-cbook {
+  font-size: 24px;
+  margin-top: 2px;
+  margin-right: 10px;
+}
