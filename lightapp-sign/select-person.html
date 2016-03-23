@@ -17,7 +17,8 @@
                     <span>返回</span>
                 </a>
                 <h1 class="text-center">选择人员</h1>
-                <a href="signmap.html" class="right">
+                <!-- <a href="signmap.html" class="right"> -->
+                <a class="right">
                     <i class="icon-rdohook"></i>
                 </a>
             </div>
@@ -26,8 +27,8 @@
         <article>
             <div class="statusbar" id="selection-box"></div>
             <!-- tree -->
-            <div class="tree-box">
-                <ul class="tree" id="tree">
+            <div class="tree-box" id="tree">
+                <ul class="tree">
                     <li>
                         <div class="treetitle" data-level="1" data-groupid="1" data-groupname="业务产品部" id="group-1"> <i class="treeicon"></i>
                             <span class="icon-persons round"></span>
@@ -136,16 +137,47 @@
                                 </ul>
                             </li>
                         </ul>
+                        
                     </li>
                 </ul>
             </div>
             <!-- /tree -->
         </article>
     </section>
-    
+<script id="tree-tpl" type="text/x-handlebars-template">
+<ul class="tree" style="display: block">
+    {{#each members}}
+    <li>
+        <div class="treetitle" data-level="" data-memberid="{{id}}" data-groupname="{{name}}" id="{{id}}"> 
+            <span class="round" style="background-color: {{nameColor name}};">{{firstName name}}</span>
+            <a class="icontitle">{{name}}</a>
+            <a class="icon icon-rdoadd right middle"></a>
+        </div>
+        
+    </li>
+    {{/each}}
+    {{#each groups}}
+    <li>
+        <div class="treetitle" data-level="" data-groupid="{{id}}" data-groupname="{{name}}" id="{{id}}"> 
+        <i class="treeicon"></i>
+            <span class="icon icon-persons round"></span>
+            <a class="icontitle">{{name}}</a>
+            <a class="icon icon-rdoadd right middle"></a>
+        </div>
+        
+    </li>
+    {{/each}}
+</ul>  
+</script> 
     <script src="plugin/jquery/jquery.min.js"></script>
     <script src="plugin/seedsui/seedsui.min.js"></script>
+    <script src="plugin/handlebars/handlebars.js"></script>
+    <script src="js/ajaxModel.js"></script>
+    <script src="js/Mplus.js"></script>
     <script>
+    var Template = {
+        tree: $("#tree-tpl").html()
+    }
     //tree function 
     var elLI,elUL,elIcon,selection,
     deleteSelection = function(){
@@ -204,7 +236,8 @@
                 var treeID = $(selection).attr("id"),
                 groupName = $(selection).data("groupname"),
                 groupID = $(selection).data("groupid");
-                console.log(groupID + "  " + groupName);
+                console.log(treeID + "  " + groupID + "  " + groupName);
+
                 //看selection-box是否为空
                 if($("#selection-box").is(':empty')){
                     $("#selection-box").slideDown();
@@ -283,15 +316,56 @@
             
         });
     }
+    document.addEventListener("plusready",setTimeout(function(){
+        plusreadyFun();
+    },1000), true);
+    
+    function plusreadyFun(){
+        document.removeEventListener("plusready",plusreadyFun, true);
+        Mplus.getUserGroupId(function(groupId){
+            Mplus.getOrgGroupsAndMembers(groupId,function(orgGroupArr,orgMemberArr){
+                var html = Handlebars.compile(Template.tree)({
+                    "members":orgMemberArr,
+                    "groups":orgGroupArr
+                });
+                $("#tree").html(html);
+            })
+        })
+    }
     window.addEventListener("load",function(e){
         onTapTree();
+        bindEvents();
         //根据姓氏获得颜色
         //console.log("成少波".toPinyin().substr(0,1).toColor());
     },false);
     //定义exmobi返回
     function back(){history.go(-1);}
-    /*var c="成少波".toPinyin().substring(0,1).toColor();
-    console.log(c);*/
+
+    function bindEvents(){
+        $(".titlebar .right").click(function(){
+            var selectedGroup = $("#selection-box").find(".selected-group"),
+                depIds = [],
+                userIds = [];
+            selectedGroup.each(function(index,el){
+                var memberid = $(el).data("memberid"),
+                    groupid = $(el).data("groupid");
+                    
+                if(memberid){
+                    userIds.push(memberid);
+                }else{
+                    depIds.push(groupid);
+                }
+            });
+            window.location.href = "signmap.html?userIds="+userIds.join(",")+"&depIds="+depIds.join(",");
+        })
+    }
+    /*Handlebars*/
+    Handlebars.registerHelper("nameColor",function(name){
+        return name.toPinyin().substring(0,1).toColor();
+    });
+    Handlebars.registerHelper("firstName",function(name){
+        return name.substring(0,1);
+    });
     </script>
 </body>
 </html>
