@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>轻应用－签到</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-	<link rel="stylesheet" href="plugin/seedsui/seedsui.css">
+	<link rel="stylesheet" href="plugin/seedsui/seedsui.min.css">
     <link rel="stylesheet" href="plugin/animate/animate.css">
 	<link rel="stylesheet" href="css/app.css">
 </head>
@@ -17,7 +17,7 @@
                     <span>返回</span>
                 </a>
                 <h1 class="text-center">签到</h1>
-                <a href="" class="right">
+                <a href="select-person.html" class="right">
                     <i class="icon-position"></i>
                 </a>
             </div>
@@ -25,7 +25,7 @@
                 <span class="day"></span>
                 <br>  
                 <span class="date"></span>
-                <a class="sign-record button"><i class="icon-file-fill"></i>签到记录</a>
+                <a href="sign-history.html" class="sign-record button"><i class="icon-file-fill"></i>签到记录</a>
             </div>
         </header>
         <article style="top:124px;bottom:0px;">
@@ -203,6 +203,7 @@
     Handlebars.registerHelper("timer",function(value){
         return value.split(/[\s]/)[1].substring(0,5);
     })
+    
 	</script>
 </body>
 </html>
