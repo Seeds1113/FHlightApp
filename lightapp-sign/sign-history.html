@@ -72,7 +72,7 @@
             </div>
         </header>
         <article style="top:194px;bottom:0px;background:#fff;border:1px solid #e8e8e8;">
-            <div class="sign-count"><i class="icon-cbook"></i>共签到5次</div>
+        <div class="sign-count"><i class="icon-cbook"></i><a class="count" style="color:#fff"><!-- 共签到5次 --></a></div>
             <div class="no-data box box-middlecenter hidden"><!--暂无数据-->
                 <div class="nodata-content ">
                     <img src="img/icon/no-data.png">
@@ -161,6 +161,7 @@
     }
     //初始化function
     window.addEventListener("load",function(){
+        bindEvents();
         queryMySign(new Date());
     },false);
 
@@ -175,10 +176,12 @@
                 if(data.length == 0){
                     $(".no-data").removeClass("hidden");
                     $("#signList").html("");
+                    $(".sign-count a.count").html("暂无投票")
                 }else{
                     $(".no-data").addClass("hidden");
                     var html = Handlebars.compile(Template.mySignInfo)({"signList":data});
                     $("#signList").html(html);
+                    $(".sign-count a.count").html("共签到"+data.length+"次")
                     DataClock();
                     lazyloadImg();
                 }
@@ -195,6 +198,21 @@
         var mm = date.getMonth()+1;
         var yyyy = date.getFullYear();
         return yyyy+"-"+mm+"-"+dd;
+    }
+    function previewImage(container,clickDom){
+        var $container = $(container),
+            $clickDom = $(clickDom);
+        var urls = [];
+        var current = $clickDom.data("href");
+        $container.find("[data-href]").each(function(){
+            (function(s){
+                var url = $(s).data("href");
+                urls.push(url);
+            })(this);  
+        })
+        console.log(urls);
+        console.log(current);
+        Mplus.previewImage(current,urls);
     }
     function lazyloadImg(container){
         $("[data-bg],[data-img]").each(function(){
@@ -215,6 +233,12 @@
                 
             })(this);
         });
+    }
+    function bindEvents(){
+        $(document).on("click","#signList .img-location",function(){
+            var $this = $(this)
+            previewImage($this.parents(".sign-info"),$this);
+        });  
     }
 
     /*Handlebars*/
