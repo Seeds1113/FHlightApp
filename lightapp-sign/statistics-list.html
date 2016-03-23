@@ -42,11 +42,11 @@
                     <div class="slider-slide" id="page1">
                         <div class="content">
                             <div class="list-date-selection">
-                                <input type="date" value="2015-03-18">
+                                <input class="expireDate" type="date" value="2016-03-23">
                                 <i class="icon-calendar"></i>
                             </div>
                             <ul class="sign-list2">
-                                <li class="box" onclick="window.location='statistic-detail.html';">
+                                <!-- <li class="box" onclick="window.location='statistic-detail.html';">
                                     <a class="icon-name" style="background-color: #3ae3ea;border-color: #3ae3ea;">
                                         进
                                     </a>
@@ -121,7 +121,7 @@
                                         </div>
                                     </div>
                                     <i class="icon-arrowright box box-middle"></i>
-                                </li> 
+                                </li>  -->
                             </ul>
                         </div>
                     </div>
@@ -129,11 +129,11 @@
                     <div class="slider-slide" id="page2">
                         <div class="content">
                             <div class="list-date-selection">
-                                <input type="date" value="2015-03-18">
+                                <input class="expireDate" type="date" value="2016-03-23">
                                 <i class="icon-calendar"></i>
                             </div>
                             <ul class="grid app radiusround unsigned-list">
-                                <li>
+                                <!-- <li>
                                     <a style="background-color: #53c6fd;border-color: #53c6fd;">
                                         阳
                                     </a>
@@ -192,7 +192,7 @@
                                         婷
                                     </a>
                                     <label class="grid-label">李婷</label>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                     </div>
@@ -200,13 +200,60 @@
             </div>
         </article>
     </section>
+    <script id="noSignedList-tpl" type="text/x-handlebars-template">
+    {{#each list}}
+    <li>
+        <a style="background-color: {{getColor creatorName}};border-color: {{getColor creatorName}};">
+            {{lastChar creatorName}}
+        </a>
+        <label class="grid-label">{{creatorName}}</label>
+    </li>
+    {{/each}} 
+    </script>
+    <script id="signedList-tpl" type="text/x-handlebars-template">
+    {{#each list}}
+    <li class="box" onclick="window.location='statistic-detail.html';">
+        <a class="icon-name" style="background-color:{{getColor creatorName}};border-color: {{getColor creatorName}};">
+            {{lastChar creatorName}}
+        </a>
+        <div class="info box-flex-1">
+            <div class="info-top">
+                <label class="person-name">{{creatorName}}</label>
+                <div class="sign-number">今天签到<span>{{signCount}}</span>次</div>
+            </div>
+            <div class="info-bottom box">
+                <i class="icon-position-fill"></i>
+                <div class="box-flex-1">
+                    <span class="time">{{parseTime signTime}}</span>
+                    <span class="location">{{address}}</span>
+                </div>
+            </div>
+        </div>
+        <i class="icon-arrowright box box-middle"></i>
+    </li>
+    {{/each}} 
+    </script>
     <script src="plugin/jquery/jquery.min.js"></script>
     <script src="plugin/seedsui/seedsui.min.js"></script>
+    <script src="plugin/handlebars/handlebars.js"></script>
+    <script src="js/ajaxModel.js"></script>
     <script>
     //tab 有关操作
     var tabbar=document.getElementById("tabbar");
     var tab=tabbar.querySelectorAll(".tab");
     var carouselPage;
+
+    //模板和URL信息
+    URL = {
+        querySignStat : "/tss/sign/querySignStat.action",
+        querySignPage : "/tss/sign/querySignPage.action"
+    }
+
+    Template = {
+        noSignedList : $("#noSignedList-tpl").html(),
+        signedList : $("#signedList-tpl").html()
+    }
+
     function initSlider(){
         carouselPage=new Slider("#carouselPage",{
             "onSlideChangeEnd":function(e){
@@ -234,34 +281,6 @@
             })(i);
         }
     }
-
-
-    //lazyload img
-    function lazyloadImg(){
-        $("[data-src]").each(function(){
-            (function(s){
-                var img=document.createElement("img");
-                img.setAttribute("src",$(s).data('src'));
-                img.onload=function(){
-                    $(s).attr('src', $(s).data('src'));
-                }
-            })(this);
-        });
-    }
-
-
-    //clear input function
-    function clearInput(){
-        [].slice.call(document.querySelectorAll('.clear-input')).forEach(function(clearBtn){
-            var input = clearBtn.previousElementSibling;
-            clearCurrent = function(ev) {
-                ev.preventDefault();
-                input.value="";
-            };
-            clearBtn.addEventListener('click',clearCurrent);
-        });
-    }
-
 
     //滚动到底部加载 function
     function loadMore(container, callback) {
@@ -337,10 +356,96 @@
         //search clear
         initSlider();
         tabBindClick();
-        lazyloadImg();
+        initSignDate();
+        queryNoSignedAndStat();
+        querySigned();
         // loadMore('page1', loadPage1);
         // loadMore('page2', loadPage2);
     },false);
+    //数据处理
+    //数据处理
+    Handlebars.registerHelper("lastChar",lastChar);
+    Handlebars.registerHelper("getColor",getColor);
+    Handlebars.registerHelper("parseTime",parseTime);
+
+    function lastChar(value) {
+        return value.slice(-1);
+    }
+
+    function getColor(value) {
+        var c=value.toPinyin().substring(0,1).toColor();
+        return c;
+    }
+
+    function queryNoSignedAndStat() {
+        var params = {
+            signDate : getDate(),
+            depIds : "bc40ac2e-46c5-45a9-b3e0-a59f587b9a5d",
+            userIds : "yeguanwen1"
+        }
+        ajaxModel.getData(URL.querySignStat,params).then(function(res){
+            var html,signedCount,noSignedCount;
+            if(res.state==="success") {
+                signedCount = res.data.signedCount;
+                noSignedCount = res.data.noSignedCount;
+                document.querySelectorAll("#tabbar .tab-label")[0].innerHTML = "已签到("+signedCount+")";
+                document.querySelectorAll("#tabbar .tab-label")[1].innerHTML = "未签到("+noSignedCount+")";
+                html = Handlebars.compile(Template.noSignedList)({
+                    list : res.data.list
+                });
+                $(".grid.unsigned-list").html(html);
+            } else {
+                new Toast("失败").show();
+            }
+        })
+    }
+
+    function querySigned() {
+        var params = {
+            signDate : getDate(),
+            depIds : "bc40ac2e-46c5-45a9-b3e0-a59f587b9a5d",
+            userIds : "yeguanwen1",
+            "page.pageNo" : 1,
+            "page.pageSize" : 2
+        }
+        ajaxModel.getData(URL.querySignPage,params).then(function(res){
+            var html;
+            if(res.state==="success" && res.rows.length>0) {
+                html = Handlebars.compile(Template.signedList)({
+                    list : res.rows
+                });
+                $(".sign-list2").html(html);
+            } else if(res.state==="success"){
+                new Toast("当天无签到信息").show();
+            } else {
+                new Toast("失败").show();
+            }
+        })
+    }
+
+    function getDate() {
+        return $(".expireDate").val();
+    }
+
+    function parseTime(time) {
+        return time.split(/[\s]/)[1].substring(0,5);
+    }
+    function initSignDate(){
+        var dateToast = new Toast("截止时间不能比今天日期晚哦！"),
+            dateInput = document.querySelectorAll(".expireDate"),
+            today = new Date();
+        $(dateInput).change(function(){
+            var inputDate = this.valueAsDate;
+            if (inputDate > today){
+                dateToast.show();
+                dateInput.valueAsDate = today;
+            }
+            dateInput.valueAsDate = this.valueAsDate;
+            queryNoSignedAndStat();
+            querySigned();
+        });  
+    }
+
     //定义exmobi返回
     function back(){history.go(-1);}
     </script>

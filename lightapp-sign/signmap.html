@@ -229,6 +229,8 @@
 	                dateToast.show();
 	                dateInput.valueAsDate = today;
 	            }
+	            querySignStat();
+	    		querySignPage();
 	        });  
 	    }
 
@@ -314,7 +316,7 @@
 				"page.pageSize" : 2
 			}
 			ajaxModel.getData(URL.querySignPage,params).then(function(res){
-				if(res.state==="success") {
+				if(res.state==="success" && res.rows.length>0) {
 					res.rows.map(function(obj,index){
 						var marker = [],
 							creatorName = obj.creatorName,
@@ -331,6 +333,8 @@
 						markerPeopleObj[obj.creator] = marker;
 					})
 					b.show(allMarkers);
+				} else if(res.state==="success"){
+					new Toast("当天无签到信息").show();
 				} else {
 					new Toast("失败").show();
 				}
