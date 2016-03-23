@@ -92,10 +92,6 @@ var Mplus = {
     },
     //3.7.1 选择当前地理位置接口
     chooseLocation: function(success,fail){
-    	// alert("chooseLocation");
-    	/*setTimeout(function(){
-
-    	})*/
     	mplus.chooseLocation({
             success: function (res) {
           //   	var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
@@ -108,5 +104,35 @@ var Mplus = {
                 new Toast(res.errMsg).show();
             }
         });
+    },
+    //获取当前用户部门id
+    getUserGroupId: function(success,fail){
+    	mplus.getUserGroupId({
+            success: function (res) {
+            	if(!res.groupId){
+            		new Toast("获取部门异常").show();
+            	}
+                success && success(res.groupId);
+            },
+            fail: function (res) {
+                new Toast(res.errMsg).show();
+            }
+        });
+    },
+    //3.3.4 获取部门直属成员和子部门
+    getOrgGroupsAndMembers: function(groupId,success,fail){
+    	mplus.getOrgGroupsAndMembers({
+    		groupId:groupId,
+            success: function (res) {
+            	// alert(JSON.stringify(res));
+            	var orgGroupArr = res.orgGroups; // 返回子部门数组
+         		var orgMemberArr = res.orgMembers; // 返回部门成员数组
+                success && success(orgGroupArr,orgMemberArr);
+            },
+            fail: function (res) {
+                new Toast(res.errMsg).show();
+            }
+        });
     }
+
 }
