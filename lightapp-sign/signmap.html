@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 	<title>local-map</title>
 	<link rel="stylesheet" href="plugin/seedsui/seedsui.min.css">
+	
 	<style type="text/css">
 		#allmap{
 			height:100%;
@@ -75,9 +76,15 @@
 	<section id="page_local_db" class="active">
 		<header>
 		    <div class="titlebar">
-		        <a href="javascript:history.go(-1)" class="left"><i class="icon-arrowleft"></i></a>
-		        <h1>签到地图</h1>
-		    </div>
+                <a href="javascript:history.go(-1)">
+                    <i class="icon-arrowleft"></i>
+                    <span>返回</span>
+                </a>
+                <h1 class="text-center">统计</h1>
+                <a href="statistics-list.html" class="right">
+                    <i class="icon-persons"></i>
+                </a>
+            </div>
 		</header>
 		<article style="bottom: 150px;">
 			<div class="signDate">
@@ -89,9 +96,9 @@
 			<ul class="list noclick">
 				<li>
 					<div class="justify-content">最新签到<b>1</b>人（已签<b>1</b>人，未签<b>2</b>人）</div>
-					<div class="justify">
-						<a>详细></a>
-					</div>
+					<a href="statistics-list.html" class="justify">
+						详细 >
+					</a>
 				</li>
 			</ul>
 			<div class="overflow-x" style="height: 112px;white-space:nowrap;">

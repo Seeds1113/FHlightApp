@@ -71,5 +71,37 @@ var Mplus = {
 			}
 		});
 
+    },
+    //3.7.3 获取当前地理位置接口
+    getLocation: function(success,fail){
+    	mplus.getLocation({
+            success: function (res) {
+          //   	var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+		        // var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+		        // var speed = res.speed; // 速度，以米/每秒计
+		        // var accuracy = res.accuracy; // 位置精度
+
+                success && success(res);
+            },
+            fail: function (res) {
+                new Toast(res.errMsg).show();
+            }
+        });
+    },
+    //3.7.1 选择当前地理位置接口
+    chooseLocation: function(success,fail){
+    	alert("chooseLocation");
+    	mplus.chooseLocation({
+            success: function (res) {
+          //   	var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+		        // var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+		        // var name = res.name; //位置名
+		        // var address = res.address; //地址详情说明
+                success && success(res);
+            },
+            fail: function (res) {
+                new Toast(res.errMsg).show();
+            }
+        });
     }
 }
