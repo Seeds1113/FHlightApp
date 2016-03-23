@@ -64,6 +64,9 @@
     <script type="text/javascript" src="js/ajaxModel.js"></script>
     <script src="js/Mplus.js"></script>
     <script>
+    var URL = {
+        signUp : "/tss/sign/saveSign.action"
+    }
     //count function
     function maxWordCount(){
         var target = $("#infoMainContent"),
@@ -106,8 +109,7 @@
     }
 
     function createSignInfo() {
-        var url = "/tss/sign/saveSign.action",
-            contentLength = $("#infoMainContent").val().length
+        var contentLength = $("#infoMainContent").val().length
             params = {
                 "sign.signTime" : getDateDay(),
                 "sign.content" : $("#infoMainContent").val(),
@@ -123,9 +125,9 @@
 
         params = $.extend(params,getImages());
 
-        ajaxModel.postData(url,params).then(function(res) {
+        ajaxModel.postData(URL.signUp,params).then(function(res) {
             if(res.state === "success"){
-                window.location("./index.html");
+                window.location = "./index.html";
             }else{
                 new Toast("提交失败").show();
             }
