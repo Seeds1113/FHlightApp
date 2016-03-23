@@ -124,7 +124,7 @@ var Mplus = {
     	mplus.getOrgGroupsAndMembers({
     		groupId:groupId,
             success: function (res) {
-            	// alert(JSON.stringify(res));
+            	alert(JSON.stringify(res));
             	var orgGroupArr = res.orgGroups; // 返回子部门数组
          		var orgMemberArr = res.orgMembers; // 返回部门成员数组
                 success && success(orgGroupArr,orgMemberArr);
