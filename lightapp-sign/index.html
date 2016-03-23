@@ -73,7 +73,8 @@
     {{/each}}
     <hr> 
 </li>
-{{/each}}           
+{{/each}} 
+<li class="sign-info bottom-space"></li>          
 </script>
     <script src="plugin/jquery/jquery.min.js"></script>
     <script src="plugin/seedsui/seedsui.min.js"></script>
@@ -98,7 +99,7 @@
         var date = new Date();
         var weekday=new Array(7);
         var dd = date.getDate();
-        var mm = date.getMonth();
+        var mm = date.getMonth()+1;
         var yyyy = date.getFullYear();
         var fullDate = yyyy+"-"+mm+"-"+dd;
         weekday[0]="星期日";
@@ -112,18 +113,21 @@
         //$(".date").html();
         $(".day").html(weekday[date.getDay()]);
         $(".date").html(fullDate);
+
+        return yyyy+"-"+mm+"-"+dd;
     }
     //初始化function
     window.addEventListener("load",function(){
         getDateDay();
         // var c=DataClock();
         queryMySign();
+        bindEvents();
 
     },false);
 
     function queryMySign(){
         ajaxModel.getData(URL.queryMySign,{
-            "signDate":"2016-03-21"
+            "signDate":getDateStr()//"2016-03-22"
         }).then(function(res){
             if(res.state === "success"){
                 var data = res.data;
@@ -134,12 +138,21 @@
                     var html = Handlebars.compile(Template.mySignInfo)({"signList":data});
                     $("#signList").html(html);
                     DataClock();
+                    lazyloadImg();
                 }
                 
             }else{
                 new Toast(res.msg).show();
             }
         })
+    }
+
+    function getDateStr(){
+        var date = new Date();
+        var dd = date.getDate();
+        var mm = date.getMonth()+1;
+        var yyyy = date.getFullYear();
+        return yyyy+"-"+mm+"-"+dd;
     }
 	//定义exmobi返回
 	function back(){history.go(-1);}
@@ -164,13 +177,6 @@
             })(this);
         });
     }
-   /* $.fn.extend({
-        previewImage: function(){
-            $(this).click(function(){
-
-            })
-        }
-    })*/
     function previewImage(container,clickDom){
         var $container = $(container),
             $clickDom = $(clickDom);
@@ -183,11 +189,13 @@
             })(this);  
         })
         console.log(urls);
+        console.log(current);
         Mplus.previewImage(current,urls);
     }
     function bindEvents(){
         $(document).on("click","#signList .img-location",function(){
-            previewImage($(this).parents(".sign-info"),$(this));
+            var $this = $(this)
+            previewImage($this.parents(".sign-info"),$this);
         });  
     }
     

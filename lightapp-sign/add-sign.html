@@ -42,8 +42,8 @@
                 <div class="info-content clearfix">
                     <textarea placeholder="填写投票描述，250字以内" id="infoMainContent" maxlength="250"></textarea>
                     <span class="count"><span id="text-num">0</span>/250</span>
-                    <ul class="grid album" data-col="2">
-                        <li><a class="img" style="background-image:url(img/content/location1-img1.jpg);"><span class="close"><i class="icon-close"></i></span></a></li>
+                    <ul class="grid album" data-col="2" id="imgBlock">
+                       <!-- <li><a class="img" data-href="img/content/location1-img1.jpg" style="background-image:url(img/content/location1-img1.jpg);"><span class="close"><i class="icon-close"></i></span></a></li> -->
                         <li><a class="add-img"><i class="icon-camera-fill"></i></a></li>
                     </ul>
                 </div>
@@ -59,11 +59,20 @@
             <a id="submit-sign" class="radius4 button block margin8">提交</a>
         </article>
 	</section>
+<script id="signImg-tpl" type="text/x-handlebars-template">
+<li><a class="img" data-href="img/content/location1-img1.jpg" style="background-image:url(img/content/location1-img1.jpg);"><span class="close"><i class="icon-close"></i></span></a></li>
+</script>
     <script src="plugin/jquery/jquery.min.js"></script>
     <script src="plugin/seedsui/seedsui.min.js"></script>
     <script type="text/javascript" src="js/ajaxModel.js"></script>
     <script src="js/Mplus.js"></script>
     <script>
+    var URL = {
+        submitMySign:"/tss/sign/saveSign.action"
+    },
+    Template = {
+        "signImg":$("#signImg-tpl").html()
+    }
     //count function
     function maxWordCount(){
         var target = $("#infoMainContent"),
@@ -106,8 +115,7 @@
     }
 
     function createSignInfo() {
-        var url = "/tss/sign/saveSign.action",
-            contentLength = $("#infoMainContent").val().length
+        var contentLength = $("#infoMainContent").val().length
             params = {
                 "sign.signTime" : getDateDay(),
                 "sign.content" : $("#infoMainContent").val(),
@@ -122,10 +130,13 @@
         }
 
         params = $.extend(params,getImages());
-
-        ajaxModel.postData(url,params).then(function(res) {
+        ajaxModel.postData(URL.submitMySign,params).then(function(res) {
             if(res.state === "success"){
-                window.location("./index.html");
+                new Toast("提交成功").show();
+                setTimeout(function(){
+                    // window.location.href="index.html";
+                    back();
+                },1000)
             }else{
                 new Toast("提交失败").show();
             }
@@ -134,8 +145,8 @@
 
     function getImages() {
         var imageObj = {};
-        $(".upload-image").each(function(index,obj) {
-            imageObj['sign.images['+index+']'] = obj.value;
+        $("#imgBlock .img").each(function(index,obj) {
+            imageObj['sign.images['+index+']'] = $(obj).data("href");
         })
         return imageObj;
     }
@@ -145,11 +156,22 @@
         getDateDay();
         maxWordCount();
         var c=DataClock();
-        
+        bindEvents();
         
     },false);
 
-	
+	/*setTimeout(function(){
+        alert(111)
+        mplus.getLocation({
+            success: function (res) {
+                alert(JSON.stringify(res));
+                $("#longitude").val(res.longitude);
+            },
+            fail: function (res) {
+                alert("fail");
+            }
+        });
+    },5000)*/
     document.addEventListener("plusready",plusreadyFun, true);
     
     function plusreadyFun(){
@@ -162,7 +184,17 @@
         }
         window.localStorage.setItem("sessionId",escape(token));
         alert("plusready")
+
         mplus.getLocation({
+            success: function (res) {
+                alert(JSON.stringify(res));
+                $("#longitude").val(res.longitude);
+            },
+            fail: function (res) {
+                alert("fail");
+            }
+        });
+        /*mplus.chooseLocation({
             success: function (res) {
                 alert(JSON.stringify(res));
             },
@@ -170,11 +202,57 @@
                 alert("fail");
             }
         });
-    }
+        mplus.openLocation({
+            latitude: 0, // 纬度，浮点数，范围为90 ~ -90
+            longitude: 0, // 经度，浮点数，范围为180 ~ -180。
+            name: '', // 位置名
+            address: '', // 地址详情说明
+            scale: 1, // 地图缩放级别,整形值,范围从1~28。默认为最大
+        });*/
 
-    $("#submit-sign").click(function() {
-        createSignInfo();
-    })
+    }
+    function previewImage(container,clickDom){
+        var $container = $(container),
+            $clickDom = $(clickDom);
+        console.log(container);
+        console.log(clickDom);
+        var urls = [];
+        var current = $clickDom.data("href");
+        $container.find("[data-href]").each(function(){
+            (function(s){
+                var url = $(s).data("href");
+                urls.push(url);
+            })(this);  
+        })
+        console.log(urls);
+        console.log(current);
+        Mplus.previewImage(current,urls);
+    }
+    function bindEvents(){
+        $(".add-img").click(function() {
+            $this = $(this);
+            Mplus.chooseImage(['album', 'camera'],function(imgURL){
+                var image = new Image();
+                image.src = imgURL;
+                image.onload = function(){
+                    $this.parent().before('<li><a class="img" data-href="'+imgURL+'" style="background-image:url('+imgURL+');"><span class="close"><i class="icon-close"></i></span></a></li>')
+                }
+            })
+        });
+        $(document).on("click","#imgBlock .img",function(){
+            var $this = $(this);
+            previewImage($this.parents("#imgBlock"),$this);
+        });
+        //删除图片
+        $(document).on("click","#imgBlock .close",function(){
+            var $this = $(this);
+            $this.parents("li").remove();
+        });  
+        $("#submit-sign").click(function() {
+            createSignInfo();
+        })  
+    }
+    
 
 	//定义exmobi返回
 	function back(){history.go(-1);}
