@@ -69,16 +69,17 @@
     <span class="location"><i class="icon-position"></i>{{address}}</span>
     <div class="title">{{content}}</div>
     {{#each images}}
-    <a class="img-location" style="background-image:url(img/content/location1-img1.jpg);" data-bg="{{this}}"></a>
+    <a class="img-location" style="background-image:url(img/content/location1-img1.jpg);" data-bg="{{this}}" data-href="{{this}}"></a>
     {{/each}}
     <hr> 
 </li>
-{{/each}}      
+{{/each}}           
 </script>
     <script src="plugin/jquery/jquery.min.js"></script>
     <script src="plugin/seedsui/seedsui.min.js"></script>
     <script src="plugin/handlebars/handlebars.js"></script>
     <script src="js/ajaxModel.js"></script>
+    <script src="js/Mplus.js"></script>
     <script>
     var URL = {
         queryMySign:"/tss/sign/queryMySign.action"
@@ -132,7 +133,7 @@
                     $(".no-data").addClass("hidden");
                     var html = Handlebars.compile(Template.mySignInfo)({"signList":data});
                     $("#signList").html(html);
-                    var c=DataClock();
+                    DataClock();
                 }
                 
             }else{
@@ -163,6 +164,33 @@
             })(this);
         });
     }
+   /* $.fn.extend({
+        previewImage: function(){
+            $(this).click(function(){
+
+            })
+        }
+    })*/
+    function previewImage(container,clickDom){
+        var $container = $(container),
+            $clickDom = $(clickDom);
+        var urls = [];
+        var current = $clickDom.data("href");
+        $container.find("[data-href]").each(function(){
+            (function(s){
+                var url = $(s).data("href");
+                urls.push(url);
+            })(this);  
+        })
+        console.log(urls);
+        Mplus.previewImage(current,urls);
+    }
+    function bindEvents(){
+        $(document).on("click","#signList .img-location",function(){
+            previewImage($(this).parents(".sign-info"),$(this));
+        });  
+    }
+    
     /*Handlebars*/
     Handlebars.registerHelper("timer",function(value){
         return value.split(/[\s]/)[1].substring(0,5);
