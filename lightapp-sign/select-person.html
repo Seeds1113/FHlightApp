@@ -235,14 +235,15 @@
             var addToDisplayDiv = function(){
                 var treeID = $(selection).attr("id"),
                 groupName = $(selection).data("groupname"),
-                groupID = $(selection).data("groupid");
+                groupID = $(selection).data("groupid") || "",
+                memberId = $(selection).data("memberid") || "";
                 console.log(treeID + "  " + groupID + "  " + groupName);
 
                 //看selection-box是否为空
                 if($("#selection-box").is(':empty')){
                     $("#selection-box").slideDown();
                 }
-                $("#selection-box").append('<span class="selected-group" data-groupid="'+groupID+'" data-groupname="'+groupName+'" data-treeid="'+treeID+'" id="select'+treeID+'">'+groupName+'<a class="icon-clear-fill delete-selection"></a></span>');
+                $("#selection-box").append('<span class="selected-group" data-groupid="'+groupID+'" data-memberid="'+memberId+'" data-groupname="'+groupName+'" data-treeid="'+treeID+'" id="select'+treeID+'">'+groupName+'<a class="icon-clear-fill delete-selection"></a></span>');
                 deleteSelection();
             };
             if(e.target.tagName.toLowerCase()=="ul"){
@@ -281,20 +282,38 @@
                 elLI=e.target.parentNode.parentNode;
                 selection = e.target.parentNode;
             }
-            // else if(e.target.tagName.toLowerCase()=="li"){
-            //     //当点击有a标签时
-            //     elLI=e.target.parentNode.parentNode;
-            // } 
             elUL=elLI.querySelector("ul");
+            
+            
+            console.log(selection);
+            console.log(elLI);
             elIcon=elLI.querySelector(".treeicon");
-            if(!elUL){
-            /*var nativePage=elLI.querySelector("a").getAttribute("data-href");
-            var param=elLI.id||"";
-            ExMobiWindow.open(nativePage, true,false,"",param);*/
-            $(selection).find(".treeicon").remove();
-            var treeToast2 = new Toast("已到最底层了", {delay:2000});
-            treeToast2.show(); 
-            return;
+            if(!elUL){//展开没有子节点（获取数据）
+                //获取下级子部门及成员
+                var groupId = $(selection).attr("id");
+                getNodes(groupId,function(html){
+                    $(selection).after(html);
+                    if($(html).find("li").length === 0){
+                        $(selection).find(".treeicon").remove();
+                        new Toast("已到最底层了", {delay:2000}).show();
+                        return;
+                    }
+                    if($(selection).hasClass("active")){
+                        $(elLI).find(".treetitle").addClass("active");
+                        $(elIcon).addClass('active');
+                        $(elUL).show();
+                        $(elLI).find(".icon-rdoadd").hide();
+                    }
+
+                });
+            }else if($(elUL).find("li").length>0){
+                //已加载过子节点（有数据）
+            }else{
+                 //已加载过子节点（没数据）
+                $(selection).find(".treeicon").remove();
+                var treeToast2 = new Toast("已到最底层了", {delay:2000});
+                treeToast2.show(); 
+                return;
             }
             if(elUL.style.display=="none" || !elUL.style.display){
                 var selectionLevel = $(selection).data('level'),
@@ -303,7 +322,6 @@
                 elIcon.className="treeicon active";
                 elUL.style.display="block";
                 console.log(selectionLevel);
-                //这里写加载mplus子节点方法
 
                 //给子节点加level
                 $(selection).next().children().find('treetitle').attr('data-level', childrenLevel);
@@ -316,6 +334,15 @@
             
         });
     }
+    function getNodes(groupId,callback){
+        Mplus.getOrgGroupsAndMembers(groupId,function(orgGroupArr,orgMemberArr){
+            var html = Handlebars.compile(Template.tree)({
+                "members":orgMemberArr,
+                "groups":orgGroupArr
+            });
+            callback && callback(html);
+        })
+    }
     document.addEventListener("plusready",setTimeout(function(){
         plusreadyFun();
     },1000), true);
@@ -323,14 +350,12 @@
     function plusreadyFun(){
         document.removeEventListener("plusready",plusreadyFun, true);
         Mplus.getUserGroupId(function(groupId){
-            Mplus.getOrgGroupsAndMembers(groupId,function(orgGroupArr,orgMemberArr){
-                var html = Handlebars.compile(Template.tree)({
-                    "members":orgMemberArr,
-                    "groups":orgGroupArr
-                });
+            groupId = "b1f00858-0b99-4206-910d-c7533a7eb16f";//调试使用
+            getNodes(groupId,function(html){
                 $("#tree").html(html);
-            })
+            });
         })
+        
     }
     window.addEventListener("load",function(e){
         onTapTree();
@@ -346,10 +371,14 @@
             var selectedGroup = $("#selection-box").find(".selected-group"),
                 depIds = [],
                 userIds = [];
+            if(selectedGroup.length === 0){
+                new Toast("请选择部门或人员!").show();
+                return;
+            }
+            // alert($("#selection-box").html())
             selectedGroup.each(function(index,el){
-                var memberid = $(el).data("memberid"),
-                    groupid = $(el).data("groupid");
-                    
+                var memberid = $(el).data("memberid") || "",
+                    groupid = $(el).data("groupid") || "";
                 if(memberid){
                     userIds.push(memberid);
                 }else{

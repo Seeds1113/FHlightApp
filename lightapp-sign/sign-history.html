@@ -17,7 +17,7 @@
                     <span>返回</span>
                 </a>
                 <h1 class="text-center">签到记录</h1>
-                <a href="" class="right">
+                <a class="right">
                     <i class="icon-position"></i>
                 </a>
             </div>
@@ -129,7 +129,8 @@
     },
     Template = {
         "mySignInfo":$("#mySignInfo-tpl").html()
-    }
+    },
+    DateStr = "";
     //日历
     var tempWeekSelectObject = new DateSelect({
             activeDate: new Date()
@@ -168,6 +169,7 @@
 
     function queryMySign(date){
         var signDate = getDateStr(date);
+        DateStr = signDate;
         ajaxModel.getData(URL.queryMySign,{
             "signDate":signDate//"2016-03-22"
         }).then(function(res){
@@ -238,7 +240,11 @@
         $(document).on("click","#signList .img-location",function(){
             var $this = $(this)
             previewImage($this.parents(".sign-info"),$this);
-        });  
+        }); 
+        $(".titlebar .icon-position").click(function(){
+            // alert("mySignmap.html?date="+DateStr);return;
+            window.location.href = "mySignmap.html?date="+DateStr;
+        }) 
     }
 
     /*Handlebars*/
