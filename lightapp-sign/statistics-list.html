@@ -276,9 +276,9 @@
         }
         ajaxModel.getData(URL.querySignPage,params).then(function(res){
             if(res.state==="success" && res.rows.length>0) {
-                for(var i=1;i<5;i++) {
-                    res.rows[i] = res.rows[0];
-                }
+                // for(var i=1;i<5;i++) {
+                //     res.rows[i] = res.rows[0];
+                // }
                 renderSignedInfo(res.rows);
             } else if(res.state==="success"){
                 if(res.total>0) {
