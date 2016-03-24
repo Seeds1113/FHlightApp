@@ -75,7 +75,7 @@
     </script>
     <script id="signedList-tpl" type="text/x-handlebars-template">
     {{#each list}}
-    <li class="box" onclick="window.location='statistic-detail.html';">
+    <li class="box" onclick="window.location='statistic-detail.html?id={{creator}}';">
         <a class="icon-name" style="background-color:{{getColor creatorName}};border-color: {{getColor creatorName}};">
             {{lastChar creatorName}}
         </a>
