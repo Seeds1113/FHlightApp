@@ -95,14 +95,14 @@
         var date = new Date();
         var weekday=new Array(7);
         var dd = date.getDate();
-        dd = dd>10?dd:"0"+dd;
+        dd = dd>=10?dd:"0"+dd;
         var mm = date.getMonth()+1;
-        mm = mm>10?mm:"0"+mm;
+        mm = mm>=10?mm:"0"+mm;
         var yyyy = date.getFullYear();
         var hour = date.getHours();
-        hour = hour>10?hour:"0"+hour;
+        hour = hour>=10?hour:"0"+hour;
         var minute = date.getMinutes();
-        minute = minute>10?minute:"0"+minute;
+        minute = minute>=10?minute:"0"+minute;
         var fullDate = yyyy+"-"+mm+"-"+dd;
         var time = hour+":"+minute;
         weekday[0]="星期日";
