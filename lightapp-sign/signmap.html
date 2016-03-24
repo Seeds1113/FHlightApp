@@ -251,13 +251,9 @@
 					pagin.setTotal(total);
 					renderSignPage(data);
 					renderMarkers(data);
-					if(data.length<pageSize||total===pageSize*currentPage) {
-						pagin.hideNextBtn();
-					}
-					callback && callback();
 				} else if(res.state==="success"){
-					b.show();
 					if(total===0) {
+						b.show();
 						new Toast("当天无签到信息").show();
 					} else {
 						new Toast("已经是最后了").show();
@@ -265,6 +261,7 @@
 				} else {
 					new Toast("失败").show();
 				}
+				callback && callback();
 			})
 		}
 
@@ -308,18 +305,19 @@
 			querySignPage(1,pageSize);
 		}
 		Pagin.prototype = {
-			nextPage : function() {
-				currentPage++;
-				querySignPage(currentPage,pageSize,callback);
+			nextPage : function(callback) {
+				this.currentPage++;
+				querySignPage(this.currentPage,this.pageSize,callback);
 			},
 
-			prevPage : function() {
-				if(currentPage===1) {
+			prevPage : function(callback) {
+				if(this.currentPage===1) {
 					new Toast("已经是第一页了").show();
+					hideLoading();
 					return;
 				}
-				currentPage--;
-				querySignPage(currentPage,pageSize,callback);
+				this.currentPage--;
+				querySignPage(this.currentPage,this.pageSize,callback);
 			},
 
 			setTotal : function(total) {

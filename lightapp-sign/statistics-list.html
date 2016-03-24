@@ -47,6 +47,7 @@
                             </div>
                             <ul class="sign-list2"></ul>
                         </div>
+                        <div class="load-more" style="visibility:hidden;"><div class="loading"></div>正在加载更多...</div>
                     </div>
                     <!--page2-->
                     <div class="slider-slide" id="page2">
@@ -104,6 +105,7 @@
     var tabbar=document.getElementById("tabbar");
     var tab=tabbar.querySelectorAll(".tab");
     var carouselPage;
+    var currentPage = 1;
 
     //模板和URL信息
     URL = {
@@ -160,12 +162,8 @@
         }
     }
     function loadPage1(){
-        //console.log(1);
-        //page1 加载 ajax 写这里
-    }
-    function loadPage2(){
-        //console.log(2);
-        //page1 加载 ajax 写这里
+        currentPage++;
+        querySigned(currentPage);
     }
     
     //card 有关操作
@@ -174,14 +172,7 @@
     var pageMaxCount = 4;
     function hideLoadDiv(containerID){
         var container =$("#"+containerID)
-        var cardLength=container.find(".card").length;
-        console.log(cardLength);
-        //这里去服务器获取数据再加一条进来
-        if (cardLength <= pageMaxCount && cardLength > 0) {
-            container.find(".load-more").hide();
-        } else if (cardLength == 0){
-            container.find(".no-data").removeClass("hidden");
-        }
+        container.find(".load-more").hide();
     }
     
 
@@ -206,7 +197,7 @@
                 setTimeout(function(){
                     e.refreshComplete();
                 }, 1000);
-                
+                // queryNoSignedAndStat(e.refreshComplete);
             },
             "onRefreshComplete":function(e){
                 //完成刷新逻辑
@@ -222,9 +213,7 @@
         queryNoSignedAndStat();
         querySigned();
         loadMore('page1', loadPage1);
-        loadMore('page2', loadPage2);
     },false);
-    //数据处理
     //数据处理
     Handlebars.registerHelper("lastChar",lastChar);
     Handlebars.registerHelper("getColor",getColor);
@@ -239,7 +228,7 @@
         return c;
     }
 
-    function queryNoSignedAndStat() {
+    function queryNoSignedAndStat(callback) {
         var params = {
             signDate : getDate(),
             depIds : "bc40ac2e-46c5-45a9-b3e0-a59f587b9a5d",
@@ -253,6 +242,7 @@
             } else {
                 new Toast("失败").show();
             }
+            callback && callback();
         })
     }
 
@@ -276,23 +266,28 @@
         document.querySelectorAll("#tabbar .tab-label")[1].innerHTML = "未签到("+noSignedCount+")";
     }
 
-    function querySigned(hasChange) {
-        if(hasChange) {
-            $(".sign-list2").empty();
-        }
+    function querySigned(currentPage) {
         var params = {
             signDate : getDate(),
             depIds : "bc40ac2e-46c5-45a9-b3e0-a59f587b9a5d",
             userIds : "yeguanwen1",
-            "page.pageNo" : 1,
-            "page.pageSize" : 2
+            "page.pageNo" : currentPage,
+            "page.pageSize" : 5
         }
         ajaxModel.getData(URL.querySignPage,params).then(function(res){
             if(res.state==="success" && res.rows.length>0) {
+                for(var i=1;i<5;i++) {
+                    res.rows[i] = res.rows[0];
+                }
                 renderSignedInfo(res.rows);
             } else if(res.state==="success"){
-                $(".sign-list2").empty();
-                new Toast("当天无签到信息").show();
+                if(res.total>0) {
+                    currentPage--;
+                    hideLoadDiv("page1");
+                    new Toast("已经到最底了").show();
+                } else {
+                    new Toast("当天无签到信息").show();
+                }
             } else {
                 new Toast("失败").show();
             }
@@ -319,6 +314,7 @@
             dateArr = [].slice.call(dateInput);
             today = new Date();
         $(dateInput).change(function(){
+            $(".sign-list2").empty();
             var inputDate = this.valueAsDate;
             if (inputDate > today){
                 dateToast.show();
@@ -331,7 +327,7 @@
                 })
             }
             queryNoSignedAndStat();
-            querySigned(true);
+            querySigned();
         });  
     }
 
