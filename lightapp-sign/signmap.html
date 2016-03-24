@@ -7,12 +7,17 @@
 	<link rel="stylesheet" href="plugin/seedsui/seedsui.min.css">
 	
 	<style type="text/css">
+		/*隐藏样式*/
+		.hide{
+			display: none!important;
+		}
 		#allmap{
 			height:100%;
 		}
 		.shrinkcase{
 			padding:10px 0;
 		}
+		/*地图标记*/
 		.pin-label{
 			position: absolute;
 			width:28px;
@@ -27,12 +32,9 @@
 
 			color: white;
 		}
+		/*人员*/
 		#signPeople{
-			height: 75px;
-    		margin-top: 14px;
-		}
-		#signPeople li{
-			width: 75px;
+			padding: 15px 0;
 		}
 		#signPeople li>a{
 			width:50px;
@@ -45,6 +47,7 @@
 			background-color:white!important;
 			color:#333;
 		}
+		/*悬浮日期框*/
 		.signDate{
 			position: absolute;top:10px;left:10px;z-index: 99999;
 			background-color: #4587F7;
@@ -64,10 +67,6 @@
 			-moz-user-select: none;
 			-ms-user-select: none;
 			user-select: none;
-		}
-		#signPeople.grid.app li{
-			float:none; 
-    		display: inline-block;
 		}
 	</style>
 </head>
@@ -93,80 +92,17 @@
 			<div id="allmap"></div>
 		</article>
 		<footer style="height: 150px;background-color:white;">
-			<ul class="list noclick">
-				<!-- <li>
-					<div class="justify-content">最新签到<b>1</b>人（已签<b>1</b>人，未签<b>2</b>人）</div>
-					<a href="statistics-list.html" class="justify">
-						详细 >
-					</a>
-				</li> -->
-			</ul>
+			<ul class="list noclick"></ul>
 			<div class="overflow-x" style="height: 112px;white-space:nowrap;">
-				<ul id="signPeople" class="grid app radiusround">
-					<!-- <li>
-						<a style="background-color: #53c6fd;border-color: #53c6fd;">
-							阳
-						</a>
-						<label class="grid-label">蔡宇阳</label>
-					</li>
-					<li>
-						<a style="background-color: #ffae02;border-color: #ffae02;">
-							波
-						</a>
-						<label class="grid-label">成少波</label>
-					</li>
-					<li>
-						<a style="background-color: #3ae3ea;border-color: #3ae3ea;">
-							进
-						</a>
-						<label class="grid-label">李进</label>
-					</li>
-					<li>
-						<a style="background-color: #ff6f36;border-color: #ff6f36;">
-							梅
-						</a>
-						<label class="grid-label">许啸梅</label>
-					</li>
-					<li>
-						<a style="background-color:#cf7af3;border-color: #cf7af3;">
-							婷
-						</a>
-						<label class="grid-label">李婷</label>
-					</li>
-					<li>
-						<a style="background-color: #53c6fd;border-color: #53c6fd;">
-							阳
-						</a>
-						<label class="grid-label">蔡宇阳</label>
-					</li>
-					<li>
-						<a style="background-color: #ffae02;border-color: #ffae02;">
-							波
-						</a>
-						<label class="grid-label">成少波</label>
-					</li>
-					<li>
-						<a style="background-color: #3ae3ea;border-color: #3ae3ea;">
-							进
-						</a>
-						<label class="grid-label">李进</label>
-					</li>
-					<li>
-						<a style="background-color: #ff6f36;border-color: #ff6f36;">
-							梅
-						</a>
-						<label class="grid-label">许啸梅</label>
-					</li>
-					<li>
-						<a style="background-color: #cf7af3;border-color: #cf7af3;">
-							婷
-						</a>
-						<label class="grid-label">李婷</label>
-					</li> -->
-				</ul>
+				<ul id="signPeople" class="grid app radiusround" data-col="4"></ul>
 			</div>
 		</footer>
 	</section>
+	<!-- 加载遮罩 -->
+	<div class="popup-mask hide" style="opacity: 1;display: block;"></div>
+	<div class="loading-box box box-middlecenter hide">
+		<div class="loading"></div>
+	</div>
 	<script id="querySignStat-tpl" type="text/x-handlebars-template">
 	<li>
 		<div class="justify-content">最新签到<b>{{signedCount}}</b>人（已签<b>{{signedCount}}</b>人，未签<b>{{noSignedCount}}</b>人）</div>
@@ -192,19 +128,11 @@
 	<script src="js/ajaxModel.js"></script>
 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=8830f84901336e9afd2c6d7033d2ebe5"></script>
 	<script>
-        //定义坐标和文字
-  //       var markerPeople=[[116.417854,39.921988,"<span class='color-1 bold'>蔡宇阳</span>&nbsp;早上8点<br>签到地址：北京市东城区王府井大街88号乐天银泰百货","<label class='pin-label'>阳</label>","#53c6fd"],
-  //       [116.406605,39.921585,"<span class='color-2 bold'>成少波</span>&nbsp;早上8点<br>签到地址：北京市东城区东华门大街","<label class='pin-label'>波</label>","#ffae02"],
-		// [116.412222,39.912345,"<span class='color-3 bold'>李进</span>&nbsp;早上8点<br>签到地址：北京市东城区正义路甲5号","<label class='pin-label'>进</label>","#3ae3ea"]
-		// 				];
-
-		// var markerPerson=[[116.517854,39.921988,"<span class='color-1 bold'>蔡宇阳</span>&nbsp;早上8点<br>签到地址：北京市东城区王府井大街88号乐天银泰百货","<label class='pin-label'>1</label>","#ffae02"],
-		// [116.406605,39.921585,"<span class='color-1 bold'>蔡宇阳</span>&nbsp;早上8点<br>签到地址：北京市东城区东华门大街","<label class='pin-label'>2</label>","#3ae3ea"]
-		// ];
-
 		var markerPeopleObj = {};
 
 		var allMarkers = [];
+
+		var sp = document.getElementById("signPeople");
 
 		URL = {
 			querySignStat : "/tss/sign/querySignStat.action",
@@ -230,7 +158,7 @@
 	                dateInput.valueAsDate = today;
 	            }
 	            querySignStat();
-	    		querySignPage();
+	    		page = new Pagin(4);
 	        });  
 	    }
 
@@ -249,7 +177,7 @@
 			target.classList.add("active");
 			markerPerson = markerPeopleObj[target.attributes.getNamedItem("data-creator").value];
 			if(markerPerson) {
-				b.show(markerPerson);
+				b.show([markerPerson]);
 			} else {
 				new Toast("ta还没有签到").show();
 			}
@@ -267,7 +195,7 @@
 	    window.addEventListener("load",function(){
 	    	initSignDate();
 	    	querySignStat();
-	    	querySignPage();
+	    	pagin = new Pagin(4);
 	    },false)
 
 	    //数据处理
@@ -290,60 +218,146 @@
 				userIds : "yeguanwen1"
 			}
 			ajaxModel.getData(URL.querySignStat,params).then(function(res){
-				var html;
 				if(res.state==="success") {
-					html = Handlebars.compile(Template.querySignStat)({
-						signedCount : res.data.signedCount,
-						noSignedCount : res.data.noSignedCount
-					});
-					$("footer .list").html(html);
-					html = Handlebars.compile(Template.querySignStatDetail)({
-						list : res.data.list
-					});
-					$("#signPeople").html(html);
+					renderSignStat(res.data);
 				} else {
 					new Toast("失败").show();
 				}
 			})
 		}
 
-		function querySignPage() {
+		function renderSignStat(data) {
+			var html = Handlebars.compile(Template.querySignStat)({
+				signedCount : data.signedCount,
+				noSignedCount : data.noSignedCount
+			});
+			$("footer .list").html(html);
+		}
+
+		function querySignPage(currentPage,pageSize,callback) {
 			var params = {
 				signDate : getDate(),
 				depIds : "bc40ac2e-46c5-45a9-b3e0-a59f587b9a5d",
 				userIds : "yeguanwen1",
-				"page.pageNo" : 1,
-				"page.pageSize" : 2
+				"page.pageNo" : currentPage,
+				"page.pageSize" : pageSize
 			}
 			ajaxModel.getData(URL.querySignPage,params).then(function(res){
+				var total = res.total,
+					html,data;
+				total && pagin.setTotal(total);
 				if(res.state==="success" && res.rows.length>0) {
-					res.rows.map(function(obj,index){
-						var marker = [],
-							creatorName = obj.creatorName,
-							color = getColor(creatorName),
-							lastNameChar = lastChar(creatorName),
-							time = obj.signTime.split(/[\s]/)[1].substring(0,5);
-
-						marker[0] = obj.longitude;
-						marker[1] = obj.latitude;
-						marker[2] = "<span class='color-1 bold'>"+creatorName+"</span>&nbsp;"+time+"<br>签到地址："+obj.address;
-						marker[3] = "<label class='pin-label'>"+lastNameChar+"</label>";
-						marker[4] = color;
-						allMarkers.push(marker);
-						markerPeopleObj[obj.creator] = marker;
-					})
-					b.show(allMarkers);
+					data = res.rows;
+					pagin.setTotal(total);
+					renderSignPage(data);
+					renderMarkers(data);
+					if(data.length<pageSize||total===pageSize*currentPage) {
+						pagin.hideNextBtn();
+					}
+					callback && callback();
 				} else if(res.state==="success"){
-					new Toast("当天无签到信息").show();
+					b.show();
+					if(total===0) {
+						new Toast("当天无签到信息").show();
+					} else {
+						new Toast("已经是最后了").show();
+					}
 				} else {
 					new Toast("失败").show();
 				}
 			})
+		}
+
+		function renderSignPage(data) {
+			var html = Handlebars.compile(Template.querySignStatDetail)({
+				list : data
+			});
+			$("#signPeople").html(html);
+		}
+
+		function renderMarkers(data) {
+			allMarkers = [];
+			markerPeopleObj = {};
+			data.map(function(obj,index){
+				var marker = [],
+					creatorName = obj.creatorName,
+					color = getColor(creatorName),
+					lastNameChar = lastChar(creatorName),
+					time = obj.signTime.split(/[\s]/)[1].substring(0,5);
+
+				marker[0] = obj.longitude;
+				marker[1] = obj.latitude;
+				marker[2] = "<span class='color-1 bold'>"+creatorName+"</span>&nbsp;"+time+"<br>签到地址："+obj.address;
+				marker[3] = "<label class='pin-label'>"+lastNameChar+"</label>";
+				marker[4] = color;
+				allMarkers.push(marker);
+				markerPeopleObj[obj.creator] = marker;
+			})
+			b.show(allMarkers);
 		}
 
 		function getDate() {
 			return document.getElementById('expireDate').value;
 		}
+
+		function Pagin(pageSize) {
+			this.currentPage = 1,
+			this.pageSize = pageSize,
+			this.total = 0;
+			$("#signPeople").empty();
+			querySignPage(1,pageSize);
+		}
+		Pagin.prototype = {
+			nextPage : function() {
+				currentPage++;
+				querySignPage(currentPage,pageSize,callback);
+			},
+
+			prevPage : function() {
+				if(currentPage===1) {
+					new Toast("已经是第一页了").show();
+					return;
+				}
+				currentPage--;
+				querySignPage(currentPage,pageSize,callback);
+			},
+
+			setTotal : function(total) {
+				this.total = total;
+			}
+		}
+
+		//滑动
+		var loadingMask=document.querySelector(".popup-mask"),loadingBox=document.querySelector(".loading-box");
+		function showLoading(){
+			loadingMask.classList.remove("hide");
+			loadingBox.classList.remove("hide");
+		}
+		function hideLoading(){
+			loadingMask.classList.add("hide");
+			loadingBox.classList.add("hide");
+		}
+		// //点击
+		// EventUtil.addHandler(sp,"tap",function(e){
+		// 	toogleMarker(e.target);
+		// })
+		//翻页
+		EventUtil.addHandler(sp,"swipeleft",function(){
+			//下一页
+			showLoading();//显示遮罩
+			//重新绘制人员：signPeople.innerHTML=xxx;
+			//重新绘制地图：生成markerPeople，并在重新绘点b.show(markerPeople)
+			pagin.nextPage(hideLoading);
+			//hideLoading();//隐藏遮罩
+		})
+		EventUtil.addHandler(sp,"swiperight",function(){
+			//上一页
+			showLoading();//显示遮罩
+			//重新绘制人员：signPeople.innerHTML=xxx;
+			//重新绘制地图：生成markerPeople，并在重新绘点b.show(markerPeople)
+			pagin.prevPage(hideLoading);
+			//hideLoading();//隐藏遮罩
+		})
 
 		//定义exmobi返回
 		function back(){history.go(-1);}
