@@ -11,7 +11,7 @@
 			reqSource:"client"*/
 		}
 	});
-	var sessionId = escape("mobileark#f6a9d28e-7460-4443-ac84-91a929434095");//mobileark#5f0390da-164a-420e-bf87-5fcd4a0eef82
+	var sessionId = escape("mobileark#f81da477-d4f8-4c6c-aa36-bd9c7a08ea30");//mobileark#5f0390da-164a-420e-bf87-5fcd4a0eef82
 	// sessionId = window.localStorage.getItem("sessionId");
 	/*document.addEventListener("plusready",function(){
 		sessionId = window.localStorage.getItem("sessionId");

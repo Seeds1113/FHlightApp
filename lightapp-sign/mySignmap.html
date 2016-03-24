@@ -86,32 +86,81 @@
 	<script src="plugin/jquery/jquery.min.js"></script>
 	<script src="plugin/seedsui/seedsui.min.js"></script>
 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=8830f84901336e9afd2c6d7033d2ebe5"></script>
+    <script src="plugin/handlebars/handlebars.js"></script>
+    <script src="js/ajaxModel.js"></script>
 	<script>
+		var URL = {
+			queryMySign:"/tss/sign/queryMySign.action"
+		}
         //定义坐标和文字
-		var markerPerson=[[116.417854,39.921988,"<span class='color-1 bold'>蔡宇阳</span>&nbsp;早上8点<br>签到地址：北京市东城区王府井大街88号乐天银泰百货","<label class='pin-label'>1</label>","#53c6fd"],
-		[116.406605,39.921585,"<span class='color-1 bold'>蔡宇阳</span>&nbsp;早上8点<br>签到地址：北京市东城区东华门大街","<label class='pin-label'>2</label>","#53c6fd"]
-		];
+		/*var markerPerson=[
+			[116.417854,39.921988,"<span class='color-1 bold'>蔡宇阳</span>&nbsp;早上8点<br>签到地址：北京市东城区王府井大街88号乐天银泰百货","<label class='pin-label'>1</label>","#53c6fd"],
+			[116.406605,39.921585,"<span class='color-1 bold'>蔡宇阳</span>&nbsp;早上8点<br>签到地址：北京市东城区东华门大街","<label class='pin-label'>2</label>","#53c6fd"]
+		];*/
 		//初始化地图
 		var b=new BaiduMap("allmap");
-		b.show(markerPerson);
-		//初始化日期
-	    function initSignDate(){
+		
+		//初始化日期2016-3-22
+	    function initSignDate(date){
 	        var dateToast = new Toast("截止时间不能比今天日期晚哦！"),
-	        dateInput = document.getElementById('expireDate'),
-	        today = new Date();
+	        dateInput = document.getElementById('expireDate')
+	        today = new Date(),
 	        dateInput.valueAsDate = today;
+	        if(date){
+	        	var t = new Date(date.split("-")+" 12:00:00");
+	        	dateInput.valueAsDate = t;
+	        }
 	        $(dateInput).change(function(){
-	            var inputDate = dateInput.valueAsDate;
-	            if (inputDate > today){
-	                dateToast.show();
-	                dateInput.valueAsDate = today;
-	            }
+	        	var dateStr = getDateStr($("#expireDate")[0].valueAsDate)
+	        	queryMySign(dateStr)
 	        });  
 	    }
+
 	    //Entry
 	    window.addEventListener("load",function(){
-	    	initSignDate();
-	    },false)
+	    	var date = getParameter("date");
+	    	initSignDate(date);
+	    	queryMySign(date);
+	    },false);
+
+	    function getParameter(argName){
+			var param = location.search.match(new RegExp("[\?\&]" + argName + "=([^\&]*)(\&?)","i"));
+			return param ? param[1] : param;
+		}
+		function queryMySign(signDate){
+			var markerPerson = []; 
+	        ajaxModel.getData(URL.queryMySign,{
+	            "signDate":signDate//"2016-03-22"
+	        }).then(function(res){
+	            if(res.state === "success"){
+	                var data = res.data;
+	                if(data.length == 0){
+	                    new Toast("暂无投票").show();
+	                    b.show();
+	                }else{
+	                	for(var i=0; i<data.length; i++){
+	                		var sign = data[i];
+	                		var pointInfo = [sign.longitude,sign.latitude];
+	                		pointInfo.push("<span class='color-1 bold'>"+sign.creatorName+"</span>&nbsp;"+sign.signTime+"<br>签到地址："+sign.address);
+	                		pointInfo.push("<label class='pin-label'>"+(i+1)+"</label>");
+	                		pointInfo.push(sign.creatorName.toPinyin().substring(0,1).toColor());
+	                		markerPerson.push(pointInfo);
+	                	}
+	                	b.show(markerPerson); 
+	                }
+	                console.log(JSON.stringify(markerPerson));
+	            }else{
+	                new Toast(res.msg).show();
+	            }
+	        })
+	    }
+	    function getDateStr(date){
+	        // var date = new Date();
+	        var dd = date.getDate();
+	        var mm = date.getMonth()+1;
+	        var yyyy = date.getFullYear();
+	        return yyyy+"-"+mm+"-"+dd;
+	    }
 		//定义exmobi返回
 		function back(){history.go(-1);}
 	</script>
