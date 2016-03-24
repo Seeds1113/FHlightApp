@@ -386,6 +386,11 @@
         ajaxModel.getData(URL.querySignStat,params).then(function(res){
             var html,signedCount,noSignedCount;
             if(res.state==="success") {
+                res.data.list.map(function(obj,index){
+                    if(obj.state===1) {
+                        res.data.list.splice(index);
+                    }
+                })
                 signedCount = res.data.signedCount;
                 noSignedCount = res.data.noSignedCount;
                 document.querySelectorAll("#tabbar .tab-label")[0].innerHTML = "已签到("+signedCount+")";
@@ -416,6 +421,7 @@
                 });
                 $(".sign-list2").html(html);
             } else if(res.state==="success"){
+                $(".sign-list2").empty();
                 new Toast("当天无签到信息").show();
             } else {
                 new Toast("失败").show();
@@ -433,14 +439,20 @@
     function initSignDate(){
         var dateToast = new Toast("截止时间不能比今天日期晚哦！"),
             dateInput = document.querySelectorAll(".expireDate"),
+            dateArr = [].slice.call(dateInput);
             today = new Date();
         $(dateInput).change(function(){
             var inputDate = this.valueAsDate;
             if (inputDate > today){
                 dateToast.show();
-                dateInput.valueAsDate = today;
+                dateArr.map(function(obj){
+                    obj.valueAsDate = today;
+                })
+            } else {
+                dateArr.map(function(obj){
+                    obj.valueAsDate = inputDate;
+                })
             }
-            dateInput.valueAsDate = this.valueAsDate;
             queryNoSignedAndStat();
             querySigned();
         });  
