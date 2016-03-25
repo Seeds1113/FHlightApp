@@ -11,8 +11,8 @@
 			reqSource:"client"*/
 		}
 	});
-	var sessionId = escape("mobileark#f81da477-d4f8-4c6c-aa36-bd9c7a08ea30");//mobileark#5f0390da-164a-420e-bf87-5fcd4a0eef82
-	// sessionId = window.localStorage.getItem("sessionId");
+	//var sessionId = escape("mobileark#f81da477-d4f8-4c6c-aa36-bd9c7a08ea30");//mobileark#5f0390da-164a-420e-bf87-5fcd4a0eef82
+	//var sessionId = window.localStorage.getItem("sessionId");
 	/*document.addEventListener("plusready",function(){
 		sessionId = window.localStorage.getItem("sessionId");
 		if(!sessionId){
@@ -24,7 +24,7 @@
 	// http://127.0.0.1:91/poll-list2.html??sessionId=mobileark%2387f71d87-cfe0-4216-8073-16a93d0b0e61
 	// var sessionId = "mobileark%23829cc4f6-8b16-4bab-8704-ffc49256f49a";
 	
-	window.defUrl = "?sessionId="+sessionId+"&reqSource=client";
+	
 	var hostURL = "http://192.168.4.179:6060/microapp";
 	var ajaxModel = {
 		/**
@@ -36,6 +36,9 @@
 		 * @return {[type]}         [返回一个ajax对象]]
 		 */
 		ajaxObject: function(ajaxUrl, params, type, custom) {
+			// var sessionId = escape("mobileark#f81da477-d4f8-4c6c-aa36-bd9c7a08ea30");
+			var sessionId = window.localStorage.getItem("sessionId");
+			window.defUrl = "?sessionId="+sessionId+"&reqSource=client";
 			ajaxUrl += defUrl;
 			var ajaxParams = {
 					url: hostURL+ajaxUrl,

@@ -47,14 +47,17 @@ var Mplus = {
     uploadImage: function(localId,success,fail){
     	if(!localId) throw "input localId";
     	var self = this;
+    	alert("调用uploadImage，localId="+localId);
     	mplus.uploadImage({
 			localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
 			isShowProgressTips: 1, //0或1， 默认为1，显示进度提示（显示上传中）
 			success: function (res) {
+				alert("uploadImage成功:"+JSON.stringify(res))
 			    success && self.downloadImage(res.serverId,success); // 返回图片的服务器端ID
 			},
 			fail: function (res) {
 			    // fail && fail(res);
+			    alert("uploadImage失败")
 			    new Toast(res.errMsg).show();
 			}
 		});
@@ -64,6 +67,7 @@ var Mplus = {
 		    serverId: serverId, // 需要下载的图片的服务器端ID，由uploadImage接口获得
 		    success: function (res) {
 		        var downloadUrl = res.downloadUrl; // 返回图片下载地址
+		        downloadUrl="https://192.168.160.98:7001/group1/M00/00/BF/wKigYlb035eAYfq0AC_Wbds9myA238.JPG?token=72014226698671884f710295f70e97a0&ts=1458888614"
 		        success && success(downloadUrl);
 			},
 			fail: function (res) {
