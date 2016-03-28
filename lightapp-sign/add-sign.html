@@ -169,6 +169,7 @@
     
     function plusreadyFun(){
         document.removeEventListener("plusready",plusreadyFun, true);
+        Mplus.config("4a4400ab-d8ac-401d-9350-4491957b31f4");
         var local_sessionId = window.localStorage.getItem("sessionId") || "";
         
         var token = NativeObj.getToken();
@@ -176,7 +177,6 @@
             return;
         }
         window.localStorage.setItem("sessionId",escape(token));
-
         Mplus.getLocation(function(res){
             // alert(JSON.stringify(res));
             changeLocation(res);

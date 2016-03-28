@@ -2,13 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>轻应用－投票－投票列表</title>
+    <title>轻应用－签到－签到列表</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
     <link rel="stylesheet" href="plugin/seedsui/seedsui.min.css">
     <link rel="stylesheet" href="plugin/animate/animate.css">
     <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
+    <!-- <div id="loading">
+        <div class="popup-mask" style="display: block; opacity: 1;"></div>
+        <div class="loading-box box box-middlecenter">
+            <div class="loading"></div>
+        </div>
+    </div> -->
     <section id="pagePolllist" class="active">
         <header>
            <div class="titlebar">
@@ -83,7 +89,7 @@
     </script>
     <script id="signedList-tpl" type="text/x-handlebars-template">
     {{#each list}}
-    <li class="box" onclick="window.location='statistic-detail.html?id={{creator}}';">
+    <li class="box" data-creator="{{creator}}" data-signTime="{{signTime}}">
         <a class="icon-name" style="background-color:{{getColor creatorName}};border-color: {{getColor creatorName}};">
             {{lastChar creatorName}}
         </a>
@@ -234,6 +240,7 @@
         queryNoSignedAndStat();
         querySigned(currentPage);
         loadMore('page1', loadPage1);
+        bindEvents();
     },false);
     //数据处理
     Handlebars.registerHelper("lastChar",lastChar);
@@ -358,6 +365,13 @@
             queryNoSignedAndStat();
             querySigned(currentPage);
         });  
+    }
+    function bindEvents(){
+        $(document).on("click",".sign-list2 li.box",function(){
+            var creator = $(this).data("creator"),
+                signTime = $(this).data("signtime").split(/[\s]/)[0];
+            window.location.href="statistic-detail.html?creator="+creator+"&signTime="+signTime;
+        })
     }
 
     function getParams(name) {

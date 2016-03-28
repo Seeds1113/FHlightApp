@@ -111,44 +111,51 @@
 	        	dateInput.valueAsDate = t;
 	        }
 	        $(dateInput).change(function(){
+	        	var inputDate = dateInput.valueAsDate;
+	        	if (inputDate > today){
+	                dateToast.show();
+	                dateInput.valueAsDate = today;
+	            }
 	        	var dateStr = getDateStr($("#expireDate")[0].valueAsDate)
-	        	queryMySign(dateStr)
+	        	queryMySign("",dateStr)
 	        });  
 	    }
 
 	    //Entry
 	    window.addEventListener("load",function(){
-	    	var date = getParameter("date");
+	    	var date = getParameter("date"),
+	    		creator = getParameter("creator") || "";
 	    	initSignDate(date);
-	    	queryMySign(date);
+	    	queryMySign(creator,date);
 	    },false);
 
 	    function getParameter(argName){
 			var param = location.search.match(new RegExp("[\?\&]" + argName + "=([^\&]*)(\&?)","i"));
 			return param ? param[1] : param;
 		}
-		function queryMySign(signDate){
+		function queryMySign(creator,signDate){
 			var markerPerson = []; 
 	        ajaxModel.getData(URL.queryMySign,{
+	        	"creator":creator,
 	            "signDate":signDate//"2016-03-22"
 	        }).then(function(res){
 	            if(res.state === "success"){
 	                var data = res.data;
 	                if(data.length == 0){
-	                    new Toast("暂无投票").show();
+	                    new Toast("暂无签到").show();
 	                    b.show();
 	                }else{
 	                	for(var i=0; i<data.length; i++){
 	                		var sign = data[i];
 	                		var pointInfo = [sign.longitude,sign.latitude];
-	                		pointInfo.push("<span class='color-1 bold'>"+sign.creatorName+"</span>&nbsp;"+sign.signTime+"<br>签到地址："+sign.address);
+	                		pointInfo.push("<span class='color-1 bold'>"+sign.creatorName+"</span>&nbsp;"+sign.signTime.split(/[\s]/)[1].substring(0,5)+"<br>签到地址："+sign.address);
 	                		pointInfo.push("<label class='pin-label'>"+(i+1)+"</label>");
 	                		pointInfo.push(sign.creatorName.toPinyin().substring(0,1).toColor());
 	                		markerPerson.push(pointInfo);
 	                	}
 	                	b.show(markerPerson); 
 	                }
-	                console.log(JSON.stringify(markerPerson));
+	                // console.log(JSON.stringify(markerPerson));
 	            }else{
 	                new Toast(res.msg).show();
 	            }

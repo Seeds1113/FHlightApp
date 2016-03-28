@@ -119,7 +119,7 @@
 	<script id="querySignStat-tpl" type="text/x-handlebars-template">
 	<li>
 		<div class="justify-content">最新签到<b>{{signedCount}}</b>人（已签<b>{{signedCount}}</b>人，未签<b>{{noSignedCount}}</b>人）</div>
-		<a href="statistics-list.html?depIds={{depIds}}&userIds={{userIds}}&signDate={{signDate}}" class="justify">
+		<a data-depids="{{depIds}}" data-userids="{{userIds}}" data-signdate="{{signDate}}" class="justify">
 			详细 >
 		</a>
 	</li>
@@ -141,6 +141,7 @@
 	<script src="js/ajaxModel.js"></script>
 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=8830f84901336e9afd2c6d7033d2ebe5"></script>
 	<script>
+	//?depIds=ad5e8a29-2744-4780-96e8-449e40563dff&userIds=3cd30a14-322d-483f-a3eb-ed83805267c7,f3aea080-c6e8-444f-8a09-d990956f1097
 		var markerPeopleObj = {};
 
 		var allMarkers = [];
@@ -214,6 +215,7 @@
 	    	initSignDate();
 	    	querySignStat();
 	    	pagin = new Pagin(4);
+	    	bindEvents();
 	    },false)
 
 	    //数据处理
@@ -384,7 +386,17 @@
 			pagin.prevPage(hideLoading);
 			//hideLoading();//隐藏遮罩
 		})
-
+		function bindEvents(){
+			$(document).on("click","footer .justify",function(){
+				var depIds = $(this).data("depids"),
+					userIds = $(this).data("userids"),
+					signDate = $(this).data("signdate");
+				window.location.href="statistics-list.html?depIds="+depIds+"&userIds="+userIds+"&signDate="+signDate;
+			});
+			$(".titlebar .icon-persons").click(function(){
+				$("footer .justify").trigger("click")
+			})
+		}
 		function getParams(name) {
 	        var reg = new RegExp("(^|\\?|&)"+ name +"=([^&]*)(\\s|&|$)", "i");
 	        if (reg.test(location.href)) return unescape(RegExp.$2.replace(/\+/g, " "));

@@ -23,21 +23,30 @@ var Mplus = {
             urls: urls // 需要预览的图片http链接列表
         });
     },
+    config:function(accessid){
+    	alert("accessid");
+    	mplus.config({
+		    accessid : accessid//'4a4400ab-d8ac-401d-9350-4491957b31f4' //访问接入码，图片上传和下载接口调用前必须设置。
+		});
+    },
     chooseImage: function(sourceType,success,fail){
     	var self = this;
-    	mplus.config({
+    	/*mplus.config({
 		    accessid : '4a4400ab-d8ac-401d-9350-4491957b31f4' //访问接入码，图片上传和下载接口调用前必须设置。
-		});
+		});*/
+		alert("调用chooseImage");
 		/*success && success();
 		return;*/
 	    mplus.chooseImage({
 		    // 最多只能选择9张图片
 		    sourceType: sourceType || ['album', 'camera'],
 		    success: function (res) {
+		    	alert("chooseImage成功"+JSON.stringify(res));
 			    success && self.uploadImage(res.localIds[0],success);
 			},
 			fail: function (res) {
 			    // fail && fail(res);
+			    alert("chooseImage失败")
 			    new Toast(res.errMsg).show();
 			}
 		});	
@@ -47,14 +56,17 @@ var Mplus = {
     uploadImage: function(localId,success,fail){
     	if(!localId) throw "input localId";
     	var self = this;
+    	alert("调用uploadImage，localId="+localId);
     	mplus.uploadImage({
 			localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
 			isShowProgressTips: 1, //0或1， 默认为1，显示进度提示（显示上传中）
 			success: function (res) {
+				alert("uploadImage成功:"+JSON.stringify(res))
 			    success && self.downloadImage(res.serverId,success); // 返回图片的服务器端ID
 			},
 			fail: function (res) {
 			    // fail && fail(res);
+			    alert("uploadImage失败")
 			    new Toast(res.errMsg).show();
 			}
 		});
@@ -133,6 +145,19 @@ var Mplus = {
                 new Toast(res.errMsg).show();
             }
         });
+    },
+    /**
+     * 隐藏顶部
+     * @param  {[boolean]} flage [true:隐藏]
+     * @return {[type]}       [description]
+     */
+    hideHeader: function(flage){
+    	var type = (flage===true ? 1 : 0);
+    	alert(type);
+    	mplus.hideHeader({
+    		isHide:type
+    	})
     }
 
 }
+
