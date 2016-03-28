@@ -51,7 +51,15 @@
                                 <input class="expireDate" type="date" value="2016-03-23">
                                 <i class="icon-calendar"></i>
                             </div>
-                            <ul class="sign-list2"></ul>
+                            <ul class="sign-list2">
+                                <div class="no-data box box-middlecenter hidden" style="padding-top: 57px;z-index:-1">
+                                    <div class="nodata-content ">
+                                        <img src="img/icon/no-data.png">
+                                        <br>
+                                        暂无签到，快去创建一个吧！
+                                    </div> 
+                                </div>
+                            </ul>
                         </div>
                         <div class="load-more" style="visibility:hidden;"><div class="loading"></div>正在加载更多...</div>
                     </div>
@@ -192,7 +200,7 @@
             "onRefresh":function(e){
                 (function(e){
                     currentPage = 1;
-                    $(".sign-list2").empty();
+                    $(".sign-list2 li.box").remove();
                     queryNoSignedAndStat();
                     querySigned(currentPage,function(){
                         e.refreshComplete();
@@ -211,7 +219,7 @@
             "onRefresh":function(e){
                 (function(e){
                     currentPage = 1;
-                    $(".sign-list2").empty();
+                    $(".sign-list2 li.box").remove();
                     querySigned(currentPage);
                     queryNoSignedAndStat(function(){
                         e.refreshComplete();
@@ -301,12 +309,14 @@
                 //     res.rows[i] = res.rows[0];
                 // }
                 renderSignedInfo(res.rows);
+                $(".sign-list2 .no-data").addClass("hidden");
             } else if(res.state==="success"){
                 if(total>0) {
                     window.currentPage = Math.floor(total%5===0?total/5:((total/5)+1));
                     hideLoadDiv("page1");
                     new Toast("已经到最底了").show();
                 } else {
+                    $(".sign-list2 .no-data").removeClass("hidden");
                     new Toast("当天无签到信息").show();
                 }
             } else {
@@ -339,7 +349,7 @@
                 obj.valueAsDate = signDate?new Date(signDate):today;
             })
         $(dateInput).change(function(){
-            $(".sign-list2").empty();
+            $(".sign-list2 li.box").remove();
             var inputDate = this.valueAsDate;
             if (inputDate > today){
                 dateToast.show();
