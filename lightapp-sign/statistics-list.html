@@ -186,6 +186,8 @@
             "onRefresh":function(e){
                 (function(e){
                     currentPage = 1;
+                    $(".sign-list2").empty();
+                    queryNoSignedAndStat();
                     querySigned(currentPage,function(){
                         e.refreshComplete();
                     })
@@ -202,7 +204,9 @@
         var drag2=new Dragrefresh("#page2",{
             "onRefresh":function(e){
                 (function(e){
+                    currentPage = 1;
                     $(".sign-list2").empty();
+                    querySigned(currentPage);
                     queryNoSignedAndStat(function(){
                         e.refreshComplete();
                     })
