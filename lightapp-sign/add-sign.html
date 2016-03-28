@@ -165,7 +165,9 @@
         
     },false);
 
-    document.addEventListener("plusready",plusreadyFun, true);
+    document.addEventListener("plusready",setTimeout(function(){
+        plusreadyFun()
+    },1000), true);
     
     function plusreadyFun(){
         document.removeEventListener("plusready",plusreadyFun, true);

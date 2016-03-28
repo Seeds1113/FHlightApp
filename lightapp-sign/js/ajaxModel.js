@@ -40,6 +40,7 @@
 			var sessionId = window.localStorage.getItem("sessionId");
 			window.defUrl = "?sessionId="+sessionId+"&reqSource=client";
 			ajaxUrl += defUrl;
+			// alert(sessionId);
 			var ajaxParams = {
 					url: hostURL+ajaxUrl,
 					type: type || 'GET',
