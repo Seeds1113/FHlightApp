@@ -162,7 +162,7 @@
 	                dateInput.valueAsDate = today;
 	            }
 	            querySignStat();
-	    		page = new Pagin(4);
+	    		pagin = new Pagin(4);
 	        });  
 	    }
 
@@ -173,6 +173,7 @@
 			if(target.classList.contains("active")){
 				target.classList.remove("active");
 				b.show(allMarkers);
+				zoomToBounds(allMarkers);
 				return;
 			}
 			[].slice.call(signPeople).forEach(function(n,i,a){
@@ -266,6 +267,7 @@
 						b.show();
 						new Toast("当天无签到信息").show();
 					} else {
+						pagin.currentPage--;
 						new Toast("已经是最后了").show();
 					}
 				} else {
