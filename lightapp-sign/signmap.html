@@ -163,7 +163,7 @@
 	                dateInput.valueAsDate = today;
 	            }
 	            querySignStat();
-	    		page = new Pagin(4);
+	    		pagin = new Pagin(4);
 	        });  
 	    }
 
@@ -174,6 +174,7 @@
 			if(target.classList.contains("active")){
 				target.classList.remove("active");
 				b.show(allMarkers);
+				zoomToBounds(allMarkers);
 				return;
 			}
 			[].slice.call(signPeople).forEach(function(n,i,a){
@@ -253,7 +254,7 @@
 					"page.pageNo" : currentPage,
 					"page.pageSize" : pageSize
 				}
-			
+
 			ajaxModel.getData(URL.querySignPage,params).then(function(res){
 				var total = res.total,
 					html,data;
@@ -268,6 +269,7 @@
 						b.show();
 						new Toast("当天无签到信息").show();
 					} else {
+						pagin.currentPage--;
 						new Toast("已经是最后了").show();
 					}
 				} else {
@@ -303,6 +305,7 @@
 				markerPeopleObj[obj.creator] = marker;
 			})
 			b.show(allMarkers);
+			zoomToBounds(allMarkers);
 		}
 
 		function getDate() {
@@ -384,6 +387,16 @@
 	        if (reg.test(location.href)) return unescape(RegExp.$2.replace(/\+/g, " "));
 	        return "";
 	    };
+
+	    function zoomToBounds(pointArr) {
+	    	var pointObjArr = [],
+	    		temp = null;
+	    	pointArr.map(function(obj) {
+	    		temp = new BMap.Point(obj[0],obj[1]);
+	    		pointObjArr.push(temp);
+	    	});
+	    	b.map.setViewport(pointObjArr);
+	    }
 
 		//定义exmobi返回
 		function back(){history.go(-1);}
