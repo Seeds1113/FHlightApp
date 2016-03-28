@@ -201,6 +201,7 @@
     document.addEventListener("plusready",plusreadyFun, true);
     
     function plusreadyFun(){
+        // Mplus.hideHeader(true);
         document.removeEventListener("plusready",plusreadyFun, true);
         var local_sessionId = window.localStorage.getItem("sessionId") || "";
         

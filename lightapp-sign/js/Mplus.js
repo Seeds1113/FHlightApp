@@ -23,21 +23,30 @@ var Mplus = {
             urls: urls // 需要预览的图片http链接列表
         });
     },
+    config:function(accessid){
+    	alert("accessid");
+    	mplus.config({
+		    accessid : accessid//'4a4400ab-d8ac-401d-9350-4491957b31f4' //访问接入码，图片上传和下载接口调用前必须设置。
+		});
+    },
     chooseImage: function(sourceType,success,fail){
     	var self = this;
-    	mplus.config({
+    	/*mplus.config({
 		    accessid : '4a4400ab-d8ac-401d-9350-4491957b31f4' //访问接入码，图片上传和下载接口调用前必须设置。
-		});
+		});*/
+		alert("调用chooseImage");
 		/*success && success();
 		return;*/
 	    mplus.chooseImage({
 		    // 最多只能选择9张图片
 		    sourceType: sourceType || ['album', 'camera'],
 		    success: function (res) {
+		    	alert("chooseImage成功"+JSON.stringify(res));
 			    success && self.uploadImage(res.localIds[0],success);
 			},
 			fail: function (res) {
 			    // fail && fail(res);
+			    alert("chooseImage失败")
 			    new Toast(res.errMsg).show();
 			}
 		});	
@@ -67,7 +76,6 @@ var Mplus = {
 		    serverId: serverId, // 需要下载的图片的服务器端ID，由uploadImage接口获得
 		    success: function (res) {
 		        var downloadUrl = res.downloadUrl; // 返回图片下载地址
-		        downloadUrl="https://192.168.160.98:7001/group1/M00/00/BF/wKigYlb035eAYfq0AC_Wbds9myA238.JPG?token=72014226698671884f710295f70e97a0&ts=1458888614"
 		        success && success(downloadUrl);
 			},
 			fail: function (res) {
@@ -137,6 +145,19 @@ var Mplus = {
                 new Toast(res.errMsg).show();
             }
         });
+    },
+    /**
+     * 隐藏顶部
+     * @param  {[boolean]} flage [true:隐藏]
+     * @return {[type]}       [description]
+     */
+    hideHeader: function(flage){
+    	var type = (flage===true ? 1 : 0);
+    	alert(type);
+    	mplus.hideHeader({
+    		isHide:type
+    	})
     }
 
 }
+
