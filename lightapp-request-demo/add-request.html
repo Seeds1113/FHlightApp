@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>轻应用－签到</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="plugin/seedsui/seedsui.min.css">
+    <link rel="stylesheet" href="plugin/animate/animate.css">
+	<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+	<section id="pageSignList" class="active">
+		<header>
+           <div class="titlebar" style="z-index:99;">
+                <a href="javascript:history.go(-1)">
+                    <i class="icon-arrowleft"></i>
+                    <span>返回</span>
+                </a>
+                <h1 class="text-center">请示申请</h1>
+            </div>
+        </header>
+        <article style="top:44px;bottom:0px;">
+            <div class="group">
+                <div class="row">
+                    <label>用户名</label>
+                    <div class="input-box">
+                        <input type="text" placeholder="用户名" name="username"/>
+                    </div>
+                </div>
+            </div>
+            <div class="group">
+                <div class="row">
+                    <label>紧急程度</label>
+                    <div class="input-box">
+                        <select>
+                            <option>一般</option>
+                            <option>紧急</option>
+                            <option>暂缓</option>
+                        </select>
+                        <i class="icon-arrowright"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="group">
+                <div class="row">
+                    <label>审批人</label>
+                    <div class="input-box">
+                        <input type="text" name="live" readonly="" placeholder="请选择审批人">
+                        <i class="icon-arrowright"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="group">
+                <div class="input-area">
+                    <textarea placeholder="填写投意见，250字以内" id="actionComment" maxlength="250"></textarea>
+                    <span class="count"><span id="text-num">0</span>/250</span>
+                </div>
+            </div>
+            <a class="radius4 button block margin8">提交</a>
+        </article>
+	</section>
+    <script src="plugin/jquery/jquery.min.js"></script>
+    <script src="plugin/seedsui/seedsui.min.js"></script>
+    <script>
+
+	</script>
+</body>
+</html>

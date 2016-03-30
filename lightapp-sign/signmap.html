@@ -8,6 +8,7 @@
 	
 	<style type="text/css">
 		/*隐藏样式*/
+		input[type="date"]::-webkit-clear-button { display:none }
 		.hide{
 			display: none!important;
 		}
@@ -169,15 +170,21 @@
 	        dateInput = document.getElementById('expireDate'),
 	        today = new Date();
 	        dateInput.valueAsDate = today;
+	        dateInput.defaultValue = getDateFormat(today);
 	        $(dateInput).change(function(){
+	        	alert("change");
 	            var inputDate = dateInput.valueAsDate;
-	            if (inputDate > today){
+	            if (inputDate > today||!inputDate){
 	                dateToast.show();
 	                dateInput.valueAsDate = today;
 	            }
 	            querySignStat();
 	    		pagin = new Pagin(4);
 	        });  
+	        $(dateInput).blur(function() {
+	        	alert("blur");
+	        	$(this).trigger("change");
+	        });
 	    }
 
 		//一个人与群组切换
@@ -411,6 +418,15 @@
 	    		pointObjArr.push(temp);
 	    	});
 	    	b.map.setViewport(pointObjArr);
+	    }
+
+	    function getDateFormat(date) {
+	        var year = date.getFullYear(),
+	            month = date.getMonth()+1,
+	            month = month>=10?month:"0"+month,
+	            date = date.getDate(),
+	            date = date>=10?date:"0"+date;
+	        return year+"-"+month+"-"+date;
 	    }
 
 		//定义exmobi返回

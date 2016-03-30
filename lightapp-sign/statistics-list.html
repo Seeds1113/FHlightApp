@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="plugin/seedsui/seedsui.min.css">
     <link rel="stylesheet" href="plugin/animate/animate.css">
     <link rel="stylesheet" href="css/app.css">
+    <style type="text/css">
+    input[type="date"]::-webkit-clear-button { display:none }
+    </style>
 </head>
 <body>
     <!-- <div id="loading">
@@ -275,14 +278,14 @@
     }
 
     function renderNoSignedInfo(data) {
-        var html;
+        var html,arr=[];
         data.map(function(obj,index){
-            if(obj.state===1) {
-                data.splice(index);
+            if(obj.state===0) {
+                arr.push(obj);
             }
         })
         html = Handlebars.compile(Template.noSignedList)({
-            list : data
+            list : arr
         });
         $(".grid.unsigned-list").html(html);
     }
@@ -346,7 +349,9 @@
             dateArr = [].slice.call(dateInput);
             today = new Date();
             dateArr.map(function(obj){
-                obj.valueAsDate = signDate?new Date(signDate):today;
+                var date = signDate?new Date(signDate):today;
+                obj.valueAsDate = date;
+                obj.defaultValue = getDateFormat(date);
             })
         $(dateInput).change(function(){
             $(".sign-list2 li.box").remove();
@@ -364,6 +369,9 @@
             currentPage = 1;
             queryNoSignedAndStat();
             querySigned(currentPage);
+        });
+        $(dateInput).blur(function() {
+            $(this).trigger("change");
         });  
     }
     function bindEvents(){
@@ -379,6 +387,15 @@
         if (reg.test(location.href)) return unescape(RegExp.$2.replace(/\+/g, " "));
         return "";
     };
+
+    function getDateFormat(date) {
+        var year = date.getFullYear(),
+            month = date.getMonth()+1,
+            month = month>=10?month:"0"+month,
+            date = date.getDate(),
+            date = date>=10?date:"0"+date;
+        return year+"-"+month+"-"+date;
+    }
 
     //定义exmobi返回
     function back(){history.go(-1);}

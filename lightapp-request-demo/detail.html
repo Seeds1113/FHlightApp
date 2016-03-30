@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>轻应用－签到</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="plugin/seedsui/seedsui.min.css">
+    <link rel="stylesheet" href="plugin/animate/animate.css">
+	<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+	<section id="pageSignList" class="active">
+		<header>
+           <div class="titlebar" style="z-index:99;">
+                <a href="javascript:history.go(-1)">
+                    <i class="icon-arrowleft"></i>
+                    <span>返回</span>
+                </a>
+                <h1 class="text-center">请示</h1>
+            </div>
+        </header>
+        <article style="top:44px;bottom:0px;">
+            <div class="content padding16">
+                <div class="user-info box">
+                    <a class="icon-name" style="background-color: #3ae3ea;border-color: #3ae3ea;">
+                        进
+                    </a> 
+                    <div class="info flexbox-1">
+                        <div class="name">李进</div>
+                        <div class="status">待我审批</div>
+                    </div>
+                </div>
+                <div class="details">
+                    <div class="row">
+                        <label>所在部门</label>
+                        <div>
+                            Marketing
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label>紧急程度</label>
+                        <div>
+                            一般
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label>创建日期</label>
+                        <div>
+                            2016/02/22  22:51
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label>具体内容</label>
+                        <div>
+                            重庆银行客户要求UI现场支撑沟通页面交互
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ul class="status-list">
+                <li>
+                    <div class="icon success">
+                        <i class="icon-hook"></i>
+                    </div>
+                    <div class="box">
+                        <a class="icon-name" style="background-color: #3ae3ea;border-color: #3ae3ea;">
+                            进
+                        </a> 
+                        <div class="info flexbox-1">
+                            <div class="name">李进</div>
+                            <div class="status success">发起申请</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="icon">
+                        <i class="icon-moreh"></i>
+                    </div>
+                    <div class="box">
+                        <a class="icon-name" style="background-color: #ffae02;border-color: #ffae02;">
+                            柱
+                        </a> 
+                        <div class="info flexbox-1">
+                            <div class="name">王明柱</div>
+                            <div class="status">审批中</div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="content">
+                <ul class="action-list box">
+                    <li>
+                        <input type="radio" id="agree" name="action">
+                        <label for="agree">同意</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="reject" name="action">
+                        <label for="reject">拒绝</label>
+                    </li>
+                </ul>
+                <div class="input-area">
+                    <textarea placeholder="填写投意见，250字以内" id="actionComment" maxlength="250"></textarea>
+                    <span class="count"><span id="text-num">0</span>/250</span>
+                </div>
+            </div>
+            <a class="radius4 button block margin8">提交</a>
+        </article>
+	</section>
+    <script src="plugin/jquery/jquery.min.js"></script>
+    <script src="plugin/seedsui/seedsui.min.js"></script>
+    <script>
+
+	</script>
+</body>
+</html>
