@@ -36,7 +36,7 @@
 		 * @return {[type]}         [返回一个ajax对象]]
 		 */
 		ajaxObject: function(ajaxUrl, params, type, custom) {
-			// var sessionId = escape("mobileark#f81da477-d4f8-4c6c-aa36-bd9c7a08ea30");
+			// var sessionId = escape("mobileark%239c2e5c40-0ae2-4e32-be1c-9893d8e65e83");
 			var sessionId = window.localStorage.getItem("sessionId");
 			window.defUrl = "?sessionId="+sessionId+"&reqSource=client";
 			ajaxUrl += defUrl;

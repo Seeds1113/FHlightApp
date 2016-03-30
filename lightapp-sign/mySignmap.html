@@ -6,6 +6,7 @@
 	<title>mySignmap</title>
 	<link rel="stylesheet" href="plugin/seedsui/seedsui.min.css">
 	<style type="text/css">
+		input[type="date"]::-webkit-clear-button { display:none }
 		#allmap{
 			height:100%;
 		}
@@ -106,9 +107,11 @@
 	        dateInput = document.getElementById('expireDate')
 	        today = new Date(),
 	        dateInput.valueAsDate = today;
+	        dateInput.defaultValue = getDateStr(today);
 	        if(date){
 	        	var t = new Date(date.split("-")+" 12:00:00");
 	        	dateInput.valueAsDate = t;
+	        	dateInput.defaultValue = getDateStr(t);
 	        }
 	        $(dateInput).change(function(){
 	        	var inputDate = dateInput.valueAsDate;
@@ -118,7 +121,10 @@
 	            }
 	        	var dateStr = getDateStr($("#expireDate")[0].valueAsDate)
 	        	queryMySign("",dateStr)
-	        });  
+	        });
+	        $(dateInput).blur(function() {
+	        	$(this).trigger("change");
+	        })
 	    }
 
 	    //Entry
@@ -166,7 +172,7 @@
 	        var dd = date.getDate();
 	        var mm = date.getMonth()+1;
 	        var yyyy = date.getFullYear();
-	        return yyyy+"-"+mm+"-"+dd;
+	        return yyyy+"-"+(mm>=10?mm:"0"+mm)+"-"+(dd>=10?dd:"0"+dd);
 	    }
 		//定义exmobi返回
 		function back(){history.go(-1);}

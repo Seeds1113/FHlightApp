@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="plugin/seedsui/seedsui.min.css">
     <link rel="stylesheet" href="plugin/animate/animate.css">
     <link rel="stylesheet" href="css/app.css">
+    <style type="text/css">
+    input[type="date"]::-webkit-clear-button { display:none }
+    </style>
 </head>
 <body>
     <!-- <div id="loading">
@@ -366,6 +369,9 @@
             currentPage = 1;
             queryNoSignedAndStat();
             querySigned(currentPage);
+        });
+        $(dateInput).blur(function() {
+            $(this).trigger("change");
         });  
     }
     function bindEvents(){
