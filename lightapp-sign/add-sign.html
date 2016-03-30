@@ -41,7 +41,7 @@
                     </li>
                 </ul>
                 <div class="info-content clearfix">
-                    <textarea placeholder="填写投票描述，250字以内" id="infoMainContent" maxlength="250"></textarea>
+                    <textarea placeholder="填写投票描述，250字以内" id="infoMainContent"></textarea>
                     <span class="count"><span id="text-num">0</span>/250</span>
                     <ul class="grid album" data-col="2" id="imgBlock">
                        <!-- <li><a class="img" data-href="img/content/location1-img1.jpg" style="background-image:url(img/content/location1-img1.jpg);"><span class="close"><i class="icon-close"></i></span></a></li> -->
@@ -77,18 +77,29 @@
     //count function
     function maxWordCount(){
         var target = $("#infoMainContent"),
-        maxLimit = target.attr("maxlength");
+        maxLimit = 250;
         target.on({
             input: function(){
                 var val = target.val(),
                 count = val.length;
                 $("#text-num").html(count);
                 if(count>=maxLimit){
+                    new Toast("内容超出限制").show();
                     $("#text-num").css("color","#fc4349");
                 }else{
                     $("#text-num").css("color","#aaa");
                 }
             }
+            // keydown : function(e) {
+            //     if(e.keyCode!==8) {
+            //         var val = target.val(),
+            //         count = val.length;
+            //         $("#text-num").html(count);
+            //         if(count>=maxLimit){
+            //             return false;
+            //         }
+            //     }
+            // }
         });
     }
     function getDateDay(){
