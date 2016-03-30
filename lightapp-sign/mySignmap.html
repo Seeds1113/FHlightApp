@@ -112,7 +112,7 @@
 	        }
 	        $(dateInput).change(function(){
 	        	var inputDate = dateInput.valueAsDate;
-	        	if (inputDate > today){
+	        	if (inputDate > today||!inputDate){
 	                dateToast.show();
 	                dateInput.valueAsDate = today;
 	            }

@@ -169,9 +169,10 @@
 	        dateInput = document.getElementById('expireDate'),
 	        today = new Date();
 	        dateInput.valueAsDate = today;
+	        dateInput.defaultValue = getDateFormat(today);
 	        $(dateInput).change(function(){
 	            var inputDate = dateInput.valueAsDate;
-	            if (inputDate > today){
+	            if (inputDate > today||!inputDate){
 	                dateToast.show();
 	                dateInput.valueAsDate = today;
 	            }
@@ -411,6 +412,15 @@
 	    		pointObjArr.push(temp);
 	    	});
 	    	b.map.setViewport(pointObjArr);
+	    }
+
+	    function getDateFormat(date) {
+	        var year = date.getFullYear(),
+	            month = date.getMonth()+1,
+	            month = month>=10?month:"0"+month,
+	            date = date.getDate(),
+	            date = date>=10?date:"0"+date;
+	        return year+"-"+month+"-"+date;
 	    }
 
 		//定义exmobi返回
