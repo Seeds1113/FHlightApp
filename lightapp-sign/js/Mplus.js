@@ -1,10 +1,9 @@
 var Mplus = {
 	//3.7.3 获取当前地理位置接口
 	getLocation : function(success,fail){
-		alert("getLocation");
+		// alert("getLocation");
 		mplus.getLocation({
 		    success: function (res) {
-		    	alert(1);
 		    	success && success(res);
 		        // var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
 		        // var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
@@ -12,7 +11,6 @@ var Mplus = {
 		        // var accuracy = res.accuracy; // 位置精度
 			},
 			fail: function (res) {
-				alert(2);
 			    fail && fail(res);
 			}
 		});
@@ -24,7 +22,6 @@ var Mplus = {
         });
     },
     config:function(accessid){
-    	alert("accessid");
     	mplus.config({
 		    accessid : accessid//'4a4400ab-d8ac-401d-9350-4491957b31f4' //访问接入码，图片上传和下载接口调用前必须设置。
 		});
@@ -34,19 +31,17 @@ var Mplus = {
     	/*mplus.config({
 		    accessid : '4a4400ab-d8ac-401d-9350-4491957b31f4' //访问接入码，图片上传和下载接口调用前必须设置。
 		});*/
-		alert("调用chooseImage");
-		/*success && success();
-		return;*/
+		// alert("调用chooseImage");
 	    mplus.chooseImage({
 		    // 最多只能选择9张图片
 		    sourceType: sourceType || ['album', 'camera'],
 		    success: function (res) {
-		    	alert("chooseImage成功"+JSON.stringify(res));
+		    	// alert("chooseImage成功"+JSON.stringify(res));
 			    success && self.uploadImage(res.localIds[0],success);
 			},
 			fail: function (res) {
 			    // fail && fail(res);
-			    alert("chooseImage失败")
+			    // alert("chooseImage失败")
 			    new Toast(res.errMsg).show();
 			}
 		});	
@@ -56,29 +51,32 @@ var Mplus = {
     uploadImage: function(localId,success,fail){
     	if(!localId) throw "input localId";
     	var self = this;
-    	alert("调用uploadImage，localId="+localId);
+    	// alert("调用uploadImage，localId="+localId);
     	mplus.uploadImage({
 			localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
 			isShowProgressTips: 1, //0或1， 默认为1，显示进度提示（显示上传中）
 			success: function (res) {
-				alert("uploadImage成功:"+JSON.stringify(res))
+				// alert("uploadImage成功:"+JSON.stringify(res))
 			    success && self.downloadImage(res.serverId,success); // 返回图片的服务器端ID
 			},
 			fail: function (res) {
 			    // fail && fail(res);
-			    alert("uploadImage失败")
+			    // alert("uploadImage失败")
 			    new Toast(res.errMsg).show();
 			}
 		});
     },
     downloadImage: function(serverId,success,fail){
+        // alert("调用downloadImage,serverId="+serverId);
     	mplus.downloadImage({
 		    serverId: serverId, // 需要下载的图片的服务器端ID，由uploadImage接口获得
 		    success: function (res) {
+                // alert("downloadImage成功:"+JSON.stringify(res));
 		        var downloadUrl = res.downloadUrl; // 返回图片下载地址
 		        success && success(downloadUrl);
 			},
 			fail: function (res) {
+                // alert("downloadImage失败")
 		        new Toast(res.errMsg).show();
 			}
 		});
@@ -86,7 +84,7 @@ var Mplus = {
     //3.7.3 获取当前地理位置接口
     getLocation: function(success,fail){
     	// alert("getLocation");
-    	setTimeout(function(){
+    	// setTimeout(function(){
     		mplus.getLocation({
 	            success: function (res) {
 	          //   	var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
@@ -99,7 +97,7 @@ var Mplus = {
 	                new Toast(res.errMsg).show();
 	            }
 	        });
-    	},2000)
+    	// },2000)
     	
     },
     //3.7.1 选择当前地理位置接口
@@ -153,7 +151,6 @@ var Mplus = {
      */
     hideHeader: function(flage){
     	var type = (flage===true ? 1 : 0);
-    	alert(type);
     	mplus.hideHeader({
     		isHide:type
     	})

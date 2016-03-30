@@ -12,7 +12,7 @@
 	<section id="pageSignList" class="active">
 		<header>
            <div class="titlebar" style="z-index:99;">
-                <a href="javascript:history.go(-1)">
+                <a href="javascript:mplus.closeWindow();">
                     <i class="icon-arrowleft"></i>
                     <span>返回</span>
                 </a>
@@ -198,19 +198,22 @@
             previewImage($this.parents(".sign-info"),$this);
         });  
     }
-    document.addEventListener("plusready",plusreadyFun, true);
+    document.addEventListener("plusready",setTimeout(function(){
+        plusreadyFun()
+    },1000), true);
     
     function plusreadyFun(){
-        // Mplus.hideHeader(true);
-        document.removeEventListener("plusready",plusreadyFun, true);
-        var local_sessionId = window.localStorage.getItem("sessionId") || "";
         
+        Mplus.hideHeader(true);
+        // var local_sessionId = window.localStorage.getItem("sessionId") || "";
         var token = NativeObj.getToken();
-        if(local_sessionId==token){
+        /*if(local_sessionId==token){
             return;
-        }
+        }*/
         window.localStorage.setItem("sessionId",escape(token));
         queryMySign();
+
+        document.removeEventListener("plusready",plusreadyFun, true);
     }
     /*Handlebars*/
     Handlebars.registerHelper("timer",function(value){
