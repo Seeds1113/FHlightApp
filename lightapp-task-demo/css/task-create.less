@@ -89,18 +89,36 @@ hr {
 		}
 }
 .details {
-	position: relative;
-	float: left;
-	margin: 35px 0 0 20px;
+	margin: 35px 0 10px 20px;
 	.show-imgs{
-		border: 1px solid #e7e7e7;
+		position: relative;
+		border: none;
 		width: 65px;
 		height: 65px;
 		border-radius: 5px;
-		top: 95px;
-		float: left;
+		background-size: cover;
+		margin: 7px 6px 1px 0;
+		display: inline-block;
+		.close{
+			width: 18px;
+			height: 18px;
+			line-height: 18px;
+			float: right;
+			top: -5px;
+			right: -5px;
+			background-size: cover;
+			border-radius: 100%;
+			border-style: solid;
+			color: #fff;
+			border-color: #fff;
+			background-color: black;
+			.icon-close{
+				font-size: 18px;
+			}
+		}
 		&.new{
-			margin-left: 10px;
+			top:1px;
+			border: 1px solid #e7e7e7;
 		}
 	}
 }
@@ -201,8 +219,7 @@ hr {
 .blog{
 	position: relative;
 	background-color: #fff;
-	margin-bottom: 10px;
-	height: 210px;
+	border-bottom: 1px solid #dedede;
 	textarea{
 	width: 90%;
 	height: 90px;

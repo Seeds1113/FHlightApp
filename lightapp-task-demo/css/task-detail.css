@@ -166,30 +166,31 @@ hr {
   position: absolute;
   margin: -4px 0 0 -5px;
 }
-.main-cont {
-  width: 65%;
-  height: 68px;
-  position: relative;
-  float: left;
-  border-left: 1px solid #dedede;
-  margin-left: 11px;
+.main-cont-all {
+  width: 75%;
+  display: inline-block;
   margin-top: 13px;
 }
-.main-cont.old {
-  margin-left: 86px;
-  margin-top: 0px;
+.main-cont-all .main-cont {
+  width: 85%;
+  border-left: 1px solid #dedede;
+  margin-left: 11px;
+  display: inline-block;
+}
+.main-cont-all .main-cont.old {
+  margin-left: -1px;
   height: 37px;
 }
-.main-cont .content1 {
+.main-cont-all .main-cont .content1 {
   width: 100%;
   word-break: break-all;
   word-wrap: break-word;
   margin: -9px 0 0 14px;
 }
-.main-cont .time {
+.main-cont-all .main-cont .time {
   color: #b1b1b1;
   font-size: 12px;
-  margin: 5px 0 0 15px;
+  margin: 5px 0 12px 15px;
 }
 .blog {
   position: relative;

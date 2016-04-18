@@ -24,17 +24,7 @@ section {
 		}
 	}
 }
-.time-list{
-	.time-total{
-		width: 100%;
-		height: 22px;
-		.task-p{
-				float: left;
-				font-size: 14px;
-				margin: 3px 0 0 13px;
-				color: #808080;
-		}
-		.selectbox { 
+.selectbox { 
 		    width: 95px;
 			height: 25px;
 			border-radius: 20px;
@@ -68,24 +58,53 @@ section {
 		    z-index: 100;
 			}
 		}
+.time-list{
+	.time-total{
+		width: 100%;
+		height: 22px;
+		.task-p{
+				float: left;
+				font-size: 14px;
+				margin: 3px 0 0 13px;
+				color: #808080;
+		}
 	}
 	.cont{
 			width: 93%;
 			height: 95px;
 			margin-left: 20px;
 			border-left: 1px solid #e8e8e8;
-			.task-a{
-				width: 100%;
-				color: #333;
+			&.pass{
+			    	.circle1{
+			    		background: no-repeat scroll 0 0 #f6a54f;
+			    	}
+			    	.part{
+			    		background-color: #f6a54f;
+						border:0px solid #f6a54f;
+						.name{
+							color: #ffe3c5;
+						}
+						.cont-tip{
+							border-top: 28px solid #909090;
+						}
+						.time{
+							color: #ffe3c5;
+						}
+						.content{
+							color: #fff;
+						}
+			    	}
+			    }
 			.circle1{
 			border-radius: 10px 10px 10px 10px;
 			background: no-repeat scroll 0 0 #36ac72;
 		    padding:5px 5px;
 		    position: absolute;
 		    margin: 15px 0 0 -5px;
-			    &.pass{
-			    	background: no-repeat scroll 0 0 #f6a54f;
-			    }
+			}
+			.task-a{
+				width: 100%;
+				color: #333;
 			}
 			.part{
 				position: relative;
@@ -97,18 +116,11 @@ section {
 				border-radius: 6px;
 				background-color: #fff;
 				overflow: hidden;
-				&.pass{
-					background-color: #f6a54f;
-					border:0px solid #f6a54f;
-				}
 				.name{
 					width: 20%;
 					color: #909090;
 					float: left;
 					margin: 12px 0 0 6px;
-					&.pass{
-						color: #ffe3c5;
-					}
 				}
 				.cont-tip{
 					width: 0px;
@@ -116,9 +128,6 @@ section {
 			  	    float: right;
 				    border-top: 28px solid #36ac72;
 			        border-left: 56px solid transparent;
-			        &.pass{
-			        	border-top: 28px solid #909090;
-			        }
 			        .cont-tip-new{
 			        width: 25px;
 					float: right;
@@ -138,9 +147,6 @@ section {
 					color: #909090;
 					font-size: 12px;
 					margin: 12px -25px 0 0;
-					&.pass{
-						color: #ffe3c5;
-					}
 				}
 				.content{
 					font-family: "方正兰亭细黑";
@@ -152,12 +158,8 @@ section {
 					white-space: nowrap;
 					width: 90%;
 					overflow: hidden;
-					&.pass{
-						color: #fff;
-					}
 				}
 			}
-		}
 		}
 	}
 select{
