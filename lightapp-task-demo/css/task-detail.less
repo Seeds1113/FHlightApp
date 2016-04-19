@@ -10,11 +10,13 @@ hr {
 	padding:16px;
 }
 .content {
-	height: 120px;
 	background-color: #fff;
 	border-bottom: 1px solid #dedede;
 	&.cre-img{
-		height: 167px;
+		display: inline-block;
+		width: 100%;
+		margin: 0;
+		padding: 0;
 	}
 }
 //no data
@@ -37,6 +39,8 @@ hr {
 .user-info {
 	padding-bottom: 12px;
 	position: relative;
+	height: 60px;
+	margin: 10px 0 0 15px;
 	.icon-name {
 		float: left;
 		width:45px;
@@ -88,11 +92,17 @@ hr {
 		  }
 		}
 }
-.details {
+.details-all {
 	.row {
 		border-bottom: 0;
-		margin:24px 0;
-		position: absolute;
+		display: inline-block;
+		margin-left: 18px;
+		position: relative;
+		width: 90%;
+		margin-bottom: 35px;
+		&.new{
+			margin-bottom: 0;
+		}
 		> label {
 			-webkit-box-align:start; 
 			color:#959595;
@@ -102,27 +112,47 @@ hr {
 		.cont{
 			word-wrap: break-word;
 			word-break:break-all;
-			position: absolute;
-			width: 300px;
-			top: 40px;
 		}
 	}
+	.details {
+	margin: 11px 2px 7px 18px;
 	.show-imgs{
 		position: relative;
 		border: none;
 		width: 65px;
 		height: 65px;
 		border-radius: 5px;
-		top: 95px;
-		margin-left: -57px;
-		float: left;
+		background-size: cover;
+		margin: 2px 3px 1px 0;
+		display: inline-block;
+		.close{
+			width: 18px;
+			height: 18px;
+			line-height: 18px;
+			float: right;
+			top: -5px;
+			right: -5px;
+			background-size: cover;
+			border-radius: 100%;
+			border-style: solid;
+			color: #fff;
+			border-color: #fff;
+			background-color: black;
+			border-width: 2px;
+			.icon-close{
+				font-size: 18px;
+			}
+		}
 		&.new{
-			margin-left: 10px;
+			top:1px;
+			border: 1px solid #e7e7e7;
 		}
 	}
 }
+}
+
 .create-time{
-		border-bottom: 1px solid #dedede;
+		border-top: 1px solid #dedede;
 		background-color: #fff;
 		height: 25px;
 		> label {
@@ -267,7 +297,7 @@ hr {
 		position: relative;
 		float: right;
 		width: 100px;
-		margin: 120px -100px 0 0;
+		margin: -33px 10px 0 0;
 	}
 }
 .actionsheet-cancel{

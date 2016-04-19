@@ -111,6 +111,7 @@ hr {
   color: #fff;
   border-color: #fff;
   background-color: black;
+  border-width: 2px;
 }
 .details .show-imgs .close .icon-close {
   font-size: 18px;
